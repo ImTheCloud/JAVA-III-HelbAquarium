@@ -4,13 +4,21 @@ import java.util.ArrayList;
 
 public class EdiblePellet {
 
+    ///////////////////////////////////
+    // The variables
+    //////////////////////////////////
+
     private int pos_x;
     private int pos_y;
     private Image ediblePellet_Image;
-    private static int taillePellet = 7;
-    protected int screen_W = Board.getB_WIDTH() - taillePellet;
-    protected int screen_H = Board.getB_HEIGHT() - taillePellet;
-    private static int stop = 0;
+    private static int sizePellet = 7;
+    protected int screen_W = Board.getB_WIDTH() - sizePellet;
+    protected int screen_H = Board.getB_HEIGHT() - sizePellet;
+    private static int counterToStopMoveFish = 0;
+
+    ///////////////////////////////////
+    // Constructor
+    //////////////////////////////////
 
     public EdiblePellet() {
         ImageIcon iio = new ImageIcon("Image/ediblePellet.png");
@@ -19,10 +27,9 @@ public class EdiblePellet {
 
     }
 
-    public void positionRandomEdiblePellet() {
-        pos_x = (int) (Math.random() * screen_W);
-        pos_y = (int) (Math.random() * screen_H);
-    }
+    ///////////////////////////////////
+    // The Get for other class
+    //////////////////////////////////
 
     public int getPos_x() {
         return pos_x;
@@ -36,28 +43,42 @@ public class EdiblePellet {
         return ediblePellet_Image;
     }
 
-    public void update() { // touche la pastille et le mange
+    static int get_counterToStopMoveFish() {
+        return counterToStopMoveFish;
+    }
+
+    public void set_counterToStopMoveFish(int counterToStopMoveFish) {
+        // this.stop = stop;
+    }
+
+    ///////////////////////////////////
+    // create a random position for the Pellet
+    //////////////////////////////////
+
+    public void positionRandomEdiblePellet() {
+        pos_x = (int) (Math.random() * screen_W);
+        pos_y = (int) (Math.random() * screen_H);
+    }
+
+    ///////////////////////////////////
+    // If a fish touch a pellet he eats it and another pellet appears in a random
+    // and another pellet appears in a random position
+    ///////////////////////////////////
+
+    public void update() {
         ArrayList<Fish> listFish = Board.get_listFish();
         for (Fish fish : listFish) {
-            if ((getPos_x() - taillePellet <= fish.getPos_x()) && (getPos_x() + taillePellet >= fish.getPos_x())
-                    && (getPos_y() - taillePellet <= fish.getPos_y())
-                    && (getPos_y() + taillePellet >= fish.getPos_y())) {
+            if ((getPos_x() - sizePellet <= fish.getPos_x()) && (getPos_x() + sizePellet >= fish.getPos_x())
+                    && (getPos_y() - sizePellet <= fish.getPos_y())
+                    && (getPos_y() + sizePellet >= fish.getPos_y())) {
 
                 positionRandomEdiblePellet();
-                stop = 1000;
+                counterToStopMoveFish = 1000;
 
-                // System.out.println("Pastille manger");
+                // System.out.println("Pellet");
             }
 
         }
-    }
-
-    static int get_stop() {
-        return stop;
-    }
-
-    public void set_stop(int stop) {
-        // this.stop = stop;
     }
 
 }

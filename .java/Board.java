@@ -1,3 +1,7 @@
+///////////////////////////////////
+// The Import
+//////////////////////////////////
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -8,20 +12,18 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import java.awt.Font;
-import java.awt.FontMetrics;
 // import javax.swing.*;
 // import java.awt.*;
 
 public class Board extends JPanel implements ActionListener {
 
     ///////////////////////////////////
-    // les variables
-    ///////////////////////////////////
-    private final static int B_WIDTH = 600; // largeur
-    private final static int B_HEIGHT = 300; // hauteur
-    private final int DELAY = 1;
-    private Timer timer = new Timer(DELAY, this);
+    // The variables
+    //////////////////////////////////
+    private final static int B_WIDTH = 600;
+    private final static int B_HEIGHT = 300;
+    private final int Delay = 1;
+    private Timer timer = new Timer(Delay, this);
     // private Image orange;
     // private Image purple;
     // private Image red;
@@ -36,7 +38,7 @@ public class Board extends JPanel implements ActionListener {
     private static ArrayList<Insect> insectList = new ArrayList<Insect>();
 
     ///////////////////////////////////
-    // les Get
+    // The Get for other class
     ///////////////////////////////////
 
     public static ArrayList<Fish> get_listFish() {
@@ -105,7 +107,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     ///////////////////////////////////
-    // Methodes pour add des elements dans l'aquarium
+    // Method to add the element in the aquarium
     ///////////////////////////////////
 
     private void addFish() {
@@ -124,21 +126,23 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void addObstacle() {
-        int obstacleCounter = (int) (Math.random() * 3 + 3);
+        int numberObstacleMax = 4;
+        int obstacleCounter = (int) (Math.random() * numberObstacleMax);
         for (int i = 0; i < obstacleCounter; i++) {
             obstacleList.add(new Obstacle());
         }
     }
 
     private void addEdiblePellet() {
-        int ediblePelletCounter = (int) (Math.random() * 5);
+        int numberEdiblePelletMax = 5;
+        int ediblePelletCounter = (int) (Math.random() * numberEdiblePelletMax);
         for (int i = 0; i < ediblePelletCounter; i++) {
             ediblePelletList.add(new EdiblePellet());
         }
     }
 
     ///////////////////////////////////
-    // Methode pour dessiner les elements
+    // Method to draw the element every moment
     ///////////////////////////////////
 
     private void drawFish(Graphics g) {
@@ -173,25 +177,15 @@ public class Board extends JPanel implements ActionListener {
         drawInsect(g);
         drawEdiblePellet(g);
         drawObstacle(g);
-        drawStringAquarium(g);
-
     }
 
-    private void drawStringAquarium(Graphics g) {
-
-        String msg = "Aquarium";
-        Font small = new Font("Helvetica", Font.BOLD, 13);
-        FontMetrics metr = getFontMetrics(small);
-
-        g.setColor(Color.DARK_GRAY);
-        g.setFont(small);
-        g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
-    }
-
+    ///////////////////////////////////
+    // Method to update the element every moment
+    ///////////////////////////////////
     private void doUpdate() {
 
         for (int i = 0; i < fishList.size(); i++) {
-            fishList.get(i).update(); // recuper la valeur en cours get(i)
+            fishList.get(i).update(); // get the current value get(i)
         }
 
         for (int i = 0; i < insectList.size(); i++) {
@@ -205,7 +199,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     ///////////////////////////////////
-    // Methode appeler a chaque instant
+    // Method called every moment
     ///////////////////////////////////
     @Override
     public void paintComponent(Graphics g) {
@@ -217,7 +211,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     ///////////////////////////////////
-    // Touche clavier
+    // keyboard key
     ///////////////////////////////////
 
     @Override
@@ -232,7 +226,7 @@ public class Board extends JPanel implements ActionListener {
 
             int key = e.getKeyCode();
 
-            if (key == KeyEvent.VK_0) { // vide tout les arayList et recommence le jeux
+            if (key == KeyEvent.VK_0) { // empty all the arayList and start the game again
                 obstacleList.removeAll(obstacleList);
                 fishList.removeAll(fishList);
                 ediblePelletList.removeAll(ediblePelletList);
@@ -251,8 +245,8 @@ public class Board extends JPanel implements ActionListener {
                 setBackground(Color.blue); // hot Background
             }
             if (key == KeyEvent.VK_4) { // add insect random
-
-                int insectColour = (int) (Math.random() * 3);
+                int numberInsectExisting = 3;
+                int insectColour = (int) (Math.random() * numberInsectExisting);
                 if (insectColour == 0) {
                     insectList.add(new InsectBlack());
                 } else if (insectColour == 1) {
@@ -274,8 +268,9 @@ public class Board extends JPanel implements ActionListener {
             if (key == KeyEvent.VK_8) {
 
             }
-            if (key == KeyEvent.VK_9) { // add fish
-                int fishColour = (int) (Math.random() * 5);
+            if (key == KeyEvent.VK_9) { // add fish random
+                int numberFishExisting = 5;
+                int fishColour = (int) (Math.random() * numberFishExisting);
                 if (fishColour == 0) {
                     fishList.add(new FishBlue());
                 } else if (fishColour == 1) {

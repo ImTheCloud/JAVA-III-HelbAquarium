@@ -1,28 +1,41 @@
-//import java.util.ArrayList;
-
 public class FishBlue extends Fish {
+
+    ///////////////////////////////////
+    // The variables
+    //////////////////////////////////
+
     private int nvl_pos_x;
     private int nvl_pos_y;
     private int new_pos;
+    private int MoveFishEveryMoment = 2;
+
+    ///////////////////////////////////
+    // Constructor
+    //////////////////////////////////
 
     public FishBlue() {
         super("Image/fishBlue.png");
     }
 
+    ///////////////////////////////////
+    // Method for a random Edge
+    //////////////////////////////////
+
     public void random_nvl_position() {
 
-        int r = (int) (Math.random() * 4 + 1);
+        int numberEdgeExisting = 4;
+        int randomEdge = (int) (Math.random() * numberEdgeExisting);
 
-        if (r == 1) {
+        if (randomEdge == 0) {
             nvl_pos_x = 0;
             nvl_pos_y = (int) (Math.random() * screen_H);
-        } else if (r == 2) {
+        } else if (randomEdge == 1) {
             nvl_pos_x = screen_W;
             nvl_pos_y = (int) (Math.random() * screen_H);
-        } else if (r == 3) {
+        } else if (randomEdge == 2) {
             nvl_pos_y = 0;
             nvl_pos_x = (int) (Math.random() * screen_W);
-        } else if (r == 4) {
+        } else if (randomEdge == 3) {
             nvl_pos_y = screen_H;
             nvl_pos_x = (int) (Math.random() * screen_W);
         }
@@ -34,20 +47,24 @@ public class FishBlue extends Fish {
 
     }
 
+    ///////////////////////////////////
+    // Method called every moment for a chhange, here for move
+    //////////////////////////////////
+
     @Override
     public void update() {
 
         if (getPos_x() < nvl_pos_x) {
-            new_pos = getPos_x() + 2;
+            new_pos = getPos_x() + MoveFishEveryMoment;
             setPos_x(new_pos);
         } else if (getPos_x() > nvl_pos_x) {
-            new_pos = getPos_x() - 2;
+            new_pos = getPos_x() - MoveFishEveryMoment;
             setPos_x(new_pos);
         } else if (getPos_y() > nvl_pos_y) {
-            new_pos = getPos_y() - 2;
+            new_pos = getPos_y() - MoveFishEveryMoment;
             setPos_y(new_pos);
         } else if (getPos_y() < nvl_pos_y) {
-            new_pos = getPos_y() + 2;
+            new_pos = getPos_y() + MoveFishEveryMoment;
             setPos_y(new_pos);
         } else if (getPos_x() == nvl_pos_x && getPos_y() == nvl_pos_y) {
             random_nvl_position();

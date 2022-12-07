@@ -2,12 +2,21 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Fish {
+
+    ///////////////////////////////////
+    // The variables
+    //////////////////////////////////
+
     private int pos_x;
     private int pos_y;
     private static int sizeFish = 15;
     protected static int screen_W = Board.getB_WIDTH() - sizeFish;
     protected static int screen_H = Board.getB_HEIGHT() - sizeFish;
     private final Image pathToImage;
+
+    ///////////////////////////////////
+    // Constructor
+    //////////////////////////////////
 
     public Fish(String string) {
         ImageIcon iid = new ImageIcon(string);
@@ -16,14 +25,9 @@ public class Fish {
 
     }
 
-    public void positionFish() {
-        pos_x = (int) (Math.random() * screen_W);
-        pos_y = (int) (Math.random() * screen_H);
-    }
-
-    public void update() {
-
-    }
+    ///////////////////////////////////
+    // The Get for other class
+    //////////////////////////////////
 
     public int getPos_x() {
         return pos_x;
@@ -43,6 +47,23 @@ public class Fish {
 
     public Image getPathToImage() {
         return pathToImage;
+    }
+
+    ///////////////////////////////////
+    // create a random position for the Fish
+    //////////////////////////////////
+
+    public void positionFish() {
+        pos_x = (int) (Math.random() * screen_W);
+        pos_y = (int) (Math.random() * screen_H);
+    }
+
+    ///////////////////////////////////
+    // Movement Fish every moment
+    //////////////////////////////////
+
+    public void update() {
+
     }
 
 }
