@@ -6,8 +6,8 @@ public class FishRed extends Fish {
     // The variables
     //////////////////////////////////
 
-    private static int destination_pos_x;
-    private static int destination_pos_y;
+    private static int pos_x_fishPrey;
+    private static int pos_y_fishPrey;
     private int moveFish;
     private int MoveFishEverymoment = 1;
 
@@ -32,27 +32,36 @@ public class FishRed extends Fish {
             // System.out.println("tuer");
             // }
 
-            destination_pos_x = fishprey.getPos_x();
-            destination_pos_y = fishprey.getPos_y();
+            // if ((getPos_x() >= pos_x_fishPrey) && (getPos_x() <= pos_x_fishPrey)
+            // && (getPos_y() >= pos_y_fishPrey) && (getPos_y() <= pos_y_fishPrey)) {
+            // pos_x_fishPrey = fishprey.getPos_x();
+            // pos_y_fishPrey = fishprey.getPos_y();
+            // }
+            pos_x_fishPrey = fishprey.getPos_x();
+            pos_y_fishPrey = fishprey.getPos_y();
 
         }
 
-        if (getPos_x() == destination_pos_x && getPos_y() == destination_pos_y) {
+        // if ((getPos_x() >= pos_x_fishPrey) && (getPos_x() <= pos_x_fishPrey)
+        // && (getPos_y() >= pos_y_fishPrey) && (getPos_y() <= pos_y_fishPrey)) {
+        // System.out.println("tuer");
+        // }
+        if (getPos_x() == pos_x_fishPrey && getPos_y() == pos_y_fishPrey) {
             System.out.println("tuer");
         }
-        if (getPos_y() < destination_pos_y) {
+        if (getPos_y() < pos_y_fishPrey) {
             moveFish = getPos_y() + MoveFishEverymoment;
             setPos_y(moveFish);
         }
-        if (getPos_x() < destination_pos_x) {
+        if (getPos_x() < pos_x_fishPrey) {
             moveFish = getPos_x() + MoveFishEverymoment;
             setPos_x(moveFish);
         }
-        if (getPos_x() > destination_pos_x) {
+        if (getPos_x() > pos_x_fishPrey) {
             moveFish = getPos_x() - MoveFishEverymoment;
             setPos_x(moveFish);
         }
-        if (getPos_y() > destination_pos_y) {
+        if (getPos_y() > pos_y_fishPrey) {
             moveFish = getPos_y() - MoveFishEverymoment;
             setPos_y(moveFish);
         }

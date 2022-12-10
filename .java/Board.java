@@ -116,15 +116,15 @@ public class Board extends JPanel implements ActionListener {
     // Method to add the element in the aquarium
     ///////////////////////////////////
 
-    private void addfishListPrey() {
-        fishList.add(new FishBlue());
-        fishList.add(new FishPurple());
-        fishList.add(new FishOrange());
-    }
-
     private void addFish() {
         fishList.add(new FishRed());
-        fishList.add(new FishBlack());
+    }
+
+    private void addfishListPrey() {
+        fishList.add(new FishBlue());
+        fishList.add(new FishOrange());
+        fishList.add(new FishPurple());
+
     }
 
     private void addInsect() {
@@ -135,8 +135,9 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void addObstacle() {
-        int numberObstacleMax = 4;
-        int obstacleCounter = (int) (Math.random() * numberObstacleMax);
+        int numberObstacle = 3;
+        int obstacleCounter = (int) (Math.random() * numberObstacle + 1); // at least 1 obstacle beacause if it's 0 you
+                                                                          // cant see the functionnality
         for (int i = 0; i < obstacleCounter; i++) {
             obstacleList.add(new Obstacle());
         }
@@ -286,7 +287,7 @@ public class Board extends JPanel implements ActionListener {
 
             }
             if (key == KeyEvent.VK_9) { // add fish random
-                int numberFishExisting = 5;
+                int numberFishExisting = 4;
                 int fishColour = (int) (Math.random() * numberFishExisting);
                 if (fishColour == 0) {
                     fishList.add(new FishBlue());
@@ -294,10 +295,8 @@ public class Board extends JPanel implements ActionListener {
                     fishList.add(new FishRed());
                 } else if (fishColour == 3) {
                     fishList.add(new FishPurple());
-                } else if (fishColour == 4) {
-                    fishList.add(new FishOrange());
                 } else {
-                    fishList.add(new FishBlack());
+                    fishList.add(new FishOrange());
                 }
             }
             if (key == KeyEvent.VK_R) {

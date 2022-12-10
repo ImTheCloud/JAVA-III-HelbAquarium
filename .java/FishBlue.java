@@ -1,13 +1,15 @@
+import java.util.ArrayList;
+
 public class FishBlue extends Fish {
 
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
 
-    private int nvl_pos_x;
-    private int nvl_pos_y;
-    private int new_pos;
-    private int MoveFishEveryMoment = 2;
+    private static int pos_x_fishPrey;
+    private static int pos_y_fishPrey;
+    private int moveFish;
+    private int MoveFishEverymoment = 1;
 
     ///////////////////////////////////
     // Constructor
@@ -18,56 +20,48 @@ public class FishBlue extends Fish {
     }
 
     ///////////////////////////////////
-    // Method for a random Edge
-    //////////////////////////////////
-
-    public void random_nvl_position() {
-
-        int numberEdgeExisting = 4;
-        int randomEdge = (int) (Math.random() * numberEdgeExisting);
-
-        if (randomEdge == 0) {
-            nvl_pos_x = 0;
-            nvl_pos_y = (int) (Math.random() * screen_H);
-        } else if (randomEdge == 1) {
-            nvl_pos_x = screen_W;
-            nvl_pos_y = (int) (Math.random() * screen_H);
-        } else if (randomEdge == 2) {
-            nvl_pos_y = 0;
-            nvl_pos_x = (int) (Math.random() * screen_W);
-        } else if (randomEdge == 3) {
-            nvl_pos_y = screen_H;
-            nvl_pos_x = (int) (Math.random() * screen_W);
-        }
-
-        // ArrayList<Fish> listFish = Board.get_listFish();
-        // for (Fish fish : listFish) {
-
-        // }
-
-    }
-
-    ///////////////////////////////////
     // Method called every moment for a chhange, here for move
     //////////////////////////////////
 
     @Override
     public void update() {
 
-        if (getPos_x() < nvl_pos_x) {
-            new_pos = getPos_x() + MoveFishEveryMoment;
-            setPos_x(new_pos);
-        } else if (getPos_x() > nvl_pos_x) {
-            new_pos = getPos_x() - MoveFishEveryMoment;
-            setPos_x(new_pos);
-        } else if (getPos_y() > nvl_pos_y) {
-            new_pos = getPos_y() - MoveFishEveryMoment;
-            setPos_y(new_pos);
-        } else if (getPos_y() < nvl_pos_y) {
-            new_pos = getPos_y() + MoveFishEveryMoment;
-            setPos_y(new_pos);
-        } else if (getPos_x() == nvl_pos_x && getPos_y() == nvl_pos_y) {
-            random_nvl_position();
+        ArrayList<Fish> listFishPrey = Board.get_listFish();
+        for (Fish fishprey : listFishPrey) {
+            // if (getPos_x() == fishprey.getPos_x() && getPos_y() == fishprey.getPos_y()) {
+            // System.out.println("tuer");
+            // }
+
+            if ((getPos_x() >= pos_x_fishPrey) && (getPos_x() <= pos_x_fishPrey)
+                    && (getPos_y() >= pos_y_fishPrey) && (getPos_y() <= pos_y_fishPrey)) {
+                pos_x_fishPrey = fishprey.getPos_x();
+                pos_y_fishPrey = fishprey.getPos_y();
+            }
+
+        }
+
+        // if ((getPos_x() >= pos_x_fishPrey) && (getPos_x() <= pos_x_fishPrey)
+        // && (getPos_y() >= pos_y_fishPrey) && (getPos_y() <= pos_y_fishPrey)) {
+        // System.out.println("tuer");
+        // }
+        if (getPos_x() == pos_x_fishPrey && getPos_y() == pos_y_fishPrey) {
+            System.out.println("");
+        }
+        if (getPos_y() < pos_y_fishPrey) {
+            moveFish = getPos_y() + MoveFishEverymoment;
+            setPos_y(moveFish);
+        }
+        if (getPos_x() < pos_x_fishPrey) {
+            moveFish = getPos_x() + MoveFishEverymoment;
+            setPos_x(moveFish);
+        }
+        if (getPos_x() > pos_x_fishPrey) {
+            moveFish = getPos_x() - MoveFishEverymoment;
+            setPos_x(moveFish);
+        }
+        if (getPos_y() > pos_y_fishPrey) {
+            moveFish = getPos_y() - MoveFishEverymoment;
+            setPos_y(moveFish);
         }
 
     }
