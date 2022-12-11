@@ -35,7 +35,6 @@ public class Board extends JPanel implements ActionListener {
     private static ArrayList<Obstacle> obstacleList = new ArrayList<Obstacle>();
     private static ArrayList<EdiblePellet> ediblePelletList = new ArrayList<EdiblePellet>();
     private static ArrayList<Fish> fishList = new ArrayList<Fish>();
-    private static ArrayList<Fish> fishListPrey = new ArrayList<Fish>();
     private static ArrayList<Insect> insectList = new ArrayList<Insect>();
 
     ///////////////////////////////////
@@ -44,10 +43,6 @@ public class Board extends JPanel implements ActionListener {
 
     public static ArrayList<Fish> get_listFish() {
         return fishList;
-    }
-
-    public static ArrayList<Fish> get_fishListPrey() {
-        return fishListPrey;
     }
 
     public static ArrayList<EdiblePellet> get_ediblePellet() {
@@ -105,7 +100,6 @@ public class Board extends JPanel implements ActionListener {
         timer.start();
 
         addFish();
-        addfishListPrey();
         addInsect();
         addObstacle();
         addEdiblePellet();
@@ -118,12 +112,9 @@ public class Board extends JPanel implements ActionListener {
 
     private void addFish() {
         fishList.add(new FishRed());
-    }
-
-    private void addfishListPrey() {
         fishList.add(new FishBlue());
-        fishList.add(new FishOrange());
         fishList.add(new FishPurple());
+        fishList.add(new FishOrange());
 
     }
 
@@ -161,13 +152,6 @@ public class Board extends JPanel implements ActionListener {
         }
     }
 
-    private void drawFishPrey(Graphics g) {
-        for (int i = 0; i < fishListPrey.size(); i++) {
-            g.drawImage(fishListPrey.get(i).getPathToImage(), fishListPrey.get(i).getPos_x(),
-                    fishListPrey.get(i).getPos_y(), this);
-        }
-    }
-
     private void drawInsect(Graphics g) {
         for (int i = 0; i < insectList.size(); i++) {
             g.drawImage(insectList.get(i).getPathToImage(), insectList.get(i).getPos_x(), insectList.get(i).getPos_y(),
@@ -191,7 +175,6 @@ public class Board extends JPanel implements ActionListener {
 
     private void doDrawing(Graphics g) {
         drawFish(g);
-        drawFishPrey(g);
         drawInsect(g);
         drawEdiblePellet(g);
         drawObstacle(g);

@@ -11,9 +11,9 @@ public class EdiblePellet {
     private int pos_x;
     private int pos_y;
     private Image ediblePellet_Image;
-    private static int sizePellet = 7;
-    protected int screen_W = Board.getB_WIDTH() - sizePellet;
-    protected int screen_H = Board.getB_HEIGHT() - sizePellet;
+    private static int HitBoxPellet = 7;
+    protected int screen_W = Board.getB_WIDTH();
+    protected int screen_H = Board.getB_HEIGHT();
     private static int counterToStopMoveFish = 0;
 
     ///////////////////////////////////
@@ -68,9 +68,9 @@ public class EdiblePellet {
     public void update() {
         ArrayList<Fish> listFish = Board.get_listFish();
         for (Fish fish : listFish) {
-            if ((getPos_x() - sizePellet <= fish.getPos_x()) && (getPos_x() + sizePellet >= fish.getPos_x())
-                    && (getPos_y() - sizePellet <= fish.getPos_y())
-                    && (getPos_y() + sizePellet >= fish.getPos_y())) {
+            if ((getPos_x() - HitBoxPellet <= fish.getPos_x()) && (getPos_x() + HitBoxPellet >= fish.getPos_x())
+                    && (getPos_y() - HitBoxPellet <= fish.getPos_y())
+                    && (getPos_y() + HitBoxPellet >= fish.getPos_y())) {
 
                 positionRandomEdiblePellet();
                 counterToStopMoveFish = 1000;

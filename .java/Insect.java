@@ -10,9 +10,9 @@ public class Insect {
 
     private int pos_x;
     private int pos_y;
-    private int sizeInsect = 15;
-    protected int screen_W = Board.getB_WIDTH() - sizeInsect;
-    protected int screen_H = Board.getB_HEIGHT() - sizeInsect;
+    private int HitBoxInsect = 15;
+    protected int screen_W = Board.getB_WIDTH();
+    protected int screen_H = Board.getB_HEIGHT();
     private final Image pathToImage;
 
     ///////////////////////////////////
@@ -51,9 +51,9 @@ public class Insect {
         ArrayList<Fish> listFish = Board.get_listFish();
         for (Fish fish : listFish) {
 
-            if ((getPos_x() - sizeInsect <= fish.getPos_x()) && (getPos_x() + sizeInsect >= fish.getPos_x())
-                    && (getPos_y() - sizeInsect <= fish.getPos_y())
-                    && (getPos_y() + sizeInsect >= fish.getPos_y())) {
+            if ((getPos_x() - HitBoxInsect <= fish.getPos_x()) && (getPos_x() + HitBoxInsect >= fish.getPos_x())
+                    && (getPos_y() - HitBoxInsect <= fish.getPos_y())
+                    && (getPos_y() + HitBoxInsect >= fish.getPos_y())) {
 
                 positionRandomInsect();
 

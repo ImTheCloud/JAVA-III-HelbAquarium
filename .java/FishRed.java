@@ -10,6 +10,11 @@ public class FishRed extends Fish {
     private static int pos_y_fishPrey;
     private int moveFish;
     private int MoveFishEverymoment = 1;
+    private int followedId;
+    private int hitBoxFish = 3;
+    private double rep = 0;
+    private double min = 1000;
+    private int EatId = 0;
 
     ///////////////////////////////////
     // Constructor
@@ -26,28 +31,27 @@ public class FishRed extends Fish {
     @Override
     public void update() {
 
-        ArrayList<Fish> listFishPrey = Board.get_listFish();
-        for (Fish fishprey : listFishPrey) {
-            // if (getPos_x() == fishprey.getPos_x() && getPos_y() == fishprey.getPos_y()) {
-            // System.out.println("tuer");
-            // }
+        // for (int i = 0; i < Board.get_listFish().size(); i++) {
 
-            // if ((getPos_x() >= pos_x_fishPrey) && (getPos_x() <= pos_x_fishPrey)
-            // && (getPos_y() >= pos_y_fishPrey) && (getPos_y() <= pos_y_fishPrey)) {
-            // pos_x_fishPrey = fishprey.getPos_x();
-            // pos_y_fishPrey = fishprey.getPos_y();
-            // }
-            pos_x_fishPrey = fishprey.getPos_x();
-            pos_y_fishPrey = fishprey.getPos_y();
+        // if (Board.get_listFish().get(i).getClass().getName() !=
+        // FishRed.class.getName()) {
 
-        }
+        // pos_x_fishPrey = Board.get_listFish().get(i).getPos_x();
+        // pos_y_fishPrey = Board.get_listFish().get(i).getPos_y();
 
-        // if ((getPos_x() >= pos_x_fishPrey) && (getPos_x() <= pos_x_fishPrey)
-        // && (getPos_y() >= pos_y_fishPrey) && (getPos_y() <= pos_y_fishPrey)) {
-        // System.out.println("tuer");
+        // followedId = Board.get_listFish().get(i).get_id();
+
         // }
-        if (getPos_x() == pos_x_fishPrey && getPos_y() == pos_y_fishPrey) {
-            System.out.println("tuer");
+
+        // }
+
+        closestFish();
+
+        if ((getPos_x() >= pos_x_fishPrey - hitBoxFish) && (getPos_x() <= pos_x_fishPrey + hitBoxFish)
+                && (getPos_y() >= pos_y_fishPrey - hitBoxFish) && (getPos_y() <= pos_y_fishPrey + hitBoxFish)) {
+            // System.out.println("tuer2");
+            fishKilling();
+
         }
         if (getPos_y() < pos_y_fishPrey) {
             moveFish = getPos_y() + MoveFishEverymoment;
@@ -65,6 +69,33 @@ public class FishRed extends Fish {
             moveFish = getPos_y() - MoveFishEverymoment;
             setPos_y(moveFish);
         }
+
+    }
+
+    private void closestFish() {
+        for (int i = 0; i < Board.get_listFish().size(); i++) {
+
+            if (Board.get_listFish().get(i).getClass().getName() != FishRed.class.getName()) {
+
+                rep = Math.sqrt(((getPos_x() - Board.get_listFish().get(i).getPos_x())
+                        * (getPos_x() - Board.get_listFish().get(i).getPos_x())) +
+                        ((getPos_y() - Board.get_listFish().get(i).getPos_y())
+                                * (getPos_y() - Board.get_listFish().get(i).getPos_y())));
+
+                if (min > rep) {
+                    min = rep;
+                    pos_x_fishPrey = Board.get_listFish().get(i).getPos_x();
+                    pos_y_fishPrey = Board.get_listFish().get(i).getPos_y();
+                    EatId = get_id();
+                }
+
+            }
+
+        }
+    }
+
+    private void fishKilling() {
+        Board.get_listFish().remove(followedId);
 
     }
 

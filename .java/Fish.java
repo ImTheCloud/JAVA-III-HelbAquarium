@@ -13,6 +13,7 @@ public class Fish {
     protected static int screen_W = Board.getB_WIDTH() - sizeFish;
     protected static int screen_H = Board.getB_HEIGHT() - sizeFish;
     private final Image pathToImage;
+    private int id = 0;
 
     ///////////////////////////////////
     // Constructor
@@ -20,7 +21,10 @@ public class Fish {
 
     public Fish(String string) {
         ImageIcon iid = new ImageIcon(string);
+
         pathToImage = iid.getImage();
+        id += 1;
+
         positionFish();
 
     }
@@ -28,6 +32,10 @@ public class Fish {
     ///////////////////////////////////
     // The Get for other class
     //////////////////////////////////
+
+    public int get_id() {
+        return id;
+    }
 
     public int getPos_x() {
         return pos_x;
