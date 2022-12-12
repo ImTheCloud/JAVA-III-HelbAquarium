@@ -7,7 +7,9 @@ public class FishOrange extends Fish {
     private static int destination_pos_x;
     private static int destination_pos_y;
     private int moveFish;
-    private int MoveFishEverymoment = 1;
+    private int speedFish = 1;
+    private static int numberEdgeExisting = 4;
+    private static int randomEdge = (int) (Math.random() * numberEdgeExisting);
     private static int[] tab = new int[2];
 
     ///////////////////////////////////
@@ -24,9 +26,6 @@ public class FishOrange extends Fish {
     //////////////////////////////////
 
     public static int[] random_nvl_position() {
-
-        int numberEdgeExisting = 4;
-        int randomEdge = (int) (Math.random() * numberEdgeExisting);
 
         if (randomEdge == 0) {
             destination_pos_x = 0;
@@ -71,19 +70,19 @@ public class FishOrange extends Fish {
             random_nvl_position();
         }
         if (getPos_y() < destination_pos_y) {
-            moveFish = getPos_y() + MoveFishEverymoment;
+            moveFish = getPos_y() + speedFish;
             setPos_y(moveFish);
         }
         if (getPos_x() < destination_pos_x) {
-            moveFish = getPos_x() + MoveFishEverymoment;
+            moveFish = getPos_x() + speedFish;
             setPos_x(moveFish);
         }
         if (getPos_x() > destination_pos_x) {
-            moveFish = getPos_x() - MoveFishEverymoment;
+            moveFish = getPos_x() - speedFish;
             setPos_x(moveFish);
         }
         if (getPos_y() > destination_pos_y) {
-            moveFish = getPos_y() - MoveFishEverymoment;
+            moveFish = getPos_y() - speedFish;
             setPos_y(moveFish);
         }
 

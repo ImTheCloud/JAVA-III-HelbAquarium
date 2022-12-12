@@ -1,15 +1,13 @@
-import java.util.ArrayList;
-
 public class FishBlue extends Fish {
 
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
 
-    private static int pos_x_fishPrey;
-    private static int pos_y_fishPrey;
+    private static int pos_x_fishBlueOrPurple;
+    private static int pos_y_fishBlueOrPurple;
     private int moveFish;
-    private int MoveFishEverymoment = 1;
+    private int speedFish = 2;
 
     ///////////////////////////////////
     // Constructor
@@ -26,44 +24,51 @@ public class FishBlue extends Fish {
     @Override
     public void update() {
 
-        ArrayList<Fish> listFishPrey = Board.get_listFish();
-        for (Fish fishprey : listFishPrey) {
-            // if (getPos_x() == fishprey.getPos_x() && getPos_y() == fishprey.getPos_y()) {
-            // System.out.println("tuer");
-            // }
+        directionToFishBlueOrPurple();
 
-            if ((getPos_x() >= pos_x_fishPrey) && (getPos_x() <= pos_x_fishPrey)
-                    && (getPos_y() >= pos_y_fishPrey) && (getPos_y() <= pos_y_fishPrey)) {
-                pos_x_fishPrey = fishprey.getPos_x();
-                pos_y_fishPrey = fishprey.getPos_y();
+        if (getPos_y() < pos_y_fishBlueOrPurple) {
+            moveFish = getPos_y() + speedFish;
+            setPos_y(moveFish);
+        }
+        if (getPos_x() < pos_x_fishBlueOrPurple) {
+            moveFish = getPos_x() + speedFish;
+            setPos_x(moveFish);
+        }
+        if (getPos_x() > pos_x_fishBlueOrPurple) {
+            moveFish = getPos_x() - speedFish;
+            setPos_x(moveFish);
+        }
+        if (getPos_y() > pos_y_fishBlueOrPurple) {
+            moveFish = getPos_y() - speedFish;
+            setPos_y(moveFish);
+        }
+
+    }
+
+    private void directionToFishBlueOrPurple() {
+
+        for (int i = 0; i < Board.get_listFish().size(); i++) {
+
+            if (FishBlue.class.getName() == Board.get_listFish().get(i).getClass().getName()
+                    || FishPurple.class.getName() == Board.get_listFish().get(i).getClass().getName()) {
+
+                // calculDistance = Math.sqrt(((getPos_x() -
+                // Board.get_listFish().get(i).getPos_x())
+                // * (getPos_x() - Board.get_listFish().get(i).getPos_x()))
+                // + ((getPos_y() - Board.get_listFish().get(i).getPos_y())
+                // * (getPos_y() - Board.get_listFish().get(i).getPos_y())));
+
+                // if (calculClosestDistance > calculDistance) {
+                // calculClosestDistance = calculDistance;
+
+                pos_x_fishBlueOrPurple = Board.get_listFish().get(i).getPos_x();
+                pos_y_fishBlueOrPurple = Board.get_listFish().get(i).getPos_y();
+
+                // }
+
             }
 
         }
-
-        // if ((getPos_x() >= pos_x_fishPrey) && (getPos_x() <= pos_x_fishPrey)
-        // && (getPos_y() >= pos_y_fishPrey) && (getPos_y() <= pos_y_fishPrey)) {
-        // System.out.println("tuer");
-        // }
-        if (getPos_x() == pos_x_fishPrey && getPos_y() == pos_y_fishPrey) {
-            System.out.println("");
-        }
-        if (getPos_y() < pos_y_fishPrey) {
-            moveFish = getPos_y() + MoveFishEverymoment;
-            setPos_y(moveFish);
-        }
-        if (getPos_x() < pos_x_fishPrey) {
-            moveFish = getPos_x() + MoveFishEverymoment;
-            setPos_x(moveFish);
-        }
-        if (getPos_x() > pos_x_fishPrey) {
-            moveFish = getPos_x() - MoveFishEverymoment;
-            setPos_x(moveFish);
-        }
-        if (getPos_y() > pos_y_fishPrey) {
-            moveFish = getPos_y() - MoveFishEverymoment;
-            setPos_y(moveFish);
-        }
-
     }
 
 }

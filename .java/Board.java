@@ -20,10 +20,23 @@ public class Board extends JPanel implements ActionListener {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-    private final static int B_WIDTH = 600;
-    private final static int B_HEIGHT = 300;
+    private final static int B_WIDTH = 1000;
+    private final static int B_HEIGHT = 600;
     private final int Delay = 10;
     private Timer timer = new Timer(Delay, this);
+
+    private int numberInsectMax = 5;
+    private int numberInsect = (int) (Math.random() * numberInsectMax);
+    private static int numberObstacleMax = 2;
+    private static int numberObstacle = (int) (Math.random() * numberObstacleMax + 1);
+    private int numberEdiblePelletMax = 5;
+    private int ediblePelletCounter = (int) (Math.random() * numberEdiblePelletMax);
+
+    private int numberFishDifferentExisting = 4;
+    private int fishColourAdd;
+    private int numberInsectDifferentExisting = 3;
+    private int insectColourAdd;
+
     // private Image orange;
     // private Image purple;
     // private Image red;
@@ -51,6 +64,10 @@ public class Board extends JPanel implements ActionListener {
 
     public static ArrayList<Obstacle> get_listObstacle() {
         return obstacleList;
+    }
+
+    public static int get_speed_fish() {
+        return numberObstacle;
     }
 
     public static int getB_WIDTH() {
@@ -81,7 +98,6 @@ public class Board extends JPanel implements ActionListener {
     // Lancement de l'application
     ///////////////////////////////////
     public Board() {
-
         initBoard();
 
     }
@@ -89,7 +105,7 @@ public class Board extends JPanel implements ActionListener {
     private void initBoard() {
 
         addKeyListener(new TAdapter());
-        setBackground(Color.cyan);
+        setBackground(Color.gray);
         setFocusable(true);
 
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
@@ -119,24 +135,27 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void addInsect() {
-        insectList.add(new InsectBlack());
-        insectList.add(new InsectRed());
-        insectList.add(new InsectBrown());
+
+        for (int i = 0; i < numberInsect; i++) {
+            insectColourAdd = (int) (Math.random() * numberInsectDifferentExisting);
+            if (insectColourAdd == 0) {
+                insectList.add(new InsectBlack());
+            } else if (insectColourAdd == 1) {
+                insectList.add(new InsectRed());
+            } else if (insectColourAdd == 2) {
+                insectList.add(new InsectBrown());
+            }
+        }
 
     }
 
     private void addObstacle() {
-        int numberObstacle = 3;
-        int obstacleCounter = (int) (Math.random() * numberObstacle + 1); // at least 1 obstacle beacause if it's 0 you
-                                                                          // cant see the functionnality
-        for (int i = 0; i < obstacleCounter; i++) {
+        for (int i = 0; i < numberObstacle; i++) {
             obstacleList.add(new Obstacle());
         }
     }
 
     private void addEdiblePellet() {
-        int numberEdiblePelletMax = 5;
-        int ediblePelletCounter = (int) (Math.random() * numberEdiblePelletMax);
         for (int i = 0; i < ediblePelletCounter; i++) {
             ediblePelletList.add(new EdiblePellet());
         }
@@ -246,16 +265,14 @@ public class Board extends JPanel implements ActionListener {
                 setBackground(Color.blue); // hot Background
             }
             if (key == KeyEvent.VK_4) { // add insect random
-                int numberInsectExisting = 3;
-                int insectColour = (int) (Math.random() * numberInsectExisting);
-                if (insectColour == 0) {
+                insectColourAdd = (int) (Math.random() * numberInsectDifferentExisting);
+                if (insectColourAdd == 0) {
                     insectList.add(new InsectBlack());
-                } else if (insectColour == 1) {
+                } else if (insectColourAdd == 1) {
                     insectList.add(new InsectRed());
                 } else {
                     insectList.add(new InsectBrown());
                 }
-
             }
             if (key == KeyEvent.VK_5) { // add edible pellet
                 ediblePelletList.add(new EdiblePellet());
@@ -270,13 +287,12 @@ public class Board extends JPanel implements ActionListener {
 
             }
             if (key == KeyEvent.VK_9) { // add fish random
-                int numberFishExisting = 4;
-                int fishColour = (int) (Math.random() * numberFishExisting);
-                if (fishColour == 0) {
+                fishColourAdd = (int) (Math.random() * numberFishDifferentExisting);
+                if (fishColourAdd == 0) {
                     fishList.add(new FishBlue());
-                } else if (fishColour == 1) {
+                } else if (fishColourAdd == 1) {
                     fishList.add(new FishRed());
-                } else if (fishColour == 3) {
+                } else if (fishColourAdd == 3) {
                     fishList.add(new FishPurple());
                 } else {
                     fishList.add(new FishOrange());

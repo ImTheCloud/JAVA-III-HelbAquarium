@@ -4,10 +4,10 @@ public class FishPurple extends Fish {
     // The variables
     //////////////////////////////////
 
-    private static int destination_pos_x;
-    private static int destination_pos_y;
+    private static int pos_x_fishRed;
+    private static int pos_y_fishRed;
     private int moveFish;
-    private int MoveFishEverymoment = 1;
+    private int speedFish = Board.get_speed_fish();
 
     ///////////////////////////////////
     // Constructor
@@ -18,70 +18,57 @@ public class FishPurple extends Fish {
     }
 
     ///////////////////////////////////
-    // Method for a random Edge
-    //////////////////////////////////
-
-    public void random_nvl_position() {
-
-        int numberEdgeExisting = 4;
-        int randomEdge = (int) (Math.random() * numberEdgeExisting);
-
-        if (randomEdge == 0) {
-            destination_pos_x = 0;
-            destination_pos_y = (int) (Math.random() * screen_H);
-        } else if (randomEdge == 1) {
-            destination_pos_x = screen_W;
-            destination_pos_y = (int) (Math.random() * screen_H);
-        } else if (randomEdge == 2) {
-            destination_pos_y = 0;
-            destination_pos_x = (int) (Math.random() * screen_W);
-        } else if (randomEdge == 3) {
-            destination_pos_y = screen_H;
-            destination_pos_x = (int) (Math.random() * screen_W);
-        }
-
-        // ArrayList<Fish> listFish = Board.get_listFish();
-        // for (Fish fish : listFish) {
-
-        // }
-
-    }
-
-    ///////////////////////////////////
-    // Method called every moment for a chhange, here for move
+    // Method called every moment for a change, here for move
     //////////////////////////////////
 
     @Override
     public void update() {
 
-        // EdiblePellet.set_stop();
+        oppositeDirectionofTheRedFish();
 
-        // if (set_stop== 0) {
-        // Fait avancer le poisson
-        if (getPos_x() == destination_pos_x && getPos_y() == destination_pos_y) {
-            random_nvl_position();
-        }
-        if (getPos_y() < destination_pos_y) {
-            moveFish = getPos_y() + MoveFishEverymoment;
+        if (getPos_y() < pos_y_fishRed) {
+            moveFish = getPos_y() - speedFish;
             setPos_y(moveFish);
+            oppositeDirectionofTheRedFish();
         }
-        if (getPos_x() < destination_pos_x) {
-            moveFish = getPos_x() + MoveFishEverymoment;
+        if (getPos_x() < pos_x_fishRed) {
+            moveFish = getPos_x() - speedFish;
             setPos_x(moveFish);
+            oppositeDirectionofTheRedFish();
         }
-        if (getPos_x() > destination_pos_x) {
-            moveFish = getPos_x() - MoveFishEverymoment;
+        if (getPos_x() > pos_x_fishRed) {
+            moveFish = getPos_x() + speedFish;
             setPos_x(moveFish);
+            oppositeDirectionofTheRedFish();
         }
-        if (getPos_y() > destination_pos_y) {
-            moveFish = getPos_y() - MoveFishEverymoment;
+        if (getPos_y() > pos_y_fishRed) {
+            moveFish = getPos_y() + speedFish;
             setPos_y(moveFish);
+            oppositeDirectionofTheRedFish();
         }
+    }
 
-        // } else {
-        // set_stop--;
-        // }
+    private void oppositeDirectionofTheRedFish() {
 
+        for (int i = 0; i < Board.get_listFish().size(); i++) {
+
+            if (FishRed.class.getName() == Board.get_listFish().get(i).getClass().getName()) {
+
+                // calculDistance = Math.sqrt(((getPos_x() -
+                // Board.get_listFish().get(i).getPos_x())
+                // * (getPos_x() - Board.get_listFish().get(i).getPos_x()))
+                // + ((getPos_y() - Board.get_listFish().get(i).getPos_y())
+                // * (getPos_y() - Board.get_listFish().get(i).getPos_y())));
+
+                // if (calculClosestDistance > calculDistance) {
+                // calculClosestDistance = calculDistance;
+                pos_x_fishRed = Board.get_listFish().get(i).getPos_x();
+                pos_y_fishRed = Board.get_listFish().get(i).getPos_y();
+                // }
+
+            }
+
+        }
     }
 
 }

@@ -6,7 +6,7 @@ public class FishRed extends Fish {
     private static int pos_x_fishPrey;
     private static int pos_y_fishPrey;
     private int moveFish;
-    private int moveFishEverymoment = 1;
+    private int speedFish = 1;
     private Fish deathFish;
     private int hitBoxFish = 3;
     // private double calculDistance = 0;
@@ -35,19 +35,19 @@ public class FishRed extends Fish {
             closestFish();
         }
         if (getPos_y() < pos_y_fishPrey) {
-            moveFish = getPos_y() + moveFishEverymoment;
+            moveFish = getPos_y() + speedFish;
             setPos_y(moveFish);
         }
         if (getPos_x() < pos_x_fishPrey) {
-            moveFish = getPos_x() + moveFishEverymoment;
+            moveFish = getPos_x() + speedFish;
             setPos_x(moveFish);
         }
         if (getPos_x() > pos_x_fishPrey) {
-            moveFish = getPos_x() - moveFishEverymoment;
+            moveFish = getPos_x() - speedFish;
             setPos_x(moveFish);
         }
         if (getPos_y() > pos_y_fishPrey) {
-            moveFish = getPos_y() - moveFishEverymoment;
+            moveFish = getPos_y() - speedFish;
             setPos_y(moveFish);
         }
 
