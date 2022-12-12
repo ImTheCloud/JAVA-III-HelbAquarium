@@ -20,15 +20,15 @@ public class Board extends JPanel implements ActionListener {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-    private final static int B_WIDTH = 1000;
-    private final static int B_HEIGHT = 600;
+    private final static int B_WIDTH = 600;
+    private final static int B_HEIGHT = 350;
     private final int Delay = 10;
     private Timer timer = new Timer(Delay, this);
 
     private int numberInsectMax = 5;
     private int numberInsect = (int) (Math.random() * numberInsectMax);
     private static int numberObstacleMax = 2;
-    private static int numberObstacle = (int) (Math.random() * numberObstacleMax + 1);
+    private static int numberObstacle = 4;
     private int numberEdiblePelletMax = 5;
     private int ediblePelletCounter = (int) (Math.random() * numberEdiblePelletMax);
 
@@ -129,8 +129,8 @@ public class Board extends JPanel implements ActionListener {
     private void addFish() {
         fishList.add(new FishRed());
         fishList.add(new FishBlue());
-        fishList.add(new FishPurple());
         fishList.add(new FishOrange());
+        fishList.add(new FishPurple());
 
     }
 

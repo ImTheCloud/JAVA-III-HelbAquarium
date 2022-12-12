@@ -11,9 +11,9 @@ public class Obstacle {
     private int pos_x;
     private int pos_y;
     private Image obstacle_Image;
-    private static int sizeObstacle = 20; // 40 W / 20 H
-    protected int screen_W = Board.getB_WIDTH() - (sizeObstacle * 2); // *2 because it's a rectangle not a square
-    protected int screen_H = Board.getB_HEIGHT() - sizeObstacle;
+    private static int HitBoxOBstacle = 20; // 40 W / 20 H
+    protected int screen_W = Board.getB_WIDTH() - (HitBoxOBstacle * 2); // *2 because it's a rectangle not a square
+    protected int screen_H = Board.getB_HEIGHT() - HitBoxOBstacle;
 
     ///////////////////////////////////
     // Constructor
@@ -47,15 +47,17 @@ public class Obstacle {
     ///////////////////////////////////
 
     public void update() {
-        ArrayList<Fish> listFish = Board.get_listFish();
-        for (Fish fish : listFish) {
 
-            if ((getPos_x() >= fish.getPos_x() + sizeObstacle) && (getPos_x() <= fish.getPos_x())
-                    && (getPos_y() >= fish.getPos_y() + sizeObstacle) && (getPos_y() <= fish.getPos_y())) {
-                FishOrange.get_randomNvlPosition();
+        for (int i = 0; i < Board.get_listFish().size(); i++) {
+            if ((Board.get_listFish().get(i).getPos_x() >= getPos_x() + HitBoxOBstacle)
+                    && (Board.get_listFish().get(i).getPos_x() <= getPos_x())
+                    && (Board.get_listFish().get(i).getPos_y() >= getPos_y() + HitBoxOBstacle)
+                    && (Board.get_listFish().get(i).getPos_y() <= getPos_y())) {
 
-                // System.out.println("obstacle toucher");
+                System.out.println("obstacle toucher");
             }
         }
+
     }
+
 }

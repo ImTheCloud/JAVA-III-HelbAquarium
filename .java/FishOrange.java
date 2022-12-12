@@ -9,7 +9,7 @@ public class FishOrange extends Fish {
     private int moveFish;
     private int speedFish = 1;
     private static int numberEdgeExisting = 4;
-    private static int randomEdge = (int) (Math.random() * numberEdgeExisting);
+    private static int randomEdge;
     private static int[] tab = new int[2];
 
     ///////////////////////////////////
@@ -27,6 +27,7 @@ public class FishOrange extends Fish {
 
     public static int[] random_nvl_position() {
 
+        randomEdge = (int) (Math.random() * numberEdgeExisting);
         if (randomEdge == 0) {
             destination_pos_x = 0;
             destination_pos_y = (int) (Math.random() * screen_H);
@@ -43,6 +44,8 @@ public class FishOrange extends Fish {
 
         tab[0] = destination_pos_x;
         tab[1] = destination_pos_y;
+        // System.out.println(tab[0]);
+        // System.out.println(tab[1]);
 
         return tab;
 

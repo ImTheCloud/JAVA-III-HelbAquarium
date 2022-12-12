@@ -78,7 +78,7 @@ public class FishRed extends Fish {
     }
 
     private void fishKilling() {
-        Board.get_listFish().remove(deathFish);
+        // Board.get_listFish().remove(deathFish);
 
     }
 
