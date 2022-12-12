@@ -7,10 +7,11 @@ public class FishRed extends Fish {
     private static int pos_y_fishPrey;
     private int moveFish;
     private int moveFishEverymoment = 1;
-    private int idFishPrey;
+    private Fish deathFish;
     private int hitBoxFish = 3;
-    private double calculDistance = 0;
-    private double calculClosestDistance = 1000;
+    // private double calculDistance = 0;
+    // private double calculClosestDistance = 1000;
+
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
@@ -56,19 +57,20 @@ public class FishRed extends Fish {
 
         for (int i = 0; i < Board.get_listFish().size(); i++) {
 
-            if (Board.get_listFish().get(i).getClass().getName() != FishRed.class.getName()) {
+            if (FishRed.class.getName() != Board.get_listFish().get(i).getClass().getName()) {
 
-                calculDistance = Math.sqrt(((getPos_x() - Board.get_listFish().get(i).getPos_x())
-                        * (getPos_x() - Board.get_listFish().get(i).getPos_x())) +
-                        ((getPos_y() - Board.get_listFish().get(i).getPos_y())
-                                * (getPos_y() - Board.get_listFish().get(i).getPos_y())));
+                // calculDistance = Math.sqrt(((getPos_x() -
+                // Board.get_listFish().get(i).getPos_x())
+                // * (getPos_x() - Board.get_listFish().get(i).getPos_x()))
+                // + ((getPos_y() - Board.get_listFish().get(i).getPos_y())
+                // * (getPos_y() - Board.get_listFish().get(i).getPos_y())));
 
-                if (calculClosestDistance > calculDistance) {
-                    calculClosestDistance = calculDistance;
-                    pos_x_fishPrey = Board.get_listFish().get(i).getPos_x();
-                    pos_y_fishPrey = Board.get_listFish().get(i).getPos_y();
-                    idFishPrey = get_idFish();
-                }
+                // if (calculClosestDistance > calculDistance) {
+                // calculClosestDistance = calculDistance;
+                pos_x_fishPrey = Board.get_listFish().get(i).getPos_x();
+                pos_y_fishPrey = Board.get_listFish().get(i).getPos_y();
+                deathFish = Board.get_listFish().get(i);
+                // }
 
             }
 
@@ -76,7 +78,7 @@ public class FishRed extends Fish {
     }
 
     private void fishKilling() {
-        Board.get_listFish().remove(idFishPrey);
+        Board.get_listFish().remove(deathFish);
 
     }
 
