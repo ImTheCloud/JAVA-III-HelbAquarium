@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class EdiblePellet {
 
@@ -15,6 +14,8 @@ public class EdiblePellet {
     protected int screen_W = Board.getB_WIDTH();
     protected int screen_H = Board.getB_HEIGHT();
     private static int counterToStopMoveFish = 0;
+    private static String nameFishTouchPellet;
+    // private EdiblePellet deathPellet;
 
     ///////////////////////////////////
     // Constructor
@@ -47,8 +48,12 @@ public class EdiblePellet {
         return counterToStopMoveFish;
     }
 
-    public void set_counterToStopMoveFish(int counterToStopMoveFish) {
-        // this.stop = stop;
+    static String get_NameFishTouchPellet() {
+        return nameFishTouchPellet;
+    }
+
+    public static void set_counterToStopMoveFish(int ccounterToStopMoveFish) {
+        counterToStopMoveFish = ccounterToStopMoveFish;
     }
 
     ///////////////////////////////////
@@ -66,14 +71,17 @@ public class EdiblePellet {
     ///////////////////////////////////
 
     public void update() {
-        ArrayList<Fish> listFish = Board.get_listFish();
-        for (Fish fish : listFish) {
-            if ((getPos_x() - HitBoxPellet <= fish.getPos_x()) && (getPos_x() + HitBoxPellet >= fish.getPos_x())
-                    && (getPos_y() - HitBoxPellet <= fish.getPos_y())
-                    && (getPos_y() + HitBoxPellet >= fish.getPos_y())) {
+        for (int i = 0; i < Board.get_listFish().size(); i++) {
+            if ((Board.get_listFish().get(i).getPos_x() - HitBoxPellet <= getPos_x())
+                    && (Board.get_listFish().get(i).getPos_x() + HitBoxPellet >= getPos_x())
+                    && (Board.get_listFish().get(i).getPos_y() - HitBoxPellet <= getPos_y())
+                    && (Board.get_listFish().get(i).getPos_y() + HitBoxPellet >= getPos_y())) {
+
+                // Board.get_ediblePellet().remove(Board.get_ediblePellet().get(i));
 
                 positionRandomEdiblePellet();
-                counterToStopMoveFish = 1000;
+                counterToStopMoveFish = 625;
+                nameFishTouchPellet = Board.get_listFish().get(i).getClass().getName();
 
                 // System.out.println("Pellet");
             }

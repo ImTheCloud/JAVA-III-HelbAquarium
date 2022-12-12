@@ -14,6 +14,7 @@ public class Insect {
     protected int screen_W = Board.getB_WIDTH();
     protected int screen_H = Board.getB_HEIGHT();
     private final Image pathToImage;
+    private int SpeedUpgrade;
 
     ///////////////////////////////////
     // Constructor
@@ -38,8 +39,25 @@ public class Insect {
         return pos_y;
     }
 
+    public int getSpeedUpgrade() {
+        return SpeedUpgrade;
+    }
+
+    public void setSpeedUpgrade(int SpeedUpgrade) {
+        this.SpeedUpgrade = SpeedUpgrade;
+    }
+
     public Image getPathToImage() {
         return pathToImage;
+    }
+
+    ///////////////////////////////////
+    // create a random position for the Pellet
+    //////////////////////////////////
+
+    public void positionRandomInsect() {
+        pos_x = (int) (Math.random() * screen_W);
+        pos_y = (int) (Math.random() * screen_H);
     }
 
     ///////////////////////////////////
@@ -57,19 +75,13 @@ public class Insect {
 
                 positionRandomInsect();
 
+                FishOrange.setSpeedUpgrade(2);
+                SpeedUpgrade = 2;
+
                 // System.out.println("Insect manger");
             }
 
         }
-    }
-
-    ///////////////////////////////////
-    // create a random position for the Pellet
-    //////////////////////////////////
-
-    public void positionRandomInsect() {
-        pos_x = (int) (Math.random() * screen_W);
-        pos_y = (int) (Math.random() * screen_H);
     }
 
 }

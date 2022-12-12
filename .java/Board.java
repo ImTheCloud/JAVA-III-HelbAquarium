@@ -26,11 +26,11 @@ public class Board extends JPanel implements ActionListener {
     private Timer timer = new Timer(Delay, this);
 
     private int numberInsectMax = 5;
-    private int numberInsect = (int) (Math.random() * numberInsectMax);
+    private int numberInsect = (int) (Math.random() * numberInsectMax + 1);
     private static int numberObstacleMax = 2;
-    private static int numberObstacle = 4;
+    private static int numberObstacle = (int) (Math.random() * numberObstacleMax + 1);
     private int numberEdiblePelletMax = 5;
-    private int ediblePelletCounter = (int) (Math.random() * numberEdiblePelletMax);
+    private int ediblePelletCounter = (int) (Math.random() * numberEdiblePelletMax + 1);
 
     private int numberFishDifferentExisting = 4;
     private int fishColourAdd;

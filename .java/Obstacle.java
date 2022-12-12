@@ -48,11 +48,11 @@ public class Obstacle {
 
     public void update() {
 
-        for (int i = 0; i < Board.get_listFish().size(); i++) {
-            if ((Board.get_listFish().get(i).getPos_x() >= getPos_x() + HitBoxOBstacle)
-                    && (Board.get_listFish().get(i).getPos_x() <= getPos_x())
-                    && (Board.get_listFish().get(i).getPos_y() >= getPos_y() + HitBoxOBstacle)
-                    && (Board.get_listFish().get(i).getPos_y() <= getPos_y())) {
+        ArrayList<Fish> listFish = Board.get_listFish();
+        for (Fish fish : listFish) {
+            if ((getPos_x() - HitBoxOBstacle <= fish.getPos_x()) && (getPos_x() + HitBoxOBstacle >= fish.getPos_x())
+                    && (getPos_y() - HitBoxOBstacle <= fish.getPos_y())
+                    && (getPos_y() + HitBoxOBstacle >= fish.getPos_y())) {
 
                 System.out.println("obstacle toucher");
             }

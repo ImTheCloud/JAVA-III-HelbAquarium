@@ -7,7 +7,7 @@ public class FishPurple extends Fish {
     private static int pos_x_fishRed;
     private static int pos_y_fishRed;
     private int moveFish;
-    private int speedFish = Board.get_speed_fish();
+    private int speedFish = Board.get_speed_fish() + 1;
 
     ///////////////////////////////////
     // Constructor
@@ -24,8 +24,10 @@ public class FishPurple extends Fish {
     @Override
     public void update() {
 
+        // if ("FishPurple" != EdiblePellet.get_NameFishTouchPellet() &&
+        // EdiblePellet.get_counterToStopMoveFish() == 0) {
+        // if (EdiblePellet.get_counterToStopMoveFish() == 0) {
         oppositeDirectionofTheRedFish();
-
         if (getPos_y() < pos_y_fishRed) {
             moveFish = getPos_y() - speedFish;
             setPos_y(moveFish);
@@ -46,6 +48,13 @@ public class FishPurple extends Fish {
             setPos_y(moveFish);
             oppositeDirectionofTheRedFish();
         }
+        // } else {
+        // EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish()
+        // - 1);
+        // // System.out.println(EdiblePellet.get_counterToStopMoveFish());
+
+        // }
+
     }
 
     private void oppositeDirectionofTheRedFish() {

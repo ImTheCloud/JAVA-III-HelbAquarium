@@ -27,6 +27,10 @@ public class FishRed extends Fish {
     @Override
     public void update() {
 
+        // if ("FishRed" != EdiblePellet.get_NameFishTouchPellet() &&
+        // EdiblePellet.get_counterToStopMoveFish() == 0) {
+
+        // if (EdiblePellet.get_counterToStopMoveFish() == 0) {
         closestFish();
 
         if ((getPos_x() >= pos_x_fishPrey - hitBoxFish) && (getPos_x() <= pos_x_fishPrey + hitBoxFish)
@@ -50,6 +54,12 @@ public class FishRed extends Fish {
             moveFish = getPos_y() - speedFish;
             setPos_y(moveFish);
         }
+        // } else {
+
+        // EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish()
+        // - 1);
+        // // System.out.println(EdiblePellet.get_counterToStopMoveFish());
+        // }
 
     }
 
@@ -78,7 +88,7 @@ public class FishRed extends Fish {
     }
 
     private void fishKilling() {
-        // Board.get_listFish().remove(deathFish);
+        Board.get_listFish().remove(deathFish);
 
     }
 
