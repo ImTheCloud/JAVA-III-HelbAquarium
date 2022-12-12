@@ -14,7 +14,8 @@ public class Insect {
     protected int screen_W = Board.getB_WIDTH();
     protected int screen_H = Board.getB_HEIGHT();
     private final Image pathToImage;
-    private int SpeedUpgrade;
+    private static int SpeedUpgrade;
+    private static String nameFishTouchInsect;
 
     ///////////////////////////////////
     // Constructor
@@ -39,16 +40,20 @@ public class Insect {
         return pos_y;
     }
 
-    public int getSpeedUpgrade() {
+    public static int getSpeedUpgrade() {
         return SpeedUpgrade;
     }
 
-    public void setSpeedUpgrade(int SpeedUpgrade) {
-        this.SpeedUpgrade = SpeedUpgrade;
+    public static void setSpeedUpgrade(int setSpeedUpgrade) {
+        SpeedUpgrade = setSpeedUpgrade;
     }
 
     public Image getPathToImage() {
         return pathToImage;
+    }
+
+    static String get_nameFishTouchInsect() {
+        return nameFishTouchInsect;
     }
 
     ///////////////////////////////////
@@ -66,16 +71,18 @@ public class Insect {
     ///////////////////////////////////
 
     public void update() {
-        ArrayList<Fish> listFish = Board.get_listFish();
-        for (Fish fish : listFish) {
 
-            if ((getPos_x() - HitBoxInsect <= fish.getPos_x()) && (getPos_x() + HitBoxInsect >= fish.getPos_x())
-                    && (getPos_y() - HitBoxInsect <= fish.getPos_y())
-                    && (getPos_y() + HitBoxInsect >= fish.getPos_y())) {
+        for (int i = 0; i < Board.get_listFish().size(); i++) {
+
+            if ((getPos_x() - HitBoxInsect <= Board.get_listFish().get(i).getPos_x())
+                    && (getPos_x() + HitBoxInsect >= Board.get_listFish().get(i).getPos_x())
+                    && (getPos_y() - HitBoxInsect <= Board.get_listFish().get(i).getPos_y())
+                    && (getPos_y() + HitBoxInsect >= Board.get_listFish().get(i).getPos_y())) {
 
                 positionRandomInsect();
 
-                FishOrange.setSpeedUpgrade(2);
+                setSpeedUpgrade(2);
+                nameFishTouchInsect = Board.get_listFish().get(i).getClass().getName();
                 SpeedUpgrade = 2;
 
                 // System.out.println("Insect manger");

@@ -52,8 +52,8 @@ public class EdiblePellet {
         return nameFishTouchPellet;
     }
 
-    public static void set_counterToStopMoveFish(int ccounterToStopMoveFish) {
-        counterToStopMoveFish = ccounterToStopMoveFish;
+    public static void set_counterToStopMoveFish(int setCounterToStopMoveFish) {
+        counterToStopMoveFish = setCounterToStopMoveFish;
     }
 
     ///////////////////////////////////

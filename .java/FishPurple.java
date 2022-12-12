@@ -7,7 +7,7 @@ public class FishPurple extends Fish {
     private static int pos_x_fishRed;
     private static int pos_y_fishRed;
     private int moveFish;
-    private int speedFish = Board.get_speed_fish() + 1;
+    private int speedFish = Board.get_speed_fish();
 
     ///////////////////////////////////
     // Constructor
