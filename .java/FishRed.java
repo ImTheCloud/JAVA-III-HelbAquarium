@@ -6,7 +6,7 @@ public class FishRed extends Fish {
     private static int pos_x_fishPrey;
     private static int pos_y_fishPrey;
     private int moveFish;
-    private int speedFish = 1;
+    private static int speedFish = 3;
     private Fish deathFish;
     private int hitBoxFish = 3;
     // private double calculDistance = 0;
@@ -18,6 +18,18 @@ public class FishRed extends Fish {
 
     public FishRed() {
         super("Image/fishRed.png");
+    }
+
+    ///////////////////////////////////
+    // the get/set
+    //////////////////////////////////
+
+    public static int getSpeed() {
+        return speedFish;
+    }
+
+    public static void setSpeedUpgrade(int speeedFish) {
+        speedFish = speeedFish;
     }
 
     ///////////////////////////////////

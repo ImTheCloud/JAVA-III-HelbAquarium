@@ -7,7 +7,7 @@ public class FishBlue extends Fish {
     private static int pos_x_fishBlueOrPurple;
     private static int pos_y_fishBlueOrPurple;
     private int moveFish;
-    private int speedFish = 2;
+    private int speedFish = 4;
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////

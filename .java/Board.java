@@ -22,7 +22,7 @@ public class Board extends JPanel implements ActionListener {
     //////////////////////////////////
     private final static int B_WIDTH = 600;
     private final static int B_HEIGHT = 350;
-    private final int Delay = 10;
+    private final int Delay = 30;
     private Timer timer = new Timer(Delay, this);
 
     private int numberInsectMax = 5;
@@ -128,6 +128,12 @@ public class Board extends JPanel implements ActionListener {
 
     private void addFish() {
         fishList.add(new FishRed());
+        fishList.add(new FishBlue());
+        fishList.add(new FishOrange());
+        fishList.add(new FishPurple());
+        fishList.add(new FishBlue());
+        fishList.add(new FishOrange());
+        fishList.add(new FishPurple());
         fishList.add(new FishBlue());
         fishList.add(new FishOrange());
         fishList.add(new FishPurple());
@@ -257,12 +263,15 @@ public class Board extends JPanel implements ActionListener {
             }
             if (key == KeyEvent.VK_1) {
                 setBackground(Color.white); // cold Background
+                FishRed.setSpeedUpgrade(2);
             }
             if (key == KeyEvent.VK_2) {
-                setBackground(Color.cyan); // warm Background
+                setBackground(Color.GRAY); // warm Background
+                FishRed.setSpeedUpgrade(3);
             }
             if (key == KeyEvent.VK_3) {
                 setBackground(Color.blue); // hot Background
+                FishRed.setSpeedUpgrade(4);
             }
             if (key == KeyEvent.VK_4) { // add insect random
                 insectColourAdd = (int) (Math.random() * numberInsectDifferentExisting);

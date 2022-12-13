@@ -7,10 +7,11 @@ public class FishOrange extends Fish {
     private static int destination_pos_x;
     private static int destination_pos_y;
     private int moveFish;
-    private static int speedFish = 1;
-    private static int numberEdgeExisting = 4;
+    private static int speedFish = 3;
+    private static int numberEdgeExisting = 3;
     private static int randomEdge;
     private static int[] tab = new int[2];
+    private int timmerSpeedInsect = 20;
 
     ///////////////////////////////////
     // Constructor
@@ -76,31 +77,78 @@ public class FishOrange extends Fish {
 
         // if ("FishOrange" != EdiblePellet.get_NameFishTouchPellet()
         // && EdiblePellet.get_counterToStopMoveFish() == 0) {
-        if (EdiblePellet.get_counterToStopMoveFish() == 0) {
-            if (getPos_x() == destination_pos_x && getPos_y() == destination_pos_y) {
-                random_nvl_position();
-            }
-            if (getPos_y() < destination_pos_y) {
-                moveFish = getPos_y() + speedFish;
 
-                setPos_y(moveFish);
-            }
-            if (getPos_x() < destination_pos_x) {
-                moveFish = getPos_x() + speedFish;
-                setPos_x(moveFish);
-            }
-            if (getPos_x() > destination_pos_x) {
-                moveFish = getPos_x() - speedFish;
-                setPos_x(moveFish);
-            }
-            if (getPos_y() > destination_pos_y) {
-                moveFish = getPos_y() - speedFish;
-                setPos_y(moveFish);
+        // if (Insect.get_nameInsectColour() == "InsectBlack") {
+
+        // }
+
+        if (Insect.getSpeedUpgrade() == 2 && timmerSpeedInsect != 0) {
+            if (EdiblePellet.get_counterToStopMoveFish() == 0) {
+
+                if (getPos_y() < destination_pos_y) {
+                    moveFish = getPos_y() + 2;
+
+                    setPos_y(moveFish);
+                    timmerSpeedInsect--;
+                    // System.out.println(timmerSpeedInsect);
+                }
+                if (getPos_x() < destination_pos_x) {
+                    moveFish = getPos_x() + 2;
+                    setPos_x(moveFish);
+                    timmerSpeedInsect--;
+                    // System.out.println(timmerSpeedInsect);
+                }
+                if (getPos_x() > destination_pos_x) {
+                    moveFish = getPos_x() - 2;
+                    setPos_x(moveFish);
+                    timmerSpeedInsect--;
+                    // System.out.println(timmerSpeedInsect);
+                }
+                if (getPos_y() > destination_pos_y) {
+                    moveFish = getPos_y() - 2;
+                    setPos_y(moveFish);
+                    timmerSpeedInsect--;
+                    // System.out.println(timmerSpeedInsect);
+                }
+            } else {
+
+                EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - 1);
+                System.out.println(EdiblePellet.get_counterToStopMoveFish());
             }
         } else {
+            Insect.setSpeedUpgrade(1);
+            timmerSpeedInsect = 10;
+            if (EdiblePellet.get_counterToStopMoveFish() == 0) {
+                if (getPos_x() <= destination_pos_x + 5
+                        && getPos_x() >= destination_pos_x - 5
+                        && getPos_y() <= destination_pos_y + 5
+                        && getPos_y() >= destination_pos_y - 5) {
+                    System.out.println("hi");
+                    random_nvl_position();
 
-            EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - 1);
-            System.out.println(EdiblePellet.get_counterToStopMoveFish());
+                }
+                if (getPos_y() < destination_pos_y) {
+                    moveFish = getPos_y() + speedFish;
+
+                    setPos_y(moveFish);
+                }
+                if (getPos_x() < destination_pos_x) {
+                    moveFish = getPos_x() + speedFish;
+                    setPos_x(moveFish);
+                }
+                if (getPos_x() > destination_pos_x) {
+                    moveFish = getPos_x() - speedFish;
+                    setPos_x(moveFish);
+                }
+                if (getPos_y() > destination_pos_y) {
+                    moveFish = getPos_y() - speedFish;
+                    setPos_y(moveFish);
+                }
+            } else {
+
+                EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - 1);
+                System.out.println(EdiblePellet.get_counterToStopMoveFish());
+            }
         }
 
     }

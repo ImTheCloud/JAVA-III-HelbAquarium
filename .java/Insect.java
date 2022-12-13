@@ -15,7 +15,7 @@ public class Insect {
     protected int screen_H = Board.getB_HEIGHT();
     private final Image pathToImage;
     private static int SpeedUpgrade;
-    private static String nameFishTouchInsect;
+    private static String nameInsectColour;
 
     ///////////////////////////////////
     // Constructor
@@ -52,8 +52,8 @@ public class Insect {
         return pathToImage;
     }
 
-    static String get_nameFishTouchInsect() {
-        return nameFishTouchInsect;
+    static String get_nameInsectColour() {
+        return nameInsectColour;
     }
 
     ///////////////////////////////////
@@ -80,12 +80,10 @@ public class Insect {
                     && (getPos_y() + HitBoxInsect >= Board.get_listFish().get(i).getPos_y())) {
 
                 positionRandomInsect();
+                SpeedUpgrade = 4;
 
-                setSpeedUpgrade(2);
-                nameFishTouchInsect = Board.get_listFish().get(i).getClass().getName();
-                SpeedUpgrade = 2;
+                // nameInsectColour = Insect.getName();
 
-                // System.out.println("Insect manger");
             }
 
         }
