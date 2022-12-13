@@ -113,7 +113,6 @@ public class FishOrange extends Fish {
             } else {
 
                 EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - 1);
-                System.out.println(EdiblePellet.get_counterToStopMoveFish());
             }
         } else {
             Insect.setSpeedUpgrade(1);
@@ -146,7 +145,6 @@ public class FishOrange extends Fish {
             } else {
 
                 EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - 1);
-                System.out.println(EdiblePellet.get_counterToStopMoveFish());
             }
         }
 
