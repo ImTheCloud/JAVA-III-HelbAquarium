@@ -89,6 +89,7 @@ public class FishRed extends Fish {
 
                 // if (calculClosestDistance > calculDistance) {
                 // calculClosestDistance = calculDistance;
+
                 pos_x_fishPrey = Board.get_listFish().get(i).getPos_x();
                 pos_y_fishPrey = Board.get_listFish().get(i).getPos_y();
                 deathFish = Board.get_listFish().get(i);

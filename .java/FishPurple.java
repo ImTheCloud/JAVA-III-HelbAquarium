@@ -29,22 +29,23 @@ public class FishPurple extends Fish {
         // if (EdiblePellet.get_counterToStopMoveFish() == 0) {
         oppositeDirectionofTheRedFish();
         if (getPos_y() < pos_y_fishRed) {
-            moveFish = getPos_y() - speedFish;
+            moveFish = getPos_y() + speedFish;
             setPos_y(moveFish);
-            oppositeDirectionofTheRedFish();
+            if (getPos_x() == screen_W || getPos_x() == 0)
+                oppositeDirectionofTheRedFish();
         }
         if (getPos_x() < pos_x_fishRed) {
-            moveFish = getPos_x() - speedFish;
-            setPos_x(moveFish);
-            oppositeDirectionofTheRedFish();
-        }
-        if (getPos_x() > pos_x_fishRed) {
             moveFish = getPos_x() + speedFish;
             setPos_x(moveFish);
             oppositeDirectionofTheRedFish();
         }
+        if (getPos_x() > pos_x_fishRed) {
+            moveFish = getPos_x() - speedFish;
+            setPos_x(moveFish);
+            oppositeDirectionofTheRedFish();
+        }
         if (getPos_y() > pos_y_fishRed) {
-            moveFish = getPos_y() + speedFish;
+            moveFish = getPos_y() - speedFish;
             setPos_y(moveFish);
             oppositeDirectionofTheRedFish();
         }

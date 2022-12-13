@@ -123,7 +123,6 @@ public class FishOrange extends Fish {
                         && getPos_x() >= destination_pos_x - 5
                         && getPos_y() <= destination_pos_y + 5
                         && getPos_y() >= destination_pos_y - 5) {
-                    System.out.println("hi");
                     random_nvl_position();
 
                 }

@@ -134,9 +134,6 @@ public class Board extends JPanel implements ActionListener {
         fishList.add(new FishBlue());
         fishList.add(new FishOrange());
         fishList.add(new FishPurple());
-        fishList.add(new FishBlue());
-        fishList.add(new FishOrange());
-        fishList.add(new FishPurple());
 
     }
 
