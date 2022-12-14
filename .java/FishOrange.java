@@ -17,11 +17,6 @@ public class FishOrange extends Fish {
     // Constructor
     //////////////////////////////////
 
-    public FishOrange() {
-        super("Image/fishOrange.png");
-        random_nvl_position();
-    }
-
     ///////////////////////////////////
     // Method for a random Edge
     //////////////////////////////////

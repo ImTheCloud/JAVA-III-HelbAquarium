@@ -12,10 +12,6 @@ public class FishBlue extends Fish {
     // Constructor
     //////////////////////////////////
 
-    public FishBlue() {
-        super("Image/fishBlue.png");
-    }
-
     ///////////////////////////////////
     // Method called every moment for a chhange, here for move
     //////////////////////////////////

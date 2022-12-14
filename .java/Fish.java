@@ -1,7 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
-
 public class Fish {
 
     ///////////////////////////////////
@@ -13,18 +9,12 @@ public class Fish {
     private static int sizeFish = 15;
     protected static int screen_W = Board.getB_WIDTH() - sizeFish;
     protected static int screen_H = Board.getB_HEIGHT() - sizeFish;
-    private final Image pathToImage;
-    private int idFish = 0;
 
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
 
-    public Fish(String string) {
-        ImageIcon iid = new ImageIcon(string);
-
-        pathToImage = iid.getImage();
-        idFish += 1;
+    public Fish() {
 
         positionFish();
 
@@ -49,10 +39,6 @@ public class Fish {
     // The Get for other class
     //////////////////////////////////
 
-    public int get_idFish() {
-        return idFish;
-    }
-
     public int getPos_x() {
         return pos_x;
     }
@@ -67,10 +53,6 @@ public class Fish {
 
     public void setPos_y(int pos_y) {
         this.pos_y = pos_y;
-    }
-
-    public Image getPathToImage() {
-        return pathToImage;
     }
 
     ///////////////////////////////////

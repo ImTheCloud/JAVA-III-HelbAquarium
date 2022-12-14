@@ -12,8 +12,9 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-// import javax.swing.*;
-// import java.awt.*;
+import javax.swing.*;
+import java.awt.*;
+// delimitation ex : 10000 fish
 
 public class Board extends JPanel implements ActionListener {
 
@@ -33,14 +34,19 @@ public class Board extends JPanel implements ActionListener {
     private int ediblePelletCounter = (int) (Math.random() * numberEdiblePelletMax + 1);
 
     private int numberFishDifferentExisting = 4;
-    private int fishColourAdd;
+    private int fishColourAdd = (int) (Math.random() * numberFishDifferentExisting);
     private int numberInsectDifferentExisting = 3;
-    private int insectColourAdd;
+    private int insectColourAdd = (int) (Math.random() * numberInsectDifferentExisting);
 
-    // private Image orange;
-    // private Image purple;
-    // private Image red;
-    // private Image blue;
+    private Image orangeImage;
+    private Image purpleImage;
+    private Image redImage;
+    private Image blueImage;
+    private Image insectBlackImage;
+    private Image insectRedImage;
+    private Image insectBrownImage;
+    private Image obstacleImage;
+    private Image ediblePelletImage;
 
     ///////////////////////////////////
     // les array list
@@ -78,21 +84,36 @@ public class Board extends JPanel implements ActionListener {
         return B_HEIGHT;
     }
 
-    // //private void loadImages() {
+    private void loadImages() {
 
-    // ImageIcon iio = new ImageIcon("Image/fishOrange.png");
-    // orange = iio.getImage();
+        ImageIcon iio = new ImageIcon("Image/fishOrange.png");
+        orangeImage = iio.getImage();
 
-    // ImageIcon iip = new ImageIcon("Image/fishPurple.png");
-    // purple = iip.getImage();
+        ImageIcon iip = new ImageIcon("Image/fishPurple.png");
+        purpleImage = iip.getImage();
 
-    // ImageIcon iir = new ImageIcon("Image/fishRed.png");
-    // red = iir.getImage();
+        ImageIcon iir = new ImageIcon("Image/fishRed.png");
+        redImage = iir.getImage();
 
-    // ImageIcon iib = new ImageIcon("Image/fishBlue.png");
-    // blue = iib.getImage();
+        ImageIcon iib = new ImageIcon("Image/fishBlue.png");
+        blueImage = iib.getImage();
 
-    // }
+        ImageIcon iiiB = new ImageIcon("Image/insectBlack.png");
+        insectBlackImage = iiiB.getImage();
+
+        ImageIcon iiiR = new ImageIcon("Image/insectRed.png");
+        insectRedImage = iiiR.getImage();
+
+        ImageIcon iiiBr = new ImageIcon("Image/insectBrown.png");
+        insectBrownImage = iiiBr.getImage();
+
+        ImageIcon iiob = new ImageIcon("Image/obstacle.png");
+        obstacleImage = iiob.getImage();
+
+        ImageIcon iipl = new ImageIcon("Image/ediblePellet.png");
+        ediblePelletImage = iipl.getImage();
+
+    }
 
     //////////////////////////////////
     // Lancement de l'application
@@ -109,7 +130,9 @@ public class Board extends JPanel implements ActionListener {
         setFocusable(true);
 
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
+        loadImages();
         initGame();
+
     }
 
     private void initGame() {
@@ -128,9 +151,6 @@ public class Board extends JPanel implements ActionListener {
 
     private void addFish() {
         fishList.add(new FishRed());
-        fishList.add(new FishBlue());
-        fishList.add(new FishOrange());
-        fishList.add(new FishPurple());
         fishList.add(new FishBlue());
         fishList.add(new FishOrange());
         fishList.add(new FishPurple());
@@ -170,27 +190,42 @@ public class Board extends JPanel implements ActionListener {
 
     private void drawFish(Graphics g) {
         for (int i = 0; i < fishList.size(); i++) {
-            g.drawImage(fishList.get(i).getPathToImage(), fishList.get(i).getPos_x(), fishList.get(i).getPos_y(), this);
+            if (fishList.get(i) instanceof FishOrange) {
+                g.drawImage(orangeImage, fishList.get(i).getPos_x(), fishList.get(i).getPos_y(), this);
+            } else if (fishList.get(i) instanceof FishPurple) {
+                g.drawImage(purpleImage, fishList.get(i).getPos_x(), fishList.get(i).getPos_y(), this);
+            } else if (fishList.get(i) instanceof FishBlue) {
+                g.drawImage(blueImage, fishList.get(i).getPos_x(), fishList.get(i).getPos_y(), this);
+            } else if (fishList.get(i) instanceof FishRed) {
+                g.drawImage(redImage, fishList.get(i).getPos_x(), fishList.get(i).getPos_y(), this);
+            }
+
         }
+
     }
 
     private void drawInsect(Graphics g) {
         for (int i = 0; i < insectList.size(); i++) {
-            g.drawImage(insectList.get(i).getPathToImage(), insectList.get(i).getPos_x(), insectList.get(i).getPos_y(),
-                    this);
+            if (insectList.get(i) instanceof InsectBlack) {
+                g.drawImage(insectBlackImage, insectList.get(i).getPos_x(), insectList.get(i).getPos_y(), this);
+            } else if (insectList.get(i) instanceof InsectRed) {
+                g.drawImage(insectRedImage, insectList.get(i).getPos_x(), insectList.get(i).getPos_y(), this);
+            } else if (insectList.get(i) instanceof InsectBrown) {
+                g.drawImage(insectBrownImage, insectList.get(i).getPos_x(), insectList.get(i).getPos_y(), this);
+            }
         }
     }
 
     private void drawObstacle(Graphics g) {
         for (int i = 0; i < obstacleList.size(); i++) {
-            g.drawImage(obstacleList.get(i).PathToImage(), obstacleList.get(i).getPos_x(),
+            g.drawImage(obstacleImage, obstacleList.get(i).getPos_x(),
                     obstacleList.get(i).getPos_y(), this);
         }
     }
 
     private void drawEdiblePellet(Graphics g) {
         for (int i = 0; i < ediblePelletList.size(); i++) {
-            g.drawImage(ediblePelletList.get(i).PathToImage(), ediblePelletList.get(i).getPos_x(),
+            g.drawImage(ediblePelletImage, ediblePelletList.get(i).getPos_x(),
                     ediblePelletList.get(i).getPos_y(), this);
         }
     }
@@ -234,6 +269,43 @@ public class Board extends JPanel implements ActionListener {
     }
 
     ///////////////////////////////////
+    // Method for keyboard key
+    ///////////////////////////////////
+
+    public void resetAquarium() {
+        obstacleList.removeAll(obstacleList);
+        fishList.removeAll(fishList);
+        ediblePelletList.removeAll(ediblePelletList);
+        insectList.removeAll(insectList);
+        setBackground(Color.CYAN);
+
+        initGame();
+
+    }
+
+    public void addInsectKeyboardKey() {
+        if (insectColourAdd == 0) {
+            insectList.add(new InsectBlack());
+        } else if (insectColourAdd == 1) {
+            insectList.add(new InsectRed());
+        } else {
+            insectList.add(new InsectBrown());
+        }
+    }
+
+    public void addFishKeyboardKey() {
+        if (fishColourAdd == 0) {
+            fishList.add(new FishBlue());
+        } else if (fishColourAdd == 1) {
+            fishList.add(new FishRed());
+        } else if (fishColourAdd == 3) {
+            fishList.add(new FishPurple());
+        } else {
+            fishList.add(new FishOrange());
+        }
+    }
+
+    ///////////////////////////////////
     // keyboard key
     ///////////////////////////////////
 
@@ -250,13 +322,7 @@ public class Board extends JPanel implements ActionListener {
             int key = e.getKeyCode();
 
             if (key == KeyEvent.VK_0) { // empty all the arayList and start the game again
-                obstacleList.removeAll(obstacleList);
-                fishList.removeAll(fishList);
-                ediblePelletList.removeAll(ediblePelletList);
-                insectList.removeAll(insectList);
-                initGame();
-                setBackground(Color.CYAN);
-
+                resetAquarium();
             }
             if (key == KeyEvent.VK_1) {
                 setBackground(Color.white); // cold Background
@@ -271,14 +337,8 @@ public class Board extends JPanel implements ActionListener {
                 FishRed.setSpeedUpgrade(4);
             }
             if (key == KeyEvent.VK_4) { // add insect random
-                insectColourAdd = (int) (Math.random() * numberInsectDifferentExisting);
-                if (insectColourAdd == 0) {
-                    insectList.add(new InsectBlack());
-                } else if (insectColourAdd == 1) {
-                    insectList.add(new InsectRed());
-                } else {
-                    insectList.add(new InsectBrown());
-                }
+                addInsectKeyboardKey();
+
             }
             if (key == KeyEvent.VK_5) { // add edible pellet
                 ediblePelletList.add(new EdiblePellet());
@@ -293,16 +353,7 @@ public class Board extends JPanel implements ActionListener {
 
             }
             if (key == KeyEvent.VK_9) { // add fish random
-                fishColourAdd = (int) (Math.random() * numberFishDifferentExisting);
-                if (fishColourAdd == 0) {
-                    fishList.add(new FishBlue());
-                } else if (fishColourAdd == 1) {
-                    fishList.add(new FishRed());
-                } else if (fishColourAdd == 3) {
-                    fishList.add(new FishPurple());
-                } else {
-                    fishList.add(new FishOrange());
-                }
+                addFishKeyboardKey();
             }
             if (key == KeyEvent.VK_R) {
 

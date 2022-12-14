@@ -16,10 +16,6 @@ public class FishRed extends Fish {
     // Constructor
     //////////////////////////////////
 
-    public FishRed() {
-        super("Image/fishRed.png");
-    }
-
     ///////////////////////////////////
     // the get/set
     //////////////////////////////////
