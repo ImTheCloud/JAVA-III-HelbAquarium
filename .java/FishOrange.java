@@ -21,7 +21,7 @@ public class FishOrange extends Fish {
     // Method for a random Edge
     //////////////////////////////////
 
-    public static int[] random_nvl_position() {
+    public static int[] randomEdgePosition() {
 
         randomEdge = (int) (Math.random() * numberEdgeExisting);
         if (randomEdge == 0) {
@@ -52,7 +52,7 @@ public class FishOrange extends Fish {
     //////////////////////////////////
 
     public static int[] get_randomNvlPosition() {
-        return random_nvl_position();
+        return randomEdgePosition();
     }
 
     public static int getSpeedUpgrade() {
@@ -85,25 +85,21 @@ public class FishOrange extends Fish {
 
                     setPos_y(moveFish);
                     timmerSpeedInsect--;
-                    // System.out.println(timmerSpeedInsect);
                 }
                 if (getPos_x() < destination_pos_x) {
                     moveFish = getPos_x() + 2;
                     setPos_x(moveFish);
                     timmerSpeedInsect--;
-                    // System.out.println(timmerSpeedInsect);
                 }
                 if (getPos_x() > destination_pos_x) {
                     moveFish = getPos_x() - 2;
                     setPos_x(moveFish);
                     timmerSpeedInsect--;
-                    // System.out.println(timmerSpeedInsect);
                 }
                 if (getPos_y() > destination_pos_y) {
                     moveFish = getPos_y() - 2;
                     setPos_y(moveFish);
                     timmerSpeedInsect--;
-                    // System.out.println(timmerSpeedInsect);
                 }
             } else {
 
@@ -117,8 +113,7 @@ public class FishOrange extends Fish {
                         && getPos_x() >= destination_pos_x - 5
                         && getPos_y() <= destination_pos_y + 5
                         && getPos_y() >= destination_pos_y - 5) {
-                    random_nvl_position();
-
+                    randomEdgePosition();
                 }
                 if (getPos_y() < destination_pos_y) {
                     moveFish = getPos_y() + speedFish;
@@ -137,6 +132,7 @@ public class FishOrange extends Fish {
                     moveFish = getPos_y() - speedFish;
                     setPos_y(moveFish);
                 }
+
             } else {
 
                 EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - 1);

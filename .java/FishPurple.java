@@ -8,6 +8,13 @@ public class FishPurple extends Fish {
     private static int pos_y_fishRed;
     private int moveFish;
     private int speedFish = 3 + Board.get_speed_fish();
+    private double closestDistance = 1000;
+    private double calculDistance = 0;
+    private int x;
+    private int y;
+    private double newDistance;
+    private int destination_pos_x;
+    private int destination_pos_y;
 
     ///////////////////////////////////
     // Constructor
@@ -20,37 +27,47 @@ public class FishPurple extends Fish {
     @Override
     public void update() {
 
-        // if ("FishPurple" != EdiblePellet.get_NameFishTouchPellet() &&
-        // EdiblePellet.get_counterToStopMoveFish() == 0) {
-        // if (EdiblePellet.get_counterToStopMoveFish() == 0) {
-        oppositeDirectionofTheRedFish();
-        if (getPos_y() < pos_y_fishRed) {
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                int test_pos_x = getPos_x() + i;
+                int test_pos_y = getPos_x() + j;
+
+                x = pos_x_fishRed - test_pos_x;
+                y = pos_y_fishRed - test_pos_y;
+
+                newDistance = Math.sqrt(x * x + y * y);
+                if (closestDistance < newDistance) {
+                    if (test_pos_x >= get_screen_W() || test_pos_x <= 0) {
+                        destination_pos_y = test_pos_y;
+                    } else if (test_pos_y >= get_screen_H() || test_pos_y <= 0) {
+                        destination_pos_x = test_pos_x;
+                    } else {
+                        destination_pos_x = test_pos_x;
+                        destination_pos_y = test_pos_y;
+                    }
+
+                }
+
+            }
+
+        }
+
+        if (getPos_y() < destination_pos_y) {
             moveFish = getPos_y() + speedFish;
             setPos_y(moveFish);
-            if (getPos_x() == screen_W || getPos_x() == 0)
-                oppositeDirectionofTheRedFish();
         }
-        if (getPos_x() < pos_x_fishRed) {
+        if (getPos_x() < destination_pos_x) {
             moveFish = getPos_x() + speedFish;
             setPos_x(moveFish);
-            oppositeDirectionofTheRedFish();
         }
-        if (getPos_x() > pos_x_fishRed) {
+        if (getPos_x() > destination_pos_x) {
             moveFish = getPos_x() - speedFish;
             setPos_x(moveFish);
-            oppositeDirectionofTheRedFish();
         }
-        if (getPos_y() > pos_y_fishRed) {
+        if (getPos_y() > destination_pos_y) {
             moveFish = getPos_y() - speedFish;
             setPos_y(moveFish);
-            oppositeDirectionofTheRedFish();
         }
-        // } else {
-        // EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish()
-        // - 1);
-        // // System.out.println(EdiblePellet.get_counterToStopMoveFish());
-
-        // }
 
     }
 
@@ -60,17 +77,17 @@ public class FishPurple extends Fish {
 
             if (FishRed.class.getName() == Board.get_listFish().get(i).getClass().getName()) {
 
-                // calculDistance = Math.sqrt(((getPos_x() -
-                // Board.get_listFish().get(i).getPos_x())
-                // * (getPos_x() - Board.get_listFish().get(i).getPos_x()))
-                // + ((getPos_y() - Board.get_listFish().get(i).getPos_y())
-                // * (getPos_y() - Board.get_listFish().get(i).getPos_y())));
+                x = Board.get_listFish().get(i).getPos_x() - this.getPos_x();
+                y = Board.get_listFish().get(i).getPos_y() - this.getPos_y();
 
-                // if (calculClosestDistance > calculDistance) {
-                // calculClosestDistance = calculDistance;
-                pos_x_fishRed = Board.get_listFish().get(i).getPos_x();
-                pos_y_fishRed = Board.get_listFish().get(i).getPos_y();
-                // }
+                closestDistance = Math.sqrt(x * x + y * y);
+
+                if (closestDistance > calculDistance) {
+                    closestDistance = calculDistance;
+
+                    pos_x_fishRed = Board.get_listFish().get(i).getPos_x();
+                    pos_y_fishRed = Board.get_listFish().get(i).getPos_y();
+                }
 
             }
 

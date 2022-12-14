@@ -21,8 +21,8 @@ public class Board extends JPanel implements ActionListener {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-    private final static int B_WIDTH = 600;
-    private final static int B_HEIGHT = 350;
+    private final static int B_WIDTH = 800;
+    private final static int B_HEIGHT = 450;
     private final int Delay = 30;
     private Timer timer = new Timer(Delay, this);
 
@@ -83,6 +83,10 @@ public class Board extends JPanel implements ActionListener {
     public static int getB_HEIGHT() {
         return B_HEIGHT;
     }
+
+    ///////////////////////////////////
+    // Load Image
+    ///////////////////////////////////
 
     private void loadImages() {
 
@@ -151,9 +155,9 @@ public class Board extends JPanel implements ActionListener {
 
     private void addFish() {
         fishList.add(new FishRed());
+        fishList.add(new FishPurple());
         fishList.add(new FishBlue());
         fishList.add(new FishOrange());
-        fishList.add(new FishPurple());
 
     }
 

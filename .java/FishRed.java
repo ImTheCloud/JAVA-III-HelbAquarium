@@ -9,8 +9,10 @@ public class FishRed extends Fish {
     private static int speedFish = 3;
     private Fish deathFish;
     private int hitBoxFish = 3;
-    // private double calculDistance = 0;
-    // private double calculClosestDistance = 1000;
+    private double calculDistance = 0;
+    private double closestDistance = 1000;
+    private int x;
+    private int y;
 
     ///////////////////////////////////
     // Constructor
@@ -35,12 +37,6 @@ public class FishRed extends Fish {
     @Override
     public void update() {
 
-        // if ("FishRed" != EdiblePellet.get_NameFishTouchPellet() &&
-        // EdiblePellet.get_counterToStopMoveFish() == 0) {
-
-        // if (EdiblePellet.get_counterToStopMoveFish() == 0) {
-        closestFish();
-
         if ((getPos_x() >= pos_x_fishPrey - hitBoxFish) && (getPos_x() <= pos_x_fishPrey + hitBoxFish)
                 && (getPos_y() >= pos_y_fishPrey - hitBoxFish) && (getPos_y() <= pos_y_fishPrey + hitBoxFish)) {
             fishKilling();
@@ -62,12 +58,7 @@ public class FishRed extends Fish {
             moveFish = getPos_y() - speedFish;
             setPos_y(moveFish);
         }
-        // } else {
-
-        // EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish()
-        // - 1);
-        // // System.out.println(EdiblePellet.get_counterToStopMoveFish());
-        // }
+        closestFish();
 
     }
 
@@ -77,19 +68,22 @@ public class FishRed extends Fish {
 
             if (FishRed.class.getName() != Board.get_listFish().get(i).getClass().getName()) {
 
-                // calculDistance = Math.sqrt(((getPos_x() -
-                // Board.get_listFish().get(i).getPos_x())
-                // * (getPos_x() - Board.get_listFish().get(i).getPos_x()))
-                // + ((getPos_y() - Board.get_listFish().get(i).getPos_y())
-                // * (getPos_y() - Board.get_listFish().get(i).getPos_y())));
+                x = Board.get_listFish().get(i).getPos_x() - this.getPos_x();
+                y = Board.get_listFish().get(i).getPos_y() - this.getPos_y();
 
-                // if (calculClosestDistance > calculDistance) {
-                // calculClosestDistance = calculDistance;
+                calculDistance = Math.sqrt(x * x + y * y);
 
-                pos_x_fishPrey = Board.get_listFish().get(i).getPos_x();
-                pos_y_fishPrey = Board.get_listFish().get(i).getPos_y();
-                deathFish = Board.get_listFish().get(i);
-                // }
+                if (closestDistance > calculDistance) {
+                    closestDistance = calculDistance;
+
+                    pos_x_fishPrey = Board.get_listFish().get(i).getPos_x();
+                    pos_y_fishPrey = Board.get_listFish().get(i).getPos_y();
+
+                    System.out.println(pos_x_fishPrey);
+                    System.out.println(pos_y_fishPrey);
+
+                    deathFish = Board.get_listFish().get(i);
+                }
 
             }
 
