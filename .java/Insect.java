@@ -1,8 +1,4 @@
-import javax.swing.*;
-import java.awt.*;
-
 public class Insect {
-
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
@@ -12,18 +8,26 @@ public class Insect {
     private int HitBoxInsect = 15;
     protected int screen_W = Board.getB_WIDTH();
     protected int screen_H = Board.getB_HEIGHT();
-    private final Image pathToImage;
     private static int SpeedUpgrade;
-    private static String nameInsectColour;
+    private int randomInsectColour = (int) (Math.random() * 3);
+    private String insectColourName;
 
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
 
-    public Insect(String Image) {
-        ImageIcon iid = new ImageIcon(Image);
-        pathToImage = iid.getImage();
+    public Insect() {
+
         positionRandomInsect();
+
+        randomInsectColour = (int) (Math.random() * 3);
+        if (randomInsectColour == 0) {
+            insectColourName = "speedLow";
+        } else if (randomInsectColour == 1) {
+            insectColourName = "speedNormal";
+        } else {
+            insectColourName = "speedHigh";
+        }
 
     }
 
@@ -45,14 +49,6 @@ public class Insect {
 
     public static void setSpeedUpgrade(int setSpeedUpgrade) {
         SpeedUpgrade = setSpeedUpgrade;
-    }
-
-    public Image getPathToImage() {
-        return pathToImage;
-    }
-
-    static String get_nameInsectColour() {
-        return nameInsectColour;
     }
 
     ///////////////////////////////////
@@ -78,10 +74,14 @@ public class Insect {
                     && (getPos_y() - HitBoxInsect <= Board.get_listFish().get(i).getPos_y())
                     && (getPos_y() + HitBoxInsect >= Board.get_listFish().get(i).getPos_y())) {
 
+                if (insectColourName == "speedLow") {
+                    SpeedUpgrade = 4;
+                } else if (insectColourName == "speedNormal") {
+                    SpeedUpgrade = 5;
+                } else {
+                    SpeedUpgrade = 6;
+                }
                 positionRandomInsect();
-                SpeedUpgrade = 4;
-
-                // nameInsectColour = Insect.getName();
 
             }
 

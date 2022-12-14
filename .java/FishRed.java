@@ -36,7 +36,7 @@ public class FishRed extends Fish {
 
     @Override
     public void update() {
-
+        closestFish();
         if ((getPos_x() >= pos_x_fishPrey - hitBoxFish) && (getPos_x() <= pos_x_fishPrey + hitBoxFish)
                 && (getPos_y() >= pos_y_fishPrey - hitBoxFish) && (getPos_y() <= pos_y_fishPrey + hitBoxFish)) {
             fishKilling();
@@ -58,7 +58,6 @@ public class FishRed extends Fish {
             moveFish = getPos_y() - speedFish;
             setPos_y(moveFish);
         }
-        closestFish();
 
     }
 
@@ -79,8 +78,8 @@ public class FishRed extends Fish {
                     pos_x_fishPrey = Board.get_listFish().get(i).getPos_x();
                     pos_y_fishPrey = Board.get_listFish().get(i).getPos_y();
 
-                    System.out.println(pos_x_fishPrey);
-                    System.out.println(pos_y_fishPrey);
+                    // System.out.println(pos_x_fishPrey);
+                    // System.out.println(pos_y_fishPrey);
 
                     deathFish = Board.get_listFish().get(i);
                 }

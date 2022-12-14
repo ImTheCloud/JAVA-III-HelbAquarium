@@ -71,27 +71,4 @@ public class FishPurple extends Fish {
 
     }
 
-    private void oppositeDirectionofTheRedFish() {
-
-        for (int i = 0; i < Board.get_listFish().size(); i++) {
-
-            if (FishRed.class.getName() == Board.get_listFish().get(i).getClass().getName()) {
-
-                x = Board.get_listFish().get(i).getPos_x() - this.getPos_x();
-                y = Board.get_listFish().get(i).getPos_y() - this.getPos_y();
-
-                closestDistance = Math.sqrt(x * x + y * y);
-
-                if (closestDistance > calculDistance) {
-                    closestDistance = calculDistance;
-
-                    pos_x_fishRed = Board.get_listFish().get(i).getPos_x();
-                    pos_y_fishRed = Board.get_listFish().get(i).getPos_y();
-                }
-
-            }
-
-        }
-    }
-
 }
