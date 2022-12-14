@@ -15,6 +15,7 @@ public class EdiblePellet {
     protected int screen_H = Board.getB_HEIGHT();
     private static int counterToStopMoveFish = 0;
     private static String nameFishTouchPellet;
+    private EdiblePellet deathPellet;
     // private EdiblePellet deathPellet;
 
     ///////////////////////////////////
@@ -77,10 +78,11 @@ public class EdiblePellet {
                     && (Board.get_listFish().get(i).getPos_y() - HitBoxPellet <= getPos_y())
                     && (Board.get_listFish().get(i).getPos_y() + HitBoxPellet >= getPos_y())) {
 
-                // Board.get_ediblePellet().remove(Board.get_ediblePellet().get(i));
-
+                // deathPellet = Board.get_ediblePellet().get(i);
+                // Board.get_ediblePellet().remove(deathPellet);
                 positionRandomEdiblePellet();
-                counterToStopMoveFish = 210;
+
+                counterToStopMoveFish = 510;
                 nameFishTouchPellet = Board.get_listFish().get(i).getClass().getName();
 
                 System.out.println(get_NameFishTouchPellet());

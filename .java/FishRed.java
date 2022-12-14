@@ -36,31 +36,38 @@ public class FishRed extends Fish {
 
     @Override
     public void update() {
-        closestFish();
 
-        if ((getPos_x() >= pos_x_fishPrey - hitBoxFish) && (getPos_x() <= pos_x_fishPrey + hitBoxFish)
-                && (getPos_y() >= pos_y_fishPrey - hitBoxFish) && (getPos_y() <= pos_y_fishPrey + hitBoxFish)) {
-            fishKilling();
+        if (EdiblePellet.get_counterToStopMoveFish() == 0 || "FishRed" == EdiblePellet.get_NameFishTouchPellet()) {
+            closestFish();
+            if ((getPos_x() >= pos_x_fishPrey - hitBoxFish) && (getPos_x() <= pos_x_fishPrey + hitBoxFish)
+                    && (getPos_y() >= pos_y_fishPrey - hitBoxFish) && (getPos_y() <= pos_y_fishPrey + hitBoxFish)) {
+                fishKilling();
 
-        }
-        if (getPos_y() < pos_y_fishPrey) {
-            moveFish = getPos_y() + speedFish;
-            setPos_y(moveFish);
+            }
+            if (getPos_y() < pos_y_fishPrey) {
+                moveFish = getPos_y() + speedFish;
+                setPos_y(moveFish);
 
-        }
-        if (getPos_x() < pos_x_fishPrey) {
-            moveFish = getPos_x() + speedFish;
-            setPos_x(moveFish);
+            }
+            if (getPos_x() < pos_x_fishPrey) {
+                moveFish = getPos_x() + speedFish;
+                setPos_x(moveFish);
 
-        }
-        if (getPos_x() > pos_x_fishPrey) {
-            moveFish = getPos_x() - speedFish;
-            setPos_x(moveFish);
+            }
+            if (getPos_x() > pos_x_fishPrey) {
+                moveFish = getPos_x() - speedFish;
+                setPos_x(moveFish);
 
-        }
-        if (getPos_y() > pos_y_fishPrey) {
-            moveFish = getPos_y() - speedFish;
-            setPos_y(moveFish);
+            }
+            if (getPos_y() > pos_y_fishPrey) {
+                moveFish = getPos_y() - speedFish;
+                setPos_y(moveFish);
+
+            }
+        } else if ("FishPurple" == EdiblePellet.get_NameFishTouchPellet()
+                || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
+                || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()) {
+            EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - 1);
 
         }
 

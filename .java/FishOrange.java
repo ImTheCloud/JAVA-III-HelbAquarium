@@ -10,7 +10,7 @@ public class FishOrange extends Fish {
     private static int speedFish = 3;
     private static int numberEdgeExisting = 3;
     private static int randomEdge;
-    private int timmerSpeedInsect = 20;
+    // private int timmerSpeedInsect = 20;
 
     ///////////////////////////////////
     // Constructor
@@ -58,7 +58,7 @@ public class FishOrange extends Fish {
     public void update() {
 
         if (EdiblePellet.get_counterToStopMoveFish() == 0 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()) {
-            // System.out.println(EdiblePellet.get_counterToStopMoveFish());
+
             if (getPos_x() <= destination_pos_x + 5
                     && getPos_x() >= destination_pos_x - 5
                     && getPos_y() <= destination_pos_y + 5
@@ -82,12 +82,11 @@ public class FishOrange extends Fish {
                 moveFish = getPos_y() - speedFish;
                 setPos_y(moveFish);
             }
-        }
-        if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()
+        } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishPurple" == EdiblePellet.get_NameFishTouchPellet()) {
             EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - 1);
-            // System.out.println(EdiblePellet.get_counterToStopMoveFish());
+
         }
     }
 
