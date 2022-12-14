@@ -21,8 +21,8 @@ public class Board extends JPanel implements ActionListener {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-    private final static int B_WIDTH = 800;
-    private final static int B_HEIGHT = 450;
+    private final static int B_WIDTH = 1000;
+    private final static int B_HEIGHT = 500;
     private final int Delay = 30;
     private Timer timer = new Timer(Delay, this);
 

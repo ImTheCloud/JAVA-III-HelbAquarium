@@ -8,7 +8,7 @@ public class Fish {
 
     private int pos_x;
     private int pos_y;
-    private static int hitBoxFish = 15;
+    private static int hitBoxFish = 20;
     protected static int screen_W = Board.getB_WIDTH() - hitBoxFish;
     protected static int screen_H = Board.getB_HEIGHT() - hitBoxFish;
     private static int hitBoxOBstacle = 20; // 40 W / 20 H
@@ -47,6 +47,8 @@ public class Fish {
 
     public Fish() {
         positionFish();
+
+        System.out.println();
     }
 
     ///////////////////////////////////
