@@ -4,7 +4,7 @@ public class FishBlue extends Fish {
     // The variables
     //////////////////////////////////
 
-    private int speedFish = 4;
+    private int speedFish = 6;
     private double calculDistance;
     private double closestDistance = 1500;
     private int x;
@@ -19,7 +19,17 @@ public class FishBlue extends Fish {
 
     @Override
     public void update() {
+        if (Insect.get_timmerSpeedFish() != 0) {
+            speedFish = 8;
+            moving();
+            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - 1);
+        } else {
+            speedFish = 6;
+            moving();
+        }
+    }
 
+    public void moving() {
         if (EdiblePellet.get_counterToStopMoveFish() == 0 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()) {
 
             directionToFishBlueOrPurple();
@@ -33,7 +43,6 @@ public class FishBlue extends Fish {
             // System.out.println(EdiblePellet.get_counterToStopMoveFish() + "B");
 
         }
-
     }
 
     private void directionToFishBlueOrPurple() {

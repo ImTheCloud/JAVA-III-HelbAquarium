@@ -1,10 +1,10 @@
 public class FishRed extends Fish {
     ///////////////////////////////////
-    // The variables
+    // The variables&
     //////////////////////////////////
-    private static int speedFish = 3;
+    private static int speedFish = 5;
     private Fish deathFish;
-    private int hitBoxFish = 4;
+    private int hitBoxFish = 5;
     private double calculDistance = 0;
     private double closestDistance = 1500;
     private int x;
@@ -33,6 +33,18 @@ public class FishRed extends Fish {
     @Override
     public void update() {
 
+        if (Insect.get_timmerSpeedFish() != 0) {
+            speedFish = 8;
+            moving();
+            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - 1);
+        } else {
+            setSpeedUpgrade(getSpeed());
+            moving();
+        }
+
+    }
+
+    public void moving() {
         if (EdiblePellet.get_counterToStopMoveFish() == 0 || "FishRed" == EdiblePellet.get_NameFishTouchPellet()) {
             closestFish();
             if ((getPos_x() >= getPos_x_target() - hitBoxFish) && (getPos_x() <= getPos_x_target() + hitBoxFish)
@@ -49,7 +61,6 @@ public class FishRed extends Fish {
             // System.out.println(EdiblePellet.get_counterToStopMoveFish() + "R");
 
         }
-
     }
 
     private void closestFish() {

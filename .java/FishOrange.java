@@ -3,10 +3,9 @@ public class FishOrange extends Fish {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-    private static int speedFish = 3;
+    private static int speedFish = 5;
     private static int numberEdgeExisting = 3;
     private static int randomEdge;
-    // private int timmerSpeedInsect = 20;
 
     ///////////////////////////////////
     // Constructor
@@ -53,12 +52,23 @@ public class FishOrange extends Fish {
     @Override
     public void update() {
 
-        if (EdiblePellet.get_counterToStopMoveFish() == 0 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()) {
+        if (Insect.get_timmerSpeedFish() != 0) {
+            speedFish = 8;
+            moving();
+            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - 1);
+        } else {
+            speedFish = 5;
+            moving();
+        }
 
-            if (getPos_x() <= getPos_x_target() + 5
-                    && getPos_x() >= getPos_x_target() - 5
-                    && getPos_y() <= getPos_y_target() + 5
-                    && getPos_y() >= getPos_y_target() - 5) {
+    }
+
+    public void moving() {
+        if (EdiblePellet.get_counterToStopMoveFish() == 0 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()) {
+            if (getPos_x() <= getPos_x_target() + 6
+                    && getPos_x() >= getPos_x_target() - 6
+                    && getPos_y() <= getPos_y_target() + 6
+                    && getPos_y() >= getPos_y_target() - 6) {
                 randomEdgePosition();
             }
 

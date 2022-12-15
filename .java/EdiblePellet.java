@@ -82,11 +82,11 @@ public class EdiblePellet {
                 // Board.get_ediblePellet().remove(deathPellet);
                 positionRandomEdiblePellet();
 
-                counterToStopMoveFish = 150 * Board.get_listFish().size();
+                counterToStopMoveFish = 100 * Board.get_listFish().size();
 
                 nameFishTouchPellet = Board.get_listFish().get(i).getClass().getName();
 
-                System.out.println(get_NameFishTouchPellet());
+                System.out.println(get_NameFishTouchPellet() + " pellet");
             }
 
         }

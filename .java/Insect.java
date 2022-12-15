@@ -8,9 +8,10 @@ public class Insect {
     private int HitBoxInsect = 15;
     protected int screen_W = Board.getB_WIDTH();
     protected int screen_H = Board.getB_HEIGHT();
-    private static int SpeedUpgrade;
+
     private int randomInsectColour = (int) (Math.random() * 3);
     private String insectColourName;
+    private static int timmerSpeedInsect = 0;
 
     ///////////////////////////////////
     // Constructor
@@ -22,13 +23,12 @@ public class Insect {
 
         randomInsectColour = (int) (Math.random() * 3);
         if (randomInsectColour == 0) {
-            insectColourName = "speedLow";
+            insectColourName = "timmerLow";
         } else if (randomInsectColour == 1) {
-            insectColourName = "speedNormal";
+            insectColourName = "timmerNormal";
         } else {
-            insectColourName = "speedHigh";
+            insectColourName = "timmerHigh";
         }
-
     }
 
     ///////////////////////////////////
@@ -43,12 +43,12 @@ public class Insect {
         return pos_y;
     }
 
-    public static int getSpeedUpgrade() {
-        return SpeedUpgrade;
+    public static int get_timmerSpeedFish() {
+        return timmerSpeedInsect;
     }
 
-    public static void setSpeedUpgrade(int setSpeedUpgrade) {
-        SpeedUpgrade = setSpeedUpgrade;
+    public static void set_timmerSpeedFish(int setTimmerSpeedInsect) {
+        timmerSpeedInsect = setTimmerSpeedInsect;
     }
 
     ///////////////////////////////////
@@ -74,13 +74,14 @@ public class Insect {
                     && (getPos_y() - HitBoxInsect <= Board.get_listFish().get(i).getPos_y())
                     && (getPos_y() + HitBoxInsect >= Board.get_listFish().get(i).getPos_y())) {
 
-                if (insectColourName == "speedLow") {
-                    SpeedUpgrade = 4;
-                } else if (insectColourName == "speedNormal") {
-                    SpeedUpgrade = 5;
+                if (insectColourName == "timmerLow") {
+                    timmerSpeedInsect = 100;
+                } else if (insectColourName == "timmerNormal") {
+                    timmerSpeedInsect = 150;
                 } else {
-                    SpeedUpgrade = 6;
+                    timmerSpeedInsect = 200;
                 }
+                System.out.println(Board.get_listFish().get(i).getClass().getName() + " insect");
                 positionRandomInsect();
 
             }

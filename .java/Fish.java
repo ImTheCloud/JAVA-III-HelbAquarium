@@ -15,7 +15,6 @@ public class Fish {
     protected static int screen_H = Board.getB_HEIGHT() - hitBoxFish;
     private static int hitBoxOBstacle = 20; // 40 W / 20 H
     private int speedFish;
-
     private int moveFish;
 
     ///////////////////////////////////

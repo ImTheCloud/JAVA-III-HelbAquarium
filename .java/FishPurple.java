@@ -8,7 +8,7 @@ public class FishPurple extends Fish {
     private double closestDistance = 1500;
     private int x;
     private int y;
-    private int speedFish = 3 + Board.get_speed_fish();
+    private int speedFish = 5 + Board.get_speed_fish();
 
     ///////////////////////////////////
     // Constructor
@@ -21,6 +21,18 @@ public class FishPurple extends Fish {
     @Override
     public void update() {
 
+        if (Insect.get_timmerSpeedFish() != 0) {
+            speedFish = 8;
+            moving();
+            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - 1);
+        } else {
+            speedFish = 5 + Board.get_speed_fish();
+            moving();
+        }
+
+    }
+
+    private void moving() {
         if (EdiblePellet.get_counterToStopMoveFish() == 0 || "FishPurple" == EdiblePellet.get_NameFishTouchPellet()) {
 
             oppositeDirectionofTheRedFish();
@@ -33,7 +45,6 @@ public class FishPurple extends Fish {
             // System.out.println(EdiblePellet.get_counterToStopMoveFish() + "M");
 
         }
-
     }
 
     private void oppositeDirectionofTheRedFish() {

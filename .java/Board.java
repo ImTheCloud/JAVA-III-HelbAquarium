@@ -23,14 +23,14 @@ public class Board extends JPanel implements ActionListener {
     //////////////////////////////////
     private final static int B_WIDTH = 1000;
     private final static int B_HEIGHT = 500;
-    private final int Delay = 30;
+    private final int Delay = 50;
     private Timer timer = new Timer(Delay, this);
 
     private int numberInsectMax = 5;
     private int numberInsect = (int) (Math.random() * numberInsectMax + 1);
     private static int numberObstacleMax = 2;
     private static int numberObstacle = (int) (Math.random() * numberObstacleMax + 1);
-    private int numberEdiblePelletMax = 20;
+    private int numberEdiblePelletMax = 5;
     private int ediblePelletCounter = (int) (Math.random() * numberEdiblePelletMax + 1);
 
     private int numberFishDifferentExisting = 4;
@@ -168,17 +168,10 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void addInsect() {
-
-        for (int i = 0; i < numberInsect; i++) {
-            insectColourAdd = (int) (Math.random() * numberInsectDifferentExisting);
-            if (insectColourAdd == 0) {
-                insectList.add(new InsectBlack());
-            } else if (insectColourAdd == 1) {
-                insectList.add(new InsectRed());
-            } else if (insectColourAdd == 2) {
-                insectList.add(new InsectBrown());
-            }
-        }
+        insectList.add(new InsectBlack());
+        insectList.add(new InsectBlack());
+        insectList.add(new InsectBlack());
+        insectList.add(new InsectBlack());
 
     }
 
@@ -216,13 +209,7 @@ public class Board extends JPanel implements ActionListener {
 
     private void drawInsect(Graphics g) {
         for (int i = 0; i < insectList.size(); i++) {
-            if (insectList.get(i) instanceof InsectBlack) {
-                g.drawImage(insectBlackImage, insectList.get(i).getPos_x(), insectList.get(i).getPos_y(), this);
-            } else if (insectList.get(i) instanceof InsectRed) {
-                g.drawImage(insectRedImage, insectList.get(i).getPos_x(), insectList.get(i).getPos_y(), this);
-            } else if (insectList.get(i) instanceof InsectBrown) {
-                g.drawImage(insectBrownImage, insectList.get(i).getPos_x(), insectList.get(i).getPos_y(), this);
-            }
+            g.drawImage(insectBlackImage, insectList.get(i).getPos_x(), insectList.get(i).getPos_y(), this);
         }
     }
 
@@ -294,13 +281,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     public void addInsectKeyboardKey() {
-        if (insectColourAdd == 0) {
-            insectList.add(new InsectBlack());
-        } else if (insectColourAdd == 1) {
-            insectList.add(new InsectRed());
-        } else {
-            insectList.add(new InsectBrown());
-        }
+        insectList.add(new InsectBlack());
     }
 
     public void addFishKeyboardKey() {
@@ -337,15 +318,15 @@ public class Board extends JPanel implements ActionListener {
             }
             if (key == KeyEvent.VK_1) {
                 setBackground(Color.white); // cold Background
-                FishRed.setSpeedUpgrade(2);
+                FishRed.setSpeedUpgrade(4);
             }
             if (key == KeyEvent.VK_2) {
                 setBackground(Color.GRAY); // warm Background
-                FishRed.setSpeedUpgrade(3);
+                FishRed.setSpeedUpgrade(5);
             }
             if (key == KeyEvent.VK_3) {
                 setBackground(Color.blue); // hot Background
-                FishRed.setSpeedUpgrade(4);
+                FishRed.setSpeedUpgrade(6);
             }
             if (key == KeyEvent.VK_4) { // add insect random
                 addInsectKeyboardKey();
