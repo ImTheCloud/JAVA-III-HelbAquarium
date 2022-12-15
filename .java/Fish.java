@@ -117,6 +117,7 @@ public class Fish {
 
         for (int j = 0; j < Board.get_listFish().size(); j++) {
 
+            if (Board.get_listFish().get(j).getPos_x() == this.getPos_x()) {
                 if (Board.get_listFish().get(j).getClass().getName() == this.getClass().getName()) {
 
                     // System.out.println("test");
