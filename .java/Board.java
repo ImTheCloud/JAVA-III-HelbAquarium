@@ -26,8 +26,8 @@ public class Board extends JPanel implements ActionListener {
     private final int Delay = 50;
     private Timer timer = new Timer(Delay, this);
 
-    private int numberInsectMax = 5;
-    private int numberInsect = (int) (Math.random() * numberInsectMax + 1);
+    private int numberInsectmax = 5;
+    private int numberInsect = (int) (Math.random() * numberInsectmax + 1);
     private static int numberObstacleMax = 2;
     private static int numberObstacle = (int) (Math.random() * numberObstacleMax + 1);
     private int numberEdiblePelletMax = 5;
@@ -35,16 +35,13 @@ public class Board extends JPanel implements ActionListener {
 
     private int numberFishDifferentExisting = 4;
     private int fishColourAdd;
-    private int numberInsectDifferentExisting = 3;
-    private int insectColourAdd = (int) (Math.random() * numberInsectDifferentExisting);
 
     private Image orangeImage;
     private Image purpleImage;
     private Image redImage;
     private Image blueImage;
     private Image insectBlackImage;
-    private Image insectRedImage;
-    private Image insectBrownImage;
+
     private Image obstacleImage;
     private Image ediblePelletImage;
 
@@ -105,12 +102,6 @@ public class Board extends JPanel implements ActionListener {
         ImageIcon iiiB = new ImageIcon("Image/insectBlack.png");
         insectBlackImage = iiiB.getImage();
 
-        ImageIcon iiiR = new ImageIcon("Image/insectRed.png");
-        insectRedImage = iiiR.getImage();
-
-        ImageIcon iiiBr = new ImageIcon("Image/insectBrown.png");
-        insectBrownImage = iiiBr.getImage();
-
         ImageIcon iiob = new ImageIcon("Image/obstacle.png");
         obstacleImage = iiob.getImage();
 
@@ -168,10 +159,9 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void addInsect() {
-        insectList.add(new InsectBlack());
-        insectList.add(new InsectBlack());
-        insectList.add(new InsectBlack());
-        insectList.add(new InsectBlack());
+        for (int i = 0; i < numberInsect; i++) {
+            insectList.add(new InsectBlack());
+        }
 
     }
 
@@ -251,6 +241,10 @@ public class Board extends JPanel implements ActionListener {
             ediblePelletList.get(i).update();
         }
 
+        for (int i = 0; i < obstacleList.size(); i++) {
+            obstacleList.get(i).update();
+        }
+
     }
 
     ///////////////////////////////////
@@ -304,6 +298,7 @@ public class Board extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
+
     }
 
     private class TAdapter extends KeyAdapter {

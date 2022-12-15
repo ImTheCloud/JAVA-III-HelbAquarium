@@ -32,4 +32,34 @@ public class Obstacle {
     public int getPos_y() {
         return pos_y;
     }
+
+    public void update() {
+        obstacleTouched();
+
+    }
+
+    public void obstacleTouched() {
+        for (int i = 0; i < Board.get_listFish().size(); i++) {
+
+            if ((getPos_x() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_x())
+                    && (getPos_x() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_x())
+                    && (getPos_y() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_y())
+                    && (getPos_y() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_y())) {
+                // System.out.println("obstacle touched");
+
+                if ((getPos_y() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_y())
+                        || (getPos_y() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_y())) {
+                    // Board.get_listFish().get(i).setPos_x(Board.get_listFish().get(i).getPos_y() +
+                    // 1);
+
+                } else if ((getPos_x() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_x())
+                        || (getPos_x() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_x())) {
+                    // Board.get_listFish().get(i).setPos_y(Board.get_listFish().get(i).getPos_x() +
+                    // 1);
+                }
+
+            }
+
+        }
+    }
 }

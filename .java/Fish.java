@@ -13,7 +13,7 @@ public class Fish {
     private static int hitBoxFish = 20;
     protected static int screen_W = Board.getB_WIDTH() - hitBoxFish;
     protected static int screen_H = Board.getB_HEIGHT() - hitBoxFish;
-    private static int hitBoxOBstacle = 20; // 40 W / 20 H
+    private static int hitBoxOBstacle = 100; // 40 W / 20 H
     private int speedFish;
     private int moveFish;
 
@@ -103,9 +103,10 @@ public class Fish {
     //////////////////////////////////
 
     public void update() {
+
         move(speedFish);
         // couplingFish();
-        // obstacleTouched();
+
     }
 
     public void couplingFish() {
@@ -113,7 +114,7 @@ public class Fish {
         for (int i = 0; i < Board.get_listFish().size(); i++) {
 
             for (int j = 0; j < Board.get_listFish().size(); j++) {
-
+                System.out.println("test");
                 if (Board.get_listFish().get(j).getClass().getName() == Board.get_listFish().get(i).getClass()
                         .getName()) {
                     if (Board.get_listFish().get(j).getPos_x() <= Board.get_listFish().get(i).getPos_x() + 20
@@ -133,25 +134,6 @@ public class Fish {
                 }
             }
 
-        }
-    }
-
-    public void obstacleTouched() {
-        ArrayList<Obstacle> obstacleList = Board.get_listObstacle();
-        for (Obstacle obstacle : obstacleList) {
-            if ((getPos_x() <= obstacle.getPos_x() + hitBoxOBstacle)
-                    && (getPos_x() >= obstacle.getPos_x() - hitBoxOBstacle)
-                    && (getPos_y() <= obstacle.getPos_y() + hitBoxOBstacle)
-                    && (getPos_y() >= obstacle.getPos_y() - hitBoxOBstacle)) {
-
-                if ((getPos_y() <= obstacle.getPos_y() + hitBoxOBstacle)
-                        || (getPos_y() >= obstacle.getPos_y() - hitBoxOBstacle)) {
-                    pos_x += 1;
-                } else {
-                    pos_y += 1;
-                }
-
-            }
         }
     }
 

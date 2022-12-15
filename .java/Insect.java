@@ -5,7 +5,7 @@ public class Insect {
 
     private int pos_x;
     private int pos_y;
-    private int HitBoxInsect = 15;
+    private int hitBoxInsect = 15;
     protected int screen_W = Board.getB_WIDTH();
     protected int screen_H = Board.getB_HEIGHT();
 
@@ -69,10 +69,10 @@ public class Insect {
 
         for (int i = 0; i < Board.get_listFish().size(); i++) {
 
-            if ((getPos_x() - HitBoxInsect <= Board.get_listFish().get(i).getPos_x())
-                    && (getPos_x() + HitBoxInsect >= Board.get_listFish().get(i).getPos_x())
-                    && (getPos_y() - HitBoxInsect <= Board.get_listFish().get(i).getPos_y())
-                    && (getPos_y() + HitBoxInsect >= Board.get_listFish().get(i).getPos_y())) {
+            if ((getPos_x() - hitBoxInsect <= Board.get_listFish().get(i).getPos_x())
+                    && (getPos_x() + hitBoxInsect >= Board.get_listFish().get(i).getPos_x())
+                    && (getPos_y() - hitBoxInsect <= Board.get_listFish().get(i).getPos_y())
+                    && (getPos_y() + hitBoxInsect >= Board.get_listFish().get(i).getPos_y())) {
 
                 if (insectColourName == "timmerLow") {
                     timmerSpeedInsect = 100;

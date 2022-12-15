@@ -4,7 +4,7 @@ public class FishRed extends Fish {
     //////////////////////////////////
     private static int speedFish = 5;
     private Fish deathFish;
-    private int hitBoxFish = 5;
+    private int hitBoxFish = 6;
     private double calculDistance = 0;
     private double closestDistance = 1500;
     private int x;
