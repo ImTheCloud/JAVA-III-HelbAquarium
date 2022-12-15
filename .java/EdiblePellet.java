@@ -15,7 +15,7 @@ public class EdiblePellet {
     protected int screen_H = Board.getB_HEIGHT();
     private static int counterToStopMoveFish = 0;
     private static String nameFishTouchPellet;
-    private EdiblePellet deathPellet;
+    // private EdiblePellet deathPellet;
     // private EdiblePellet deathPellet;
 
     ///////////////////////////////////
