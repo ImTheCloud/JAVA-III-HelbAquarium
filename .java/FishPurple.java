@@ -4,9 +4,10 @@ public class FishPurple extends Fish {
     // The variables
     //////////////////////////////////
 
-    private static int pos_x_fishRed;
-    private static int pos_y_fishRed;
-    private int moveFish;
+    private double calculDistance = 0;
+    private double closestDistance = 1500;
+    private int x;
+    private int y;
     private int speedFish = 3 + Board.get_speed_fish();
 
     ///////////////////////////////////
@@ -24,22 +25,7 @@ public class FishPurple extends Fish {
 
             oppositeDirectionofTheRedFish();
 
-            if (getPos_y() < pos_y_fishRed) {
-                moveFish = getPos_y() + speedFish;
-                setPos_y(moveFish);
-            }
-            if (getPos_x() < pos_x_fishRed) {
-                moveFish = getPos_x() + speedFish;
-                setPos_x(moveFish);
-            }
-            if (getPos_x() > pos_x_fishRed) {
-                moveFish = getPos_x() - speedFish;
-                setPos_x(moveFish);
-            }
-            if (getPos_y() > pos_y_fishRed) {
-                moveFish = getPos_y() - speedFish;
-                setPos_y(moveFish);
-            }
+            super.move(speedFish);
         } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()) {
@@ -55,26 +41,36 @@ public class FishPurple extends Fish {
 
             if (FishRed.class.getName() == Board.get_listFish().get(i).getClass().getName()) {
 
-                pos_x_fishRed = Board.get_listFish().get(i).getPos_x();
-                pos_y_fishRed = Board.get_listFish().get(i).getPos_y();
+                x = Board.get_listFish().get(i).getPos_x() - this.getPos_x();
+                y = Board.get_listFish().get(i).getPos_y() - this.getPos_y();
 
-                if (getPos_x() <= pos_x_fishRed && getPos_x() <= pos_y_fishRed) {
-                    pos_x_fishRed = 5; // 5 because 0 its the edge and we cant see the fish
-                    pos_y_fishRed = 5;
-                } else if (getPos_x() >= pos_x_fishRed && getPos_y() >= pos_y_fishRed) {
-                    pos_x_fishRed = get_screen_W();
-                    pos_y_fishRed = get_screen_H();
-                } else if (getPos_x() <= pos_x_fishRed && getPos_y() >= pos_y_fishRed) {
-                    pos_x_fishRed = 30;
-                    pos_y_fishRed = get_screen_H();
+                calculDistance = Math.sqrt(x * x + y * y);
+
+                if (closestDistance > calculDistance) {
+                    closestDistance = calculDistance;
+
+                    setPos_x_target(Board.get_listFish().get(i).getPos_x());
+                    setPos_y_target(Board.get_listFish().get(i).getPos_y());
+                }
+
+                if (getPos_x() <= getPos_x_target() && getPos_x() <= getPos_y_target()) {
+                    setPos_x_target(10); // 5 because 0 its the edge and we cant see the fish
+                    setPos_y_target(10);
+                } else if (getPos_x() >= getPos_x_target() && getPos_y() >= getPos_y_target()) {
+                    setPos_x_target(get_screen_W()); // 5 because 0 its the edge and we cant see the fish
+                    setPos_y_target(get_screen_H());
+                } else if (getPos_x() <= getPos_x_target() && getPos_y() >= getPos_y_target()) {
+                    setPos_x_target(10);
+                    setPos_y_target(get_screen_H());
                 } else {
-                    pos_x_fishRed = get_screen_W();
-                    pos_y_fishRed = 30;
+                    setPos_x_target(get_screen_W());
+                    setPos_y_target(10);
                 }
 
             }
 
         }
+        closestDistance = 1500;
     }
 
 }

@@ -5,12 +5,11 @@ public class FishRed extends Fish {
 
     private static int pos_x_fishPrey;
     private static int pos_y_fishPrey;
-    private int moveFish;
     private static int speedFish = 3;
     private Fish deathFish;
-    private int hitBoxFish = 2;
+    private int hitBoxFish = 4;
     private double calculDistance = 0;
-    private double closestDistance = 1000;
+    private double closestDistance = 1500;
     private int x;
     private int y;
 
@@ -39,31 +38,13 @@ public class FishRed extends Fish {
 
         if (EdiblePellet.get_counterToStopMoveFish() == 0 || "FishRed" == EdiblePellet.get_NameFishTouchPellet()) {
             closestFish();
-            if ((getPos_x() >= pos_x_fishPrey - hitBoxFish) && (getPos_x() <= pos_x_fishPrey + hitBoxFish)
-                    && (getPos_y() >= pos_y_fishPrey - hitBoxFish) && (getPos_y() <= pos_y_fishPrey + hitBoxFish)) {
+            if ((getPos_x() >= getPos_x_target() - hitBoxFish) && (getPos_x() <= getPos_x_target() + hitBoxFish)
+                    && (getPos_y() >= getPos_y_target() - hitBoxFish)
+                    && (getPos_y() <= getPos_y_target() + hitBoxFish)) {
                 fishKilling();
 
             }
-            if (getPos_y() < pos_y_fishPrey) {
-                moveFish = getPos_y() + speedFish;
-                setPos_y(moveFish);
-
-            }
-            if (getPos_x() < pos_x_fishPrey) {
-                moveFish = getPos_x() + speedFish;
-                setPos_x(moveFish);
-
-            }
-            if (getPos_x() > pos_x_fishPrey) {
-                moveFish = getPos_x() - speedFish;
-                setPos_x(moveFish);
-
-            }
-            if (getPos_y() > pos_y_fishPrey) {
-                moveFish = getPos_y() - speedFish;
-                setPos_y(moveFish);
-
-            }
+            super.move(speedFish);
         } else if ("FishPurple" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()) {
@@ -87,8 +68,8 @@ public class FishRed extends Fish {
                 if (closestDistance > calculDistance) {
                     closestDistance = calculDistance;
 
-                    pos_x_fishPrey = Board.get_listFish().get(i).getPos_x();
-                    pos_y_fishPrey = Board.get_listFish().get(i).getPos_y();
+                    setPos_x_target(Board.get_listFish().get(i).getPos_x());
+                    setPos_y_target(Board.get_listFish().get(i).getPos_y());
 
                     deathFish = Board.get_listFish().get(i);
                 }
@@ -96,11 +77,11 @@ public class FishRed extends Fish {
             }
 
         }
+        closestDistance = 1500;
     }
 
     private void fishKilling() {
         Board.get_listFish().remove(deathFish);
-        closestDistance = 1000;
 
     }
 

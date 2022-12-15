@@ -1,3 +1,4 @@
+import java.net.Socket;
 import java.util.ArrayList;
 
 public class Fish {
@@ -69,7 +70,6 @@ public class Fish {
     public Fish() {
         positionFish();
 
-        move(speedFish);
     }
 
     public void move(int speedFish) {
@@ -105,6 +105,7 @@ public class Fish {
     //////////////////////////////////
 
     public void update() {
+        move(speedFish);
         // couplingFish();
         // obstacleTouched();
     }

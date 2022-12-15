@@ -59,11 +59,10 @@ public class FishOrange extends Fish {
                     && getPos_x() >= getPos_x_target() - 5
                     && getPos_y() <= getPos_y_target() + 5
                     && getPos_y() >= getPos_y_target() - 5) {
-                System.out.println("meth");
                 randomEdgePosition();
             }
 
-            super.move(3);
+            super.move(speedFish);
 
         } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
