@@ -1,7 +1,7 @@
 
 ///////////////////////////////////
-// The Import
-//////////////////////////////////aa
+// The Imports
+//////////////////////////////////
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -14,41 +14,38 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.*;
 import java.awt.*;
-// delimitation ex : 10000 fish
 
 public class Board extends JPanel implements ActionListener {
 
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-    private final static int B_WIDTH = 1000;
-    private final static int B_HEIGHT = 500;
-    private final int Delay = 50;
-    private Timer timer = new Timer(Delay, this);
-
-    private int numberInsectmax = 5;
-    private int numberInsect = (int) (Math.random() * numberInsectmax + 1);
-    private static int numberObstacleMax = 2;
-    private static int numberObstacle = (int) (Math.random() * numberObstacleMax + 1);
-    private int numberEdiblePelletMax = 5;
-    private int ediblePelletCounter = (int) (Math.random() * numberEdiblePelletMax + 1);
-
-    private int numberFishDifferentExisting = 4;
-    private int fishColourAdd;
-
-    private static String colourFishKeyPressed = "no";
-
     private Image orangeImage;
     private Image purpleImage;
     private Image redImage;
     private Image blueImage;
     private Image insectBlackImage;
-
     private Image obstacleImage;
     private Image ediblePelletImage;
 
+    private final static int B_WIDTH = 1000; // Size screen Width
+    private final static int B_HEIGHT = 500; // Size screen Height
+    private final int Delay = 50; // every 50 milisecond, it's the timmer
+    private Timer timer = new Timer(Delay, this);
+
+    private int numberFishDifferentExisting = 4;
+    private int numberInsectmaxInTheGame = 5;
+    private int numberEdiblePelletMaxInTheGame = 8;
+    private static int numberObstacleMaxInTheGame = 2;
+    private int fishColourAddForKeyEvent = 0;
+    private static String colourFishKeyEvent = "Default";
+    // +1 bcs at least 1 (for all +1 in a random)
+    private int numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 1);
+    private static int numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 1);
+    private int ediblePelletCounter = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
+
     ///////////////////////////////////
-    // les array list
+    // The Array lists
     ///////////////////////////////////
     private static ArrayList<Obstacle> obstacleList = new ArrayList<Obstacle>();
     private static ArrayList<EdiblePellet> ediblePelletList = new ArrayList<EdiblePellet>();
@@ -64,7 +61,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     public static String get_colourFishKeyPressed() {
-        return colourFishKeyPressed;
+        return colourFishKeyEvent;
     }
 
     public static ArrayList<EdiblePellet> get_ediblePellet() {
@@ -90,6 +87,12 @@ public class Board extends JPanel implements ActionListener {
     public static int getB_HEIGHT() {
         return B_HEIGHT;
     }
+
+    ///////////////////////////////////
+    // The Set for other class
+    ///////////////////////////////////
+
+    
 
     ///////////////////////////////////
     // Load Image
@@ -165,6 +168,28 @@ public class Board extends JPanel implements ActionListener {
         fishList.add(new FishOrange());
         fishList.add(new FishOrange());
         fishList.add(new FishOrange());
+
+    }
+
+    public static void addNewFish(String newFish) {
+
+        if (newFish == "FishOrange") {
+            fishList.add(new FishOrange());
+            fishList.add(new FishOrange());
+            fishList.add(new FishOrange());
+        } else if (newFish == "FishPurple") {
+            fishList.add(new FishPurple());
+            fishList.add(new FishPurple());
+            fishList.add(new FishPurple());
+        } else if (newFish == "FishRed") {
+            fishList.add(new FishRed());
+            fishList.add(new FishRed());
+            fishList.add(new FishRed());
+        } else {
+            fishList.add(new FishBlue());
+            fishList.add(new FishBlue());
+            fishList.add(new FishBlue());
+        }
 
     }
 
@@ -289,12 +314,12 @@ public class Board extends JPanel implements ActionListener {
     }
 
     public void addFishKeyboardKey() {
-        fishColourAdd = (int) (Math.random() * numberFishDifferentExisting);
-        if (fishColourAdd == 0) {
+        fishColourAddForKeyEvent = (int) (Math.random() * numberFishDifferentExisting);
+        if (fishColourAddForKeyEvent == 0) {
             fishList.add(new FishBlue());
-        } else if (fishColourAdd == 1) {
+        } else if (fishColourAddForKeyEvent == 1) {
             fishList.add(new FishRed());
-        } else if (fishColourAdd == 3) {
+        } else if (fishColourAddForKeyEvent == 3) {
             fishList.add(new FishPurple());
         } else {
             fishList.add(new FishOrange());
@@ -359,20 +384,20 @@ public class Board extends JPanel implements ActionListener {
                 addFishKeyboardKey();
             }
             if (key == KeyEvent.VK_R) {
-                colourFishKeyPressed = "red";
+                colourFishKeyEvent = "red";
                 EdiblePellet.set_counterToStopMoveFish(1000000);
             }
             if (key == KeyEvent.VK_B) {
-                colourFishKeyPressed = "blue";
+                colourFishKeyEvent = "blue";
                 EdiblePellet.set_counterToStopMoveFish(1000000);
             }
             if (key == KeyEvent.VK_M) {
                 EdiblePellet.set_counterToStopMoveFish(1000000);
-                colourFishKeyPressed = "purple";
+                colourFishKeyEvent = "purple";
             }
             if (key == KeyEvent.VK_O) {
                 EdiblePellet.set_counterToStopMoveFish(1000000);
-                colourFishKeyPressed = "orange";
+                colourFishKeyEvent = "orange";
             }
         }
     }

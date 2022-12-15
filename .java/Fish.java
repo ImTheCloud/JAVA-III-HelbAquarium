@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Fish {
 
     ///////////////////////////////////
@@ -111,35 +109,49 @@ public class Fish {
     //////////////////////////////////
 
     public void update() {
-        // System.out.println("test");
         move();
         // couplingFish();
-
     }
 
     public void couplingFish() {
 
-        for (int i = 0; i < Board.get_listFish().size(); i++) {
+        for (int j = 0; j < Board.get_listFish().size(); j++) {
 
-            for (int j = 0; j < Board.get_listFish().size(); j++) {
-                System.out.println("test");
-                if (Board.get_listFish().get(j).getClass().getName() == Board.get_listFish().get(i).getClass()
-                        .getName()) {
-                    if (Board.get_listFish().get(j).getPos_x() <= Board.get_listFish().get(i).getPos_x() + 20
-                            && Board.get_listFish().get(j).getPos_x() >= Board.get_listFish().get(i).getPos_x() - 20
-                            && Board.get_listFish().get(j).getPos_y() <= Board.get_listFish().get(i).getPos_y() + 20
-                            && Board.get_listFish().get(j).getPos_y() >= Board.get_listFish().get(i).getPos_y() - 20) {
+                if (Board.get_listFish().get(j).getClass().getName() == this.getClass().getName()) {
 
-                        Board.get_listFish().remove(Board.get_listFish().get(i));
-                        Board.get_listFish().remove(Board.get_listFish().get(j));
+                    // System.out.println("test");
+                    // Board.get_listFish().remove(this);
+                    // Board.get_listFish().remove(Board.get_listFish().get(j));
 
-                        Board.get_listFish().add(Board.get_listFish().get(i));
-                        Board.get_listFish().add(Board.get_listFish().get(i));
-                        Board.get_listFish().add(Board.get_listFish().get(i));
-
-                    }
+                    // Board.addNewFish(this.getClass().getName());
 
                 }
+
+            }
+
+        }
+    }
+
+    public void obstacleTouched() {
+        for (int i = 0; i < Board.get_listFish().size(); i++) {
+
+            if ((getPos_x() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_x())
+                    && (getPos_x() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_x())
+                    && (getPos_y() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_y())
+                    && (getPos_y() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_y())) {
+                // System.out.println("obstacle touched");
+
+                if ((getPos_y() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_y())
+                        || (getPos_y() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_y())) {
+                    // Board.get_listFish().get(i).setPos_x(Board.get_listFish().get(i).getPos_y() +
+                    // 1);
+
+                } else if ((getPos_x() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_x())
+                        || (getPos_x() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_x())) {
+                    // Board.get_listFish().get(i).setPos_y(Board.get_listFish().get(i).getPos_x() +
+                    // 1);
+                }
+
             }
 
         }

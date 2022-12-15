@@ -45,7 +45,7 @@ public class Obstacle {
                     && (getPos_x() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_x())
                     && (getPos_y() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_y())
                     && (getPos_y() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_y())) {
-                // System.out.println("obstacle touched");
+                System.out.println("obstacle touched");
 
                 if ((getPos_y() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_y())
                         || (getPos_y() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_y())) {
