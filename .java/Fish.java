@@ -8,10 +8,15 @@ public class Fish {
 
     private int pos_x;
     private int pos_y;
+    private int pos_x_target;
+    private int pos_y_target;
     private static int hitBoxFish = 20;
     protected static int screen_W = Board.getB_WIDTH() - hitBoxFish;
     protected static int screen_H = Board.getB_HEIGHT() - hitBoxFish;
     private static int hitBoxOBstacle = 20; // 40 W / 20 H
+    private int speedFish;
+
+    private int moveFish;
 
     ///////////////////////////////////
     // The Get for other class
@@ -33,6 +38,22 @@ public class Fish {
         return pos_x;
     }
 
+    public int getPos_y_target() {
+        return pos_y_target;
+    }
+
+    public int getPos_x_target() {
+        return pos_x_target;
+    }
+
+    public void setPos_x_target(int pos_x_target) {
+        this.pos_x_target = pos_x_target;
+    }
+
+    public void setPos_y_target(int pos_y_target) {
+        this.pos_y_target = pos_y_target;
+    }
+
     public void setPos_x(int pos_x) {
         this.pos_x = pos_x;
     }
@@ -48,7 +69,27 @@ public class Fish {
     public Fish() {
         positionFish();
 
-        System.out.println();
+        move(speedFish);
+    }
+
+    public void move(int speedFish) {
+
+        if (getPos_y() < getPos_y_target()) {
+            moveFish = getPos_y() + speedFish;
+            setPos_y(moveFish);
+        }
+        if (getPos_x() < getPos_x_target()) {
+            moveFish = getPos_x() + speedFish;
+            setPos_x(moveFish);
+        }
+        if (getPos_x() > getPos_x_target()) {
+            moveFish = getPos_x() - speedFish;
+            setPos_x(moveFish);
+        }
+        if (getPos_y() > getPos_y_target()) {
+            moveFish = getPos_y() - speedFish;
+            setPos_y(moveFish);
+        }
     }
 
     ///////////////////////////////////

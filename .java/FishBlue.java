@@ -22,22 +22,9 @@ public class FishBlue extends Fish {
         if (EdiblePellet.get_counterToStopMoveFish() == 0 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()) {
 
             directionToFishBlueOrPurple();
-            if (getPos_y() < pos_y_fishBlueOrPurple) {
-                moveFish = getPos_y() + speedFish;
-                setPos_y(moveFish);
-            }
-            if (getPos_x() < pos_x_fishBlueOrPurple) {
-                moveFish = getPos_x() + speedFish;
-                setPos_x(moveFish);
-            }
-            if (getPos_x() > pos_x_fishBlueOrPurple) {
-                moveFish = getPos_x() - speedFish;
-                setPos_x(moveFish);
-            }
-            if (getPos_y() > pos_y_fishBlueOrPurple) {
-                moveFish = getPos_y() - speedFish;
-                setPos_y(moveFish);
-            }
+
+            super.move(4);
+
         } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishPurple" == EdiblePellet.get_NameFishTouchPellet()) {

@@ -3,10 +3,6 @@ public class FishOrange extends Fish {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-
-    private static int destination_pos_x;
-    private static int destination_pos_y;
-    private int moveFish;
     private static int speedFish = 3;
     private static int numberEdgeExisting = 3;
     private static int randomEdge;
@@ -24,17 +20,17 @@ public class FishOrange extends Fish {
 
         randomEdge = (int) (Math.random() * numberEdgeExisting);
         if (randomEdge == 0) {
-            destination_pos_x = 0;
-            destination_pos_y = (int) (Math.random() * screen_H);
+            setPos_x_target(0);
+            setPos_y_target((int) (Math.random() * screen_H));
         } else if (randomEdge == 1) {
-            destination_pos_x = screen_W;
-            destination_pos_y = (int) (Math.random() * screen_H);
+            setPos_x_target(screen_W);
+            setPos_y_target((int) (Math.random() * screen_H));
         } else if (randomEdge == 2) {
-            destination_pos_y = 0;
-            destination_pos_x = (int) (Math.random() * screen_W);
+            setPos_y_target(0);
+            setPos_x_target((int) (Math.random() * screen_W));
         } else if (randomEdge == 3) {
-            destination_pos_y = screen_H;
-            destination_pos_x = (int) (Math.random() * screen_W);
+            setPos_y_target(screen_H);
+            setPos_x_target((int) (Math.random() * screen_W));
         }
     }
 
@@ -59,29 +55,16 @@ public class FishOrange extends Fish {
 
         if (EdiblePellet.get_counterToStopMoveFish() == 0 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()) {
 
-            if (getPos_x() <= destination_pos_x + 5
-                    && getPos_x() >= destination_pos_x - 5
-                    && getPos_y() <= destination_pos_y + 5
-                    && getPos_y() >= destination_pos_y - 5) {
+            if (getPos_x() <= getPos_x_target() + 5
+                    && getPos_x() >= getPos_x_target() - 5
+                    && getPos_y() <= getPos_y_target() + 5
+                    && getPos_y() >= getPos_y_target() - 5) {
+                System.out.println("meth");
                 randomEdgePosition();
             }
 
-            if (getPos_y() < destination_pos_y) {
-                moveFish = getPos_y() + speedFish;
-                setPos_y(moveFish);
-            }
-            if (getPos_x() < destination_pos_x) {
-                moveFish = getPos_x() + speedFish;
-                setPos_x(moveFish);
-            }
-            if (getPos_x() > destination_pos_x) {
-                moveFish = getPos_x() - speedFish;
-                setPos_x(moveFish);
-            }
-            if (getPos_y() > destination_pos_y) {
-                moveFish = getPos_y() - speedFish;
-                setPos_y(moveFish);
-            }
+            super.move(3);
+
         } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishPurple" == EdiblePellet.get_NameFishTouchPellet()) {
