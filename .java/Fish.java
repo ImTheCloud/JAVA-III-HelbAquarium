@@ -21,6 +21,14 @@ public class Fish {
     // The Get for other class
     //////////////////////////////////
 
+    public int get_SpeedFish() {
+        return speedFish;
+    }
+
+    public void set_speedFish(int speedFish) {
+        this.speedFish = speedFish;
+    }
+
     public int get_screen_W() {
         return screen_W;
     }
@@ -70,7 +78,7 @@ public class Fish {
 
     }
 
-    public void move(int speedFish) {
+    public void move() {
 
         if (getPos_y() < getPos_y_target()) {
             moveFish = getPos_y() + speedFish;
@@ -103,8 +111,8 @@ public class Fish {
     //////////////////////////////////
 
     public void update() {
-
-        move(speedFish);
+        // System.out.println("test");
+        move();
         // couplingFish();
 
     }

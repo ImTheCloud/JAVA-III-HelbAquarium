@@ -36,6 +36,8 @@ public class Board extends JPanel implements ActionListener {
     private int numberFishDifferentExisting = 4;
     private int fishColourAdd;
 
+    private static String colourFishKeyPressed = "no";
+
     private Image orangeImage;
     private Image purpleImage;
     private Image redImage;
@@ -61,12 +63,20 @@ public class Board extends JPanel implements ActionListener {
         return fishList;
     }
 
+    public static String get_colourFishKeyPressed() {
+        return colourFishKeyPressed;
+    }
+
     public static ArrayList<EdiblePellet> get_ediblePellet() {
         return ediblePelletList;
     }
 
     public static ArrayList<Obstacle> get_listObstacle() {
         return obstacleList;
+    }
+
+    public static ArrayList<Insect> get_insectList() {
+        return insectList;
     }
 
     public static int get_speed_fish() {
@@ -312,15 +322,15 @@ public class Board extends JPanel implements ActionListener {
                 resetAquarium();
             }
             if (key == KeyEvent.VK_1) {
-                setBackground(Color.white); // cold Background
+                setBackground(Color.lightGray); // cold Background
                 FishRed.setSpeedUpgrade(4);
             }
             if (key == KeyEvent.VK_2) {
-                setBackground(Color.GRAY); // warm Background
+                setBackground(Color.gray); // warm Background
                 FishRed.setSpeedUpgrade(5);
             }
             if (key == KeyEvent.VK_3) {
-                setBackground(Color.blue); // hot Background
+                setBackground(Color.darkGray); // hot Background
                 FishRed.setSpeedUpgrade(6);
             }
             if (key == KeyEvent.VK_4) { // add insect random
@@ -331,6 +341,12 @@ public class Board extends JPanel implements ActionListener {
                 ediblePelletList.add(new EdiblePellet());
             }
             if (key == KeyEvent.VK_6) {
+
+                if (EdiblePellet.get_counterToStopMoveFish() == 0) {
+                    for (int i = 0; i < get_insectList().size(); i++) {
+
+                    }
+                }
 
             }
             if (key == KeyEvent.VK_7) {
@@ -343,16 +359,20 @@ public class Board extends JPanel implements ActionListener {
                 addFishKeyboardKey();
             }
             if (key == KeyEvent.VK_R) {
-
+                colourFishKeyPressed = "red";
+                EdiblePellet.set_counterToStopMoveFish(1000000);
             }
             if (key == KeyEvent.VK_B) {
-
+                colourFishKeyPressed = "blue";
+                EdiblePellet.set_counterToStopMoveFish(1000000);
             }
             if (key == KeyEvent.VK_M) {
-
+                EdiblePellet.set_counterToStopMoveFish(1000000);
+                colourFishKeyPressed = "purple";
             }
             if (key == KeyEvent.VK_O) {
-
+                EdiblePellet.set_counterToStopMoveFish(1000000);
+                colourFishKeyPressed = "orange";
             }
         }
     }

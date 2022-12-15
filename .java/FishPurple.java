@@ -13,6 +13,9 @@ public class FishPurple extends Fish {
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
+    public FishPurple() {
+        set_speedFish(speedFish);
+    }
 
     ///////////////////////////////////
     // Method called every moment for a change, here for move
@@ -37,7 +40,7 @@ public class FishPurple extends Fish {
 
             oppositeDirectionofTheRedFish();
 
-            super.move(speedFish);
+            super.update();
         } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()) {

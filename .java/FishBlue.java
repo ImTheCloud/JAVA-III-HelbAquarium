@@ -13,6 +13,10 @@ public class FishBlue extends Fish {
     // Constructor
     //////////////////////////////////
 
+    public FishBlue() {
+        set_speedFish(speedFish);
+    }
+
     ///////////////////////////////////
     // Method called every moment for a chhange, here for move
     //////////////////////////////////
@@ -30,11 +34,15 @@ public class FishBlue extends Fish {
     }
 
     public void moving() {
+        // if (Board.get_colourFishKeyPressed() == "blue") {
+        // EdiblePellet.set_counterToStopMoveFish(100000);
+        // }
+
         if (EdiblePellet.get_counterToStopMoveFish() == 0 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()) {
 
             directionToFishBlueOrPurple();
 
-            super.move(speedFish);
+            super.update();
 
         } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()
@@ -48,7 +56,6 @@ public class FishBlue extends Fish {
     private void directionToFishBlueOrPurple() {
 
         for (int i = 0; i < Board.get_listFish().size(); i++) {
-
             if (FishPurple.class.getName() == Board.get_listFish().get(i).getClass().getName()) {
 
                 x = Board.get_listFish().get(i).getPos_x() - this.getPos_x();

@@ -15,6 +15,10 @@ public class FishOrange extends Fish {
     // Method for a random Edge
     //////////////////////////////////
 
+    public FishOrange() {
+        set_speedFish(speedFish);
+    }
+
     public void randomEdgePosition() {
 
         randomEdge = (int) (Math.random() * numberEdgeExisting);
@@ -72,7 +76,7 @@ public class FishOrange extends Fish {
                 randomEdgePosition();
             }
 
-            super.move(speedFish);
+            super.update();
 
         } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()

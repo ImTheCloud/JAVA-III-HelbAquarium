@@ -14,6 +14,10 @@ public class FishRed extends Fish {
     // Constructor
     //////////////////////////////////
 
+    public FishRed() {
+        set_speedFish(speedFish);
+    }
+
     ///////////////////////////////////
     // the get/set
     //////////////////////////////////
@@ -53,7 +57,7 @@ public class FishRed extends Fish {
                 fishKilling();
 
             }
-            super.move(speedFish);
+            super.update();
         } else if ("FishPurple" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()) {
