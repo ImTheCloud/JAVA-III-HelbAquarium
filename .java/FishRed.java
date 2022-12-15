@@ -2,9 +2,6 @@ public class FishRed extends Fish {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-
-    private static int pos_x_fishPrey;
-    private static int pos_y_fishPrey;
     private static int speedFish = 3;
     private Fish deathFish;
     private int hitBoxFish = 4;
@@ -49,6 +46,7 @@ public class FishRed extends Fish {
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()) {
             EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - 1);
+            // System.out.println(EdiblePellet.get_counterToStopMoveFish() + "R");
 
         }
 

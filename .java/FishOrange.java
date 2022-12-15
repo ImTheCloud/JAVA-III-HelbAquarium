@@ -68,7 +68,7 @@ public class FishOrange extends Fish {
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishPurple" == EdiblePellet.get_NameFishTouchPellet()) {
             EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - 1);
-
+            // System.out.println(EdiblePellet.get_counterToStopMoveFish() + "O");
         }
     }
 
