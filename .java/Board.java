@@ -18,7 +18,7 @@ import java.awt.*;
 public class Board extends JPanel implements ActionListener {
 
     ///////////////////////////////////
-    // The variables
+    // The variables Image
     //////////////////////////////////
     private Image orangeImage;
     private Image purpleImage;
@@ -28,6 +28,9 @@ public class Board extends JPanel implements ActionListener {
     private Image obstacleImage;
     private Image ediblePelletImage;
 
+    ///////////////////////////////////
+    // The variables 
+    //////////////////////////////////
     private final static int B_WIDTH = 1000; // Size screen Width
     private final static int B_HEIGHT = 500; // Size screen Height
     private final int Delay = 50; // every 50 milisecond, it's the timmer
@@ -91,8 +94,6 @@ public class Board extends JPanel implements ActionListener {
     ///////////////////////////////////
     // The Set for other class
     ///////////////////////////////////
-
-    
 
     ///////////////////////////////////
     // Load Image
