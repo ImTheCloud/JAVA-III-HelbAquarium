@@ -6,7 +6,7 @@ public class FishRed extends Fish {
     private Fish deathFish;
     private int hitBoxFish = 6;
     private double calculDistance = 0;
-    private double closestDistance = 1500;
+    private double closestDistance = Board.getB_WIDTH();
     private int x;
     private int y;
 
@@ -101,7 +101,7 @@ public class FishRed extends Fish {
             }
 
         }
-        closestDistance = 1500;
+        closestDistance = Board.getB_WIDTH();
     }
 
     private void fishKilling() {

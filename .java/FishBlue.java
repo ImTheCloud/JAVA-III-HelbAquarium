@@ -6,7 +6,7 @@ public class FishBlue extends Fish {
 
     private int speedFish = 6;
     private double calculDistance;
-    private double closestDistance = 1500;
+    private double closestDistance = Board.getB_WIDTH();
     private int x;
     private int y;
 
@@ -80,7 +80,7 @@ public class FishBlue extends Fish {
             }
 
         }
-        closestDistance = 1500;
+        closestDistance = Board.getB_WIDTH();
     }
 
 }

@@ -1,15 +1,15 @@
 public class FishPurple extends Fish {
-
-    ///////////////////////////////////
+    //////////////////////////////////
     // The variables
     //////////////////////////////////
-
+    private static final int corner = 20;// 20 because 0 its the corner and we cant see the fish
     private double calculDistance = 0;
-    private double closestDistance = 1500;
-    private int x;
+    private double closestDistance = Board.getB_WIDTH();
+    // by default its the width but when the calcul start the closest
+    // distance become the closest distance of the fish
+    private int x; // calcul for the closest distance
     private int y;
     private int speedFish = 5 + Board.get_numberObstacle();
-
     private boolean stopMoveFishFromKeyEvent = false;
 
     ///////////////////////////////////
@@ -25,19 +25,31 @@ public class FishPurple extends Fish {
 
     @Override
     public void update() {
+        ifTheOrangeFishTouchAnInsectPlusPellet();
+    }
 
+    ///////////////////////////////////
+    // If the fish touch an insect
+    // hes speed upgrade for a definite time in the class insect
+    //////////////////////////////////
+
+    public void ifTheOrangeFishTouchAnInsectPlusPellet() {
         if (Insect.get_timmerSpeedFish() != 0) {
             speedFish = 8;
-            moving();
+            ifThePurpleFishTouchAPellet();
             Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - 1);
         } else {
             speedFish = 5 + Board.get_numberObstacle();
-            moving();
+            ifThePurpleFishTouchAPellet();
         }
-
     }
 
-    private void moving() {
+    ///////////////////////////////////
+    // If the fish touch a pellet
+    // he will stop every other fish who dont have the same colour than him
+    //////////////////////////////////
+
+    private void ifThePurpleFishTouchAPellet() {
 
         if (Board.get_colourFishKeyPressed() == "FishPurple") {
             stopMoveFishFromKeyEvent = true;
@@ -60,6 +72,11 @@ public class FishPurple extends Fish {
         }
     }
 
+    ///////////////////////////////////
+    // the fish will go every moment in the farthest corner of the fish red
+    // its exactly the farthest position of the fish red
+    //////////////////////////////////
+
     private void oppositeDirectionofTheRedFish() {
 
         for (int i = 0; i < Board.get_listFish().size(); i++) {
@@ -79,23 +96,23 @@ public class FishPurple extends Fish {
                 }
 
                 if (getPos_x_fish() <= getPos_x_target() && getPos_x_fish() <= getPos_y_target()) {
-                    setPos_x_target(10); // 5 because 0 its the edge and we cant see the fish
-                    setPos_y_target(10);
+                    setPos_x_target(corner);
+                    setPos_y_target(corner);
                 } else if (getPos_x_fish() >= getPos_x_target() && getPos_y_fish() >= getPos_y_target()) {
-                    setPos_x_target(get_screen_W()); // 5 because 0 its the edge and we cant see the fish
+                    setPos_x_target(get_screen_W());
                     setPos_y_target(get_screen_H());
                 } else if (getPos_x_fish() <= getPos_x_target() && getPos_y_fish() >= getPos_y_target()) {
-                    setPos_x_target(10);
+                    setPos_x_target(corner);
                     setPos_y_target(get_screen_H());
                 } else {
                     setPos_x_target(get_screen_W());
-                    setPos_y_target(10);
+                    setPos_y_target(corner);
                 }
 
             }
 
         }
-        closestDistance = 1500;
+        closestDistance = Board.getB_WIDTH();
     }
 
 }

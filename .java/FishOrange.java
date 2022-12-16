@@ -6,6 +6,7 @@ public class FishOrange extends Fish {
     private static int speedFish = 5;
     private static int numberEdgeExisting = 3;
     private static int randomEdge;
+    private int hitboxTarget = 7;
     private boolean stopMoveFishFromKeyEvent = false;
 
     ///////////////////////////////////
@@ -26,6 +27,16 @@ public class FishOrange extends Fish {
     public static void setSpeedUpgrade(int speeedFish) {
         speeedFish = speedFish;
     }
+
+    ///////////////////////////////////
+    // Method update called in Board for do something every x milisecond (timer)
+    //////////////////////////////////
+
+    @Override
+    public void update() {
+        ifTheOrangeFishTouchAnInsectPlusPellet();
+    }
+
     ///////////////////////////////////
     // Method for a random Edge (target of the orange fish)
     //////////////////////////////////
@@ -46,15 +57,6 @@ public class FishOrange extends Fish {
             setPos_y_target(screen_H);
             setPos_x_target((int) (Math.random() * screen_W));
         }
-    }
-
-    ///////////////////////////////////
-    // Method update called in Board for do something every x milisecond (timer)
-    //////////////////////////////////
-
-    @Override
-    public void update() {
-        ifTheOrangeFishTouchAnInsectPlusPellet();
     }
 
     ///////////////////////////////////
@@ -88,10 +90,14 @@ public class FishOrange extends Fish {
         if (EdiblePellet.get_counterToStopMoveFish() == 0 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()
                 || stopMoveFishFromKeyEvent == true) {
 
-            if (getPos_x_fish() <= getPos_x_target() + 6
-                    && getPos_x_fish() >= getPos_x_target() - 6
-                    && getPos_y_fish() <= getPos_y_target() + 6
-                    && getPos_y_fish() >= getPos_y_target() - 6) {
+            if (getPos_x_fish() <= getPos_x_target() + hitboxTarget
+                    && getPos_x_fish() >= getPos_x_target() - hitboxTarget
+                    && getPos_y_fish() <= getPos_y_target() + hitboxTarget
+                    && getPos_y_fish() >= getPos_y_target() - hitboxTarget) {
+                // hitbox of the target because hes speed his more than 1
+                // so in x,y its important to enteer its the hitbox of the target
+                // to change the edge
+
                 randomEdgePosition();
             }
 
