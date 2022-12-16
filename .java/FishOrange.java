@@ -6,21 +6,29 @@ public class FishOrange extends Fish {
     private static int speedFish = 5;
     private static int numberEdgeExisting = 3;
     private static int randomEdge;
-
     private boolean stopMoveFishFromKeyEvent = false;
 
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
-
-    ///////////////////////////////////
-    // Method for a random Edge
-    //////////////////////////////////
-
     public FishOrange() {
         set_speedFish(speedFish);
 
     }
+    ///////////////////////////////////
+    // the get/set
+    //////////////////////////////////
+
+    public static int getSpeedUpgrade() {
+        return speedFish;
+    }
+
+    public static void setSpeedUpgrade(int speeedFish) {
+        speeedFish = speedFish;
+    }
+    ///////////////////////////////////
+    // Method for a random Edge (target of the orange fish)
+    //////////////////////////////////
 
     public void randomEdgePosition() {
 
@@ -41,36 +49,36 @@ public class FishOrange extends Fish {
     }
 
     ///////////////////////////////////
-    // the get/set
-    //////////////////////////////////
-
-    public static int getSpeedUpgrade() {
-        return speedFish;
-    }
-
-    public static void setSpeedUpgrade(int speeedFish) {
-        speeedFish = speedFish;
-    }
-
-    ///////////////////////////////////
-    // Method called every moment for a change, here for move
+    // Method update called in Board for do something every x milisecond (timer)
     //////////////////////////////////
 
     @Override
     public void update() {
+        ifTheOrangeFishTouchAnInsectPlusPellet();
+    }
 
+    ///////////////////////////////////
+    // If the fish touch an insect
+    // hes speed upgrade for a definite time in the class insect
+    //////////////////////////////////
+
+    public void ifTheOrangeFishTouchAnInsectPlusPellet() {
         if (Insect.get_timmerSpeedFish() != 0) {
             speedFish = 8;
-            moving();
+            ifTheOrangeFishTouchAPellet();
             Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - 1);
         } else {
             speedFish = 5;
-            moving();
+            ifTheOrangeFishTouchAPellet();
         }
-
     }
 
-    public void moving() {
+    ///////////////////////////////////
+    // If the fish touch a pellet
+    // he will stop every other fish who dont have the same colour than him
+    //////////////////////////////////
+
+    public void ifTheOrangeFishTouchAPellet() {
 
         if (Board.get_colourFishKeyPressed() == "FishOrange") {
             stopMoveFishFromKeyEvent = true;
@@ -80,10 +88,10 @@ public class FishOrange extends Fish {
         if (EdiblePellet.get_counterToStopMoveFish() == 0 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()
                 || stopMoveFishFromKeyEvent == true) {
 
-            if (getPos_x() <= getPos_x_target() + 6
-                    && getPos_x() >= getPos_x_target() - 6
-                    && getPos_y() <= getPos_y_target() + 6
-                    && getPos_y() >= getPos_y_target() - 6) {
+            if (getPos_x_fish() <= getPos_x_target() + 6
+                    && getPos_x_fish() >= getPos_x_target() - 6
+                    && getPos_y_fish() <= getPos_y_target() + 6
+                    && getPos_y_fish() >= getPos_y_target() - 6) {
                 randomEdgePosition();
             }
 
@@ -93,7 +101,6 @@ public class FishOrange extends Fish {
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishPurple" == EdiblePellet.get_NameFishTouchPellet() && stopMoveFishFromKeyEvent == false) {
             EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - 1);
-            // System.out.println(EdiblePellet.get_counterToStopMoveFish() + "O");
         }
     }
 

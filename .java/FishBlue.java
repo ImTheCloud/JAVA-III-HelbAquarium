@@ -65,16 +65,16 @@ public class FishBlue extends Fish {
                     || ((FishBlue.class.getName() == Board.get_listFish().get(i).getClass().getName())
                             && (FishBlue.class.getName() != Board.get_listFish().get(i).getClass().getName()))) {
 
-                x = Board.get_listFish().get(i).getPos_x() - this.getPos_x();
-                y = Board.get_listFish().get(i).getPos_y() - this.getPos_y();
+                x = Board.get_listFish().get(i).getPos_x_fish() - this.getPos_x_fish();
+                y = Board.get_listFish().get(i).getPos_y_fish() - this.getPos_y_fish();
 
                 calculDistance = Math.sqrt(x * x + y * y);
 
                 if (closestDistance > calculDistance) {
                     closestDistance = calculDistance;
 
-                    setPos_x_target(Board.get_listFish().get(i).getPos_x());
-                    setPos_y_target(Board.get_listFish().get(i).getPos_y());
+                    setPos_x_target(Board.get_listFish().get(i).getPos_x_fish());
+                    setPos_y_target(Board.get_listFish().get(i).getPos_y_fish());
 
                 }
             }

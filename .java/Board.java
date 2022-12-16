@@ -46,7 +46,7 @@ public class Board extends JPanel implements ActionListener {
     // +1 bcs at least 1 (for all +1 in a random)
     private int numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 1);
     private static int numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 1);
-    private int ediblePelletCounter = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 10);
+    private int ediblePelletCounter = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
 
     ///////////////////////////////////
     // The Array lists
@@ -180,7 +180,7 @@ public class Board extends JPanel implements ActionListener {
 
     private void addInsect() {
         for (int i = 0; i < numberInsect; i++) {
-            insectList.add(new InsectBlack());
+            insectList.add(new Insect());
         }
 
     }
@@ -231,15 +231,15 @@ public class Board extends JPanel implements ActionListener {
     private void drawFish(Graphics g) {
         for (int i = 0; i < fishList.size(); i++) {
             if (fishList.get(i) instanceof FishOrange) {
-                g.drawImage(orangeImage, fishList.get(i).getPos_x(), fishList.get(i).getPos_y(), this);
+                g.drawImage(orangeImage, fishList.get(i).getPos_x_fish(), fishList.get(i).getPos_y_fish(), this);
             } else if (fishList.get(i) instanceof FishPurple) {
-                g.drawImage(purpleImage, fishList.get(i).getPos_x(), fishList.get(i).getPos_y(), this);
+                g.drawImage(purpleImage, fishList.get(i).getPos_x_fish(), fishList.get(i).getPos_y_fish(), this);
             } else if (fishList.get(i) instanceof FishBlue) {
-                g.drawImage(blueImage, fishList.get(i).getPos_x(), fishList.get(i).getPos_y(), this);
+                g.drawImage(blueImage, fishList.get(i).getPos_x_fish(), fishList.get(i).getPos_y_fish(), this);
             } else if (fishList.get(i) instanceof FishRed) {
-                g.drawImage(redImage, fishList.get(i).getPos_x(), fishList.get(i).getPos_y(), this);
+                g.drawImage(redImage, fishList.get(i).getPos_x_fish(), fishList.get(i).getPos_y_fish(), this);
             } else if (fishList.get(i) instanceof FishBlack) {
-                g.drawImage(blackImage, fishList.get(i).getPos_x(), fishList.get(i).getPos_y(), this);
+                g.drawImage(blackImage, fishList.get(i).getPos_x_fish(), fishList.get(i).getPos_y_fish(), this);
             }
         }
 
@@ -247,21 +247,22 @@ public class Board extends JPanel implements ActionListener {
 
     private void drawInsect(Graphics g) {
         for (int i = 0; i < insectList.size(); i++) {
-            g.drawImage(insectBlackImage, insectList.get(i).getPos_x(), insectList.get(i).getPos_y(), this);
+            g.drawImage(insectBlackImage, insectList.get(i).getPos_x_insect(), insectList.get(i).getPos_y_insect(),
+                    this);
         }
     }
 
     private void drawObstacle(Graphics g) {
         for (int i = 0; i < obstacleList.size(); i++) {
-            g.drawImage(obstacleImage, obstacleList.get(i).getPos_x(),
-                    obstacleList.get(i).getPos_y(), this);
+            g.drawImage(obstacleImage, obstacleList.get(i).getPos_x_obstacle(),
+                    obstacleList.get(i).getPos_y_obstacle(), this);
         }
     }
 
     private void drawEdiblePellet(Graphics g) {
         for (int i = 0; i < ediblePelletList.size(); i++) {
-            g.drawImage(ediblePelletImage, ediblePelletList.get(i).getPos_x(),
-                    ediblePelletList.get(i).getPos_y(), this);
+            g.drawImage(ediblePelletImage, ediblePelletList.get(i).getPos_x_pellet(),
+                    ediblePelletList.get(i).getPos_y_pellet(), this);
         }
     }
 
@@ -287,10 +288,6 @@ public class Board extends JPanel implements ActionListener {
 
         for (int i = 0; i < ediblePelletList.size(); i++) {
             ediblePelletList.get(i).update();
-        }
-
-        for (int i = 0; i < obstacleList.size(); i++) {
-            obstacleList.get(i).update();
         }
 
     }
@@ -369,7 +366,7 @@ public class Board extends JPanel implements ActionListener {
                 FishRed.setSpeedUpgrade(6);
             }
             if (keyEvent == KeyEvent.VK_4) { // add insect
-                insectList.add(new InsectBlack());
+                insectList.add(new Insect());
 
             }
             if (keyEvent == KeyEvent.VK_5) { // add edible pellet
@@ -406,7 +403,6 @@ public class Board extends JPanel implements ActionListener {
             if (keyEvent == KeyEvent.VK_A) {// add Fish Black and 2 fish red
                 fishList.add(new FishBlack());
 
-                fishList.add(new FishRed());
                 fishList.add(new FishRed());
 
             }

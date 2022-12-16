@@ -14,6 +14,11 @@ public class FishBlack extends Fish {
     // Constructor
     //////////////////////////////////
 
+    public FishBlack() {
+        set_speedFish(speedFish);
+
+    }
+
     ///////////////////////////////////
     // the get/set
     //////////////////////////////////
@@ -32,7 +37,7 @@ public class FishBlack extends Fish {
 
     @Override
     public void update() {
-        set_speedFish(speedFish);
+
         if (Insect.get_timmerSpeedFish() != 0) {
             speedFish = 8;
             moving();
@@ -47,9 +52,9 @@ public class FishBlack extends Fish {
     public void moving() {
 
         closestFish();
-        if ((getPos_x() >= getPos_x_target() - hitBoxFish) && (getPos_x() <= getPos_x_target() + hitBoxFish)
-                && (getPos_y() >= getPos_y_target() - hitBoxFish)
-                && (getPos_y() <= getPos_y_target() + hitBoxFish)) {
+        if ((getPos_x_fish() >= getPos_x_target() - hitBoxFish) && (getPos_x_fish() <= getPos_x_target() + hitBoxFish)
+                && (getPos_y_fish() >= getPos_y_target() - hitBoxFish)
+                && (getPos_y_fish() <= getPos_y_target() + hitBoxFish)) {
             fishKilling();
         }
         super.update();
@@ -62,16 +67,16 @@ public class FishBlack extends Fish {
 
             if (FishRed.class.getName() == Board.get_listFish().get(i).getClass().getName()) {
 
-                x = Board.get_listFish().get(i).getPos_x() - this.getPos_x();
-                y = Board.get_listFish().get(i).getPos_y() - this.getPos_y();
+                x = Board.get_listFish().get(i).getPos_x_fish() - this.getPos_x_fish();
+                y = Board.get_listFish().get(i).getPos_y_fish() - this.getPos_y_fish();
 
                 calculDistance = Math.sqrt(x * x + y * y);
 
                 if (closestDistance > calculDistance) {
                     closestDistance = calculDistance;
 
-                    setPos_x_target(Board.get_listFish().get(i).getPos_x());
-                    setPos_y_target(Board.get_listFish().get(i).getPos_y());
+                    setPos_x_target(Board.get_listFish().get(i).getPos_x_fish());
+                    setPos_y_target(Board.get_listFish().get(i).getPos_y_fish());
 
                     deathFish = Board.get_listFish().get(i);
                 }

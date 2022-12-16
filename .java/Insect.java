@@ -3,14 +3,15 @@ public class Insect {
     // The variables
     //////////////////////////////////
 
-    private int pos_x;
-    private int pos_y;
+    private int pos_x_insect;
+    private int pos_y_insect;
     private int hitBoxInsect = 15;
-    protected int screen_W = Board.getB_WIDTH();
-    protected int screen_H = Board.getB_HEIGHT();
-
-    private int randomInsectColour = (int) (Math.random() * 3);
-    private String insectColourName;
+    protected int screen_W = Board.getB_WIDTH() - hitBoxInsect;
+    protected int screen_H = Board.getB_HEIGHT() - hitBoxInsect;
+    // - hitbox, if not its possible to see the insect halfway
+    // if is appear at the limit of the screen
+    private int randomInsectTimmer = (int) (Math.random() * 3);
+    private String insecTimmerName;
     private static int timmerSpeedInsect = 0;
 
     ///////////////////////////////////
@@ -18,31 +19,23 @@ public class Insect {
     //////////////////////////////////
 
     public Insect() {
-
         positionRandomInsect();
-
-        randomInsectColour = (int) (Math.random() * 3);
-        if (randomInsectColour == 0) {
-            insectColourName = "timmerLow";
-        } else if (randomInsectColour == 1) {
-            insectColourName = "timmerNormal";
-        } else {
-            insectColourName = "timmerHigh";
-        }
+        nameTimeSpeedUpgrade();
     }
 
     ///////////////////////////////////
     // The Get for other class
     //////////////////////////////////
 
-    public int getPos_x() {
-        return pos_x;
+    public int getPos_x_insect() {
+        return pos_x_insect;
     }
 
-    public int getPos_y() {
-        return pos_y;
+    public int getPos_y_insect() {
+        return pos_y_insect;
     }
 
+    // time of the spped
     public static int get_timmerSpeedFish() {
         return timmerSpeedInsect;
     }
@@ -50,38 +43,62 @@ public class Insect {
     public static void set_timmerSpeedFish(int setTimmerSpeedInsect) {
         timmerSpeedInsect = setTimmerSpeedInsect;
     }
-
     ///////////////////////////////////
-    // create a random position for the Pellet
+    // Method update called in Board for do something every x milisecond (timer)
     //////////////////////////////////
 
-    public void positionRandomInsect() {
-        pos_x = (int) (Math.random() * screen_W);
-        pos_y = (int) (Math.random() * screen_H);
+    public void update() {
+        insectTouchedbyAInsect();
     }
 
     ///////////////////////////////////
-    // If a fish touch a insect he eats it and another insect appears in a random
+    // Method for different timer
+    // when a fish take a insect his speed upgrade
+    // if its the timmer low, the time of the speed will be low, etc...
+    //////////////////////////////////
+
+    public void nameTimeSpeedUpgrade() {
+        randomInsectTimmer = (int) (Math.random() * 3);
+        if (randomInsectTimmer == 0) {
+            insecTimmerName = "timmerLow";
+        } else if (randomInsectTimmer == 1) {
+            insecTimmerName = "timmerNormal";
+        } else {
+            insecTimmerName = "timmerHigh";
+        }
+    }
+
+    ///////////////////////////////////
+    // Method for put a insect in a random position at the beginning
+    //////////////////////////////////
+
+    public void positionRandomInsect() {
+        pos_x_insect = (int) (Math.random() * screen_W);
+        pos_y_insect = (int) (Math.random() * screen_H);
+    }
+
+    ///////////////////////////////////
+    // If a fish touch a insect he eats it
     // and another insect appears in a random position
+    // if the insect has the name "timmerHigh"
+    // he will have the most time of the 3 time, etc...
     ///////////////////////////////////
 
-    public void update() {
-
+    public void insectTouchedbyAInsect() {
         for (int i = 0; i < Board.get_listFish().size(); i++) {
 
-            if ((getPos_x() - hitBoxInsect <= Board.get_listFish().get(i).getPos_x())
-                    && (getPos_x() + hitBoxInsect >= Board.get_listFish().get(i).getPos_x())
-                    && (getPos_y() - hitBoxInsect <= Board.get_listFish().get(i).getPos_y())
-                    && (getPos_y() + hitBoxInsect >= Board.get_listFish().get(i).getPos_y())) {
+            if ((getPos_x_insect() - hitBoxInsect <= Board.get_listFish().get(i).getPos_x_fish())
+                    && (getPos_x_insect() + hitBoxInsect >= Board.get_listFish().get(i).getPos_x_fish())
+                    && (getPos_y_insect() - hitBoxInsect <= Board.get_listFish().get(i).getPos_y_fish())
+                    && (getPos_y_insect() + hitBoxInsect >= Board.get_listFish().get(i).getPos_y_fish())) {
 
-                if (insectColourName == "timmerLow") {
+                if (insecTimmerName == "timmerLow") {
                     timmerSpeedInsect = 100;
-                } else if (insectColourName == "timmerNormal") {
+                } else if (insecTimmerName == "timmerNormal") {
                     timmerSpeedInsect = 150;
                 } else {
                     timmerSpeedInsect = 200;
                 }
-                System.out.println(Board.get_listFish().get(i).getClass().getName() + " insect");
                 positionRandomInsect();
 
             }
