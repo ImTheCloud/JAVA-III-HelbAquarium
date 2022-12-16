@@ -1,4 +1,4 @@
-public class FishRed extends Fish {
+public class FishBlack extends Fish {
     ///////////////////////////////////
     // The variables&
     //////////////////////////////////
@@ -10,8 +10,6 @@ public class FishRed extends Fish {
     private int x;
     private int y;
 
-    private boolean stopMoveFishFromKeyEvent = false;
-
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
@@ -22,11 +20,10 @@ public class FishRed extends Fish {
 
     public static int getSpeed() {
         return speedFish;
-
     }
 
-    public static void setSpeedUpgrade(int speedFishChange) {
-        speedFish = speedFishChange;
+    public static void setSpeedUpgrade(int speeedFish) {
+        speedFish = speeedFish;
     }
 
     ///////////////////////////////////
@@ -36,15 +33,12 @@ public class FishRed extends Fish {
     @Override
     public void update() {
         set_speedFish(speedFish);
-
         if (Insect.get_timmerSpeedFish() != 0) {
             speedFish = 8;
             moving();
             Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - 1);
-
         } else {
-
-            set_speedFish(get_SpeedFish());
+            setSpeedUpgrade(getSpeed());
             moving();
         }
 
@@ -52,36 +46,21 @@ public class FishRed extends Fish {
 
     public void moving() {
 
-        if (Board.get_colourFishKeyPressed() == "FishRed") {
-            stopMoveFishFromKeyEvent = true;
-        } else {
-            stopMoveFishFromKeyEvent = false;
+        closestFish();
+        if ((getPos_x() >= getPos_x_target() - hitBoxFish) && (getPos_x() <= getPos_x_target() + hitBoxFish)
+                && (getPos_y() >= getPos_y_target() - hitBoxFish)
+                && (getPos_y() <= getPos_y_target() + hitBoxFish)) {
+            fishKilling();
         }
-        if (EdiblePellet.get_counterToStopMoveFish() == 0 || "FishRed" == EdiblePellet.get_NameFishTouchPellet()
-                || stopMoveFishFromKeyEvent == true) {
-            closestFish();
-            if ((getPos_x() >= getPos_x_target() - hitBoxFish) && (getPos_x() <= getPos_x_target() + hitBoxFish)
-                    && (getPos_y() >= getPos_y_target() - hitBoxFish)
-                    && (getPos_y() <= getPos_y_target() + hitBoxFish)) {
-                fishKilling();
+        super.update();
 
-            }
-            super.update();
-        } else if ("FishPurple" == EdiblePellet.get_NameFishTouchPellet()
-                || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
-                || "FishOrange" == EdiblePellet.get_NameFishTouchPellet() && stopMoveFishFromKeyEvent == false) {
-            EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - 1);
-            // System.out.println(EdiblePellet.get_counterToStopMoveFish() + "R");
-
-        }
     }
 
     private void closestFish() {
 
         for (int i = 0; i < Board.get_listFish().size(); i++) {
 
-            if (FishRed.class.getName() != Board.get_listFish().get(i).getClass().getName()
-                    && FishBlack.class.getName() != Board.get_listFish().get(i).getClass().getName()) {
+            if (FishRed.class.getName() == Board.get_listFish().get(i).getClass().getName()) {
 
                 x = Board.get_listFish().get(i).getPos_x() - this.getPos_x();
                 y = Board.get_listFish().get(i).getPos_y() - this.getPos_y();

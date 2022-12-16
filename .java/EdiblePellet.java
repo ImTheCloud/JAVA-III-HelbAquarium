@@ -78,15 +78,17 @@ public class EdiblePellet {
                     && (Board.get_listFish().get(i).getPos_y() - HitBoxPellet <= getPos_y())
                     && (Board.get_listFish().get(i).getPos_y() + HitBoxPellet >= getPos_y())) {
 
-                // deathPellet = Board.get_ediblePellet().get(i);
-                // Board.get_ediblePellet().remove(deathPellet);
-                positionRandomEdiblePellet();
+                System.out.println(Board.get_listFish().get(i).getClass().getName() + " pellet");
 
-                counterToStopMoveFish = 100 * Board.get_listFish().size();
+                if (Board.get_listFish().get(i).getClass().getName() != "FishBlack") {
+                    positionRandomEdiblePellet();
 
-                nameFishTouchPellet = Board.get_listFish().get(i).getClass().getName();
+                    counterToStopMoveFish = 100 * Board.get_listFish().size();
 
-                System.out.println(get_NameFishTouchPellet() + " pellet");
+                    nameFishTouchPellet = Board.get_listFish().get(i).getClass().getName();
+
+                }
+
             }
 
         }

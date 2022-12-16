@@ -7,6 +7,8 @@ public class FishOrange extends Fish {
     private static int numberEdgeExisting = 3;
     private static int randomEdge;
 
+    private boolean stopMoveFishFromKeyEvent = false;
+
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
@@ -17,6 +19,7 @@ public class FishOrange extends Fish {
 
     public FishOrange() {
         set_speedFish(speedFish);
+
     }
 
     public void randomEdgePosition() {
@@ -68,7 +71,15 @@ public class FishOrange extends Fish {
     }
 
     public void moving() {
-        if (EdiblePellet.get_counterToStopMoveFish() == 0 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()) {
+
+        if (Board.get_colourFishKeyPressed() == "FishOrange") {
+            stopMoveFishFromKeyEvent = true;
+        } else {
+            stopMoveFishFromKeyEvent = false;
+        }
+        if (EdiblePellet.get_counterToStopMoveFish() == 0 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()
+                || stopMoveFishFromKeyEvent == true) {
+
             if (getPos_x() <= getPos_x_target() + 6
                     && getPos_x() >= getPos_x_target() - 6
                     && getPos_y() <= getPos_y_target() + 6
@@ -80,7 +91,7 @@ public class FishOrange extends Fish {
 
         } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
-                || "FishPurple" == EdiblePellet.get_NameFishTouchPellet()) {
+                || "FishPurple" == EdiblePellet.get_NameFishTouchPellet() && stopMoveFishFromKeyEvent == false) {
             EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - 1);
             // System.out.println(EdiblePellet.get_counterToStopMoveFish() + "O");
         }

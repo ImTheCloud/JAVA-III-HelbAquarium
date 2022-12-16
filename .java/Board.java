@@ -27,25 +27,26 @@ public class Board extends JPanel implements ActionListener {
     private Image insectBlackImage;
     private Image obstacleImage;
     private Image ediblePelletImage;
+    private Image blackImage;
 
     ///////////////////////////////////
-    // The variables 
+    // The variables
     //////////////////////////////////
     private final static int B_WIDTH = 1000; // Size screen Width
     private final static int B_HEIGHT = 500; // Size screen Height
     private final int Delay = 50; // every 50 milisecond, it's the timmer
     private Timer timer = new Timer(Delay, this);
-
+    private int keyEvent;
     private int numberFishDifferentExisting = 4;
     private int numberInsectmaxInTheGame = 5;
-    private int numberEdiblePelletMaxInTheGame = 8;
+    private int numberEdiblePelletMaxInTheGame = 3;
     private static int numberObstacleMaxInTheGame = 2;
     private int fishColourAddForKeyEvent = 0;
     private static String colourFishKeyEvent = "Default";
     // +1 bcs at least 1 (for all +1 in a random)
     private int numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 1);
     private static int numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 1);
-    private int ediblePelletCounter = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
+    private int ediblePelletCounter = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 10);
 
     ///////////////////////////////////
     // The Array lists
@@ -56,15 +57,11 @@ public class Board extends JPanel implements ActionListener {
     private static ArrayList<Insect> insectList = new ArrayList<Insect>();
 
     ///////////////////////////////////
-    // The Get for other class
+    // Get Array List
     ///////////////////////////////////
 
     public static ArrayList<Fish> get_listFish() {
         return fishList;
-    }
-
-    public static String get_colourFishKeyPressed() {
-        return colourFishKeyEvent;
     }
 
     public static ArrayList<EdiblePellet> get_ediblePellet() {
@@ -79,7 +76,15 @@ public class Board extends JPanel implements ActionListener {
         return insectList;
     }
 
-    public static int get_speed_fish() {
+    ///////////////////////////////////
+    // Other Get
+    ///////////////////////////////////
+
+    public static String get_colourFishKeyPressed() {
+        return colourFishKeyEvent;
+    }
+
+    public static int get_numberObstacle() {
         return numberObstacle;
     }
 
@@ -92,14 +97,13 @@ public class Board extends JPanel implements ActionListener {
     }
 
     ///////////////////////////////////
-    // The Set for other class
-    ///////////////////////////////////
-
-    ///////////////////////////////////
-    // Load Image
+    // Image
     ///////////////////////////////////
 
     private void loadImages() {
+
+        ImageIcon iibl = new ImageIcon("Image/fishBlack.png");
+        blackImage = iibl.getImage();
 
         ImageIcon iio = new ImageIcon("Image/fishOrange.png");
         orangeImage = iio.getImage();
@@ -125,7 +129,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     //////////////////////////////////
-    // Lancement de l'application
+    // Start the application
     ///////////////////////////////////
     public Board() {
         initBoard();
@@ -155,7 +159,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     ///////////////////////////////////
-    // Method to add the element in the aquarium
+    // Method to add the element in the aquarium by default
     ///////////////////////////////////
 
     private void addFish() {
@@ -163,34 +167,14 @@ public class Board extends JPanel implements ActionListener {
 
         fishList.add(new FishPurple());
         fishList.add(new FishPurple());
+
         fishList.add(new FishBlue());
         fishList.add(new FishBlue());
 
         fishList.add(new FishOrange());
         fishList.add(new FishOrange());
         fishList.add(new FishOrange());
-
-    }
-
-    public static void addNewFish(String newFish) {
-
-        if (newFish == "FishOrange") {
-            fishList.add(new FishOrange());
-            fishList.add(new FishOrange());
-            fishList.add(new FishOrange());
-        } else if (newFish == "FishPurple") {
-            fishList.add(new FishPurple());
-            fishList.add(new FishPurple());
-            fishList.add(new FishPurple());
-        } else if (newFish == "FishRed") {
-            fishList.add(new FishRed());
-            fishList.add(new FishRed());
-            fishList.add(new FishRed());
-        } else {
-            fishList.add(new FishBlue());
-            fishList.add(new FishBlue());
-            fishList.add(new FishBlue());
-        }
+        fishList.add(new FishOrange());
 
     }
 
@@ -214,7 +198,34 @@ public class Board extends JPanel implements ActionListener {
     }
 
     ///////////////////////////////////
-    // Method to draw the element every moment
+    // Method for the couple if 2 fish touch each other, 3 others appear
+    ///////////////////////////////////
+    public static void addNewFish(String newFish) {
+
+        if (newFish == "FishOrange") {
+            fishList.add(new FishOrange());
+            fishList.add(new FishOrange());
+            fishList.add(new FishOrange());
+        } else if (newFish == "FishPurple") {
+            fishList.add(new FishPurple());
+            fishList.add(new FishPurple());
+            fishList.add(new FishPurple());
+        } else if (newFish == "FishRed") {
+            fishList.add(new FishRed());
+            fishList.add(new FishRed());
+            fishList.add(new FishRed());
+        } else {
+            fishList.add(new FishBlue());
+            fishList.add(new FishBlue());
+            fishList.add(new FishBlue());
+        }
+
+    }
+
+    ///////////////////////////////////
+    // Draw the element every moment if a fish is oange he take the orange image,...
+    // same for insect, obstacle and Pelelt but whitout condition
+    // because its only 1 image
     ///////////////////////////////////
 
     private void drawFish(Graphics g) {
@@ -227,8 +238,9 @@ public class Board extends JPanel implements ActionListener {
                 g.drawImage(blueImage, fishList.get(i).getPos_x(), fishList.get(i).getPos_y(), this);
             } else if (fishList.get(i) instanceof FishRed) {
                 g.drawImage(redImage, fishList.get(i).getPos_x(), fishList.get(i).getPos_y(), this);
+            } else if (fishList.get(i) instanceof FishBlack) {
+                g.drawImage(blackImage, fishList.get(i).getPos_x(), fishList.get(i).getPos_y(), this);
             }
-
         }
 
     }
@@ -261,7 +273,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     ///////////////////////////////////
-    // Method to update the element every moment
+    // Method to update the element every moment from each class
     ///////////////////////////////////
     private void doUpdate() {
 
@@ -295,23 +307,26 @@ public class Board extends JPanel implements ActionListener {
 
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        repaint();
+
+    }
+
     ///////////////////////////////////
     // Method for keyboard key
     ///////////////////////////////////
-
+    // empty all the arayList and start the game again
     public void resetAquarium() {
         obstacleList.removeAll(obstacleList);
         fishList.removeAll(fishList);
         ediblePelletList.removeAll(ediblePelletList);
         insectList.removeAll(insectList);
-        setBackground(Color.CYAN);
+        EdiblePellet.set_counterToStopMoveFish(0);
 
+        setBackground(Color.gray);
         initGame();
 
-    }
-
-    public void addInsectKeyboardKey() {
-        insectList.add(new InsectBlack());
     }
 
     public void addFishKeyboardKey() {
@@ -320,7 +335,7 @@ public class Board extends JPanel implements ActionListener {
             fishList.add(new FishBlue());
         } else if (fishColourAddForKeyEvent == 1) {
             fishList.add(new FishRed());
-        } else if (fishColourAddForKeyEvent == 3) {
+        } else if (fishColourAddForKeyEvent == 2) {
             fishList.add(new FishPurple());
         } else {
             fishList.add(new FishOrange());
@@ -331,74 +346,69 @@ public class Board extends JPanel implements ActionListener {
     // keyboard key
     ///////////////////////////////////
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        repaint();
-
-    }
-
     private class TAdapter extends KeyAdapter {
 
         @Override
         public void keyPressed(KeyEvent e) {
 
-            int key = e.getKeyCode();
+            keyEvent = e.getKeyCode();
 
-            if (key == KeyEvent.VK_0) { // empty all the arayList and start the game again
+            if (keyEvent == KeyEvent.VK_0) {
                 resetAquarium();
             }
-            if (key == KeyEvent.VK_1) {
+            if (keyEvent == KeyEvent.VK_1) {
                 setBackground(Color.lightGray); // cold Background
                 FishRed.setSpeedUpgrade(4);
             }
-            if (key == KeyEvent.VK_2) {
+            if (keyEvent == KeyEvent.VK_2) {
                 setBackground(Color.gray); // warm Background
                 FishRed.setSpeedUpgrade(5);
             }
-            if (key == KeyEvent.VK_3) {
+            if (keyEvent == KeyEvent.VK_3) {
                 setBackground(Color.darkGray); // hot Background
                 FishRed.setSpeedUpgrade(6);
             }
-            if (key == KeyEvent.VK_4) { // add insect random
-                addInsectKeyboardKey();
+            if (keyEvent == KeyEvent.VK_4) { // add insect
+                insectList.add(new InsectBlack());
 
             }
-            if (key == KeyEvent.VK_5) { // add edible pellet
+            if (keyEvent == KeyEvent.VK_5) { // add edible pellet
                 ediblePelletList.add(new EdiblePellet());
             }
-            if (key == KeyEvent.VK_6) {
-
-                if (EdiblePellet.get_counterToStopMoveFish() == 0) {
-                    for (int i = 0; i < get_insectList().size(); i++) {
-
-                    }
-                }
+            if (keyEvent == KeyEvent.VK_6) {
 
             }
-            if (key == KeyEvent.VK_7) {
+            if (keyEvent == KeyEvent.VK_7) {
 
             }
-            if (key == KeyEvent.VK_8) {
+            if (keyEvent == KeyEvent.VK_8) {
 
             }
-            if (key == KeyEvent.VK_9) { // add fish random
+            if (keyEvent == KeyEvent.VK_9) { // add fish random
                 addFishKeyboardKey();
             }
-            if (key == KeyEvent.VK_R) {
-                colourFishKeyEvent = "red";
-                EdiblePellet.set_counterToStopMoveFish(1000000);
+            if (keyEvent == KeyEvent.VK_R) { // stop move fish all but not red
+                colourFishKeyEvent = "FishRed";
+                EdiblePellet.set_counterToStopMoveFish(100000000);
             }
-            if (key == KeyEvent.VK_B) {
-                colourFishKeyEvent = "blue";
-                EdiblePellet.set_counterToStopMoveFish(1000000);
+            if (keyEvent == KeyEvent.VK_B) {// stop move fish all but not blue
+                colourFishKeyEvent = "FishBlue";
+                EdiblePellet.set_counterToStopMoveFish(100000000);
             }
-            if (key == KeyEvent.VK_M) {
-                EdiblePellet.set_counterToStopMoveFish(1000000);
-                colourFishKeyEvent = "purple";
+            if (keyEvent == KeyEvent.VK_M) {// stop move fish all but not purple
+                EdiblePellet.set_counterToStopMoveFish(100000000);
+                colourFishKeyEvent = "FishPurple";
             }
-            if (key == KeyEvent.VK_O) {
-                EdiblePellet.set_counterToStopMoveFish(1000000);
-                colourFishKeyEvent = "orange";
+            if (keyEvent == KeyEvent.VK_O) {// stop move fish all but not orange
+                EdiblePellet.set_counterToStopMoveFish(100000000);
+                colourFishKeyEvent = "FishOrange";
+            }
+            if (keyEvent == KeyEvent.VK_A) {// add Fish Black and 2 fish red
+                fishList.add(new FishBlack());
+
+                fishList.add(new FishRed());
+                fishList.add(new FishRed());
+
             }
         }
     }
