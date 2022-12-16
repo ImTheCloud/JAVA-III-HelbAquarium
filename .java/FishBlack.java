@@ -6,8 +6,10 @@ public class FishBlack extends Fish {
     private Fish deathFish;
     private int hitBoxFish = 6;
     private double calculDistance = 0;
-    private double closestDistance = 1500;
-    private int x;
+    private double closestDistance = Board.getB_WIDTH();
+    // by default its the width but when the calcul start the closest
+    // distance become the closest distance of the fish
+    private int x;// calcul for the closest distance
     private int y;
 
     ///////////////////////////////////
@@ -32,24 +34,33 @@ public class FishBlack extends Fish {
     }
 
     ///////////////////////////////////
-    // Method called every moment for a change, here for move
+    // Method update called in Board for do something every x milisecond (timer)
     //////////////////////////////////
 
     @Override
     public void update() {
+        ifTheBlackFishTouchAnInsectPlusPellet();
+    }
+    ///////////////////////////////////
+    // If the fish touch an insect
+    // hes speed upgrade for a definite time in the class insect
+    //////////////////////////////////
 
+    public void ifTheBlackFishTouchAnInsectPlusPellet() {
         if (Insect.get_timmerSpeedFish() != 0) {
             speedFish = 8;
-            moving();
+            killFishRed();
             Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - 1);
         } else {
-            setSpeedUpgrade(getSpeed());
-            moving();
+            speedFish = 5;
+            killFishRed();
         }
-
     }
 
-    public void moving() {
+    ///////////////////////////////////
+    // the fish will follow the closest fish red and he will kill him
+    //////////////////////////////////
+    public void killFishRed() {
 
         closestFish();
         if ((getPos_x_fish() >= getPos_x_target() - hitBoxFish) && (getPos_x_fish() <= getPos_x_target() + hitBoxFish)
@@ -60,6 +71,10 @@ public class FishBlack extends Fish {
         super.update();
 
     }
+
+    ///////////////////////////////////
+    // method to calculate the closest fish red
+    //////////////////////////////////
 
     private void closestFish() {
 
@@ -84,8 +99,12 @@ public class FishBlack extends Fish {
             }
 
         }
-        closestDistance = 1500;
+        closestDistance = Board.getB_WIDTH();
     }
+
+    ///////////////////////////////////
+    // method to kill fish red
+    //////////////////////////////////
 
     private void fishKilling() {
         Board.get_listFish().remove(deathFish);

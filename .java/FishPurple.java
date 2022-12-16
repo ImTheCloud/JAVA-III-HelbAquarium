@@ -2,7 +2,7 @@ public class FishPurple extends Fish {
     //////////////////////////////////
     // The variables
     //////////////////////////////////
-    private static final int corner = 20;// 20 because 0 its the corner and we cant see the fish
+    private final int corner = 20;// 20 because 0 its the corner and we cant see the fish
     private double calculDistance = 0;
     private double closestDistance = Board.getB_WIDTH();
     // by default its the width but when the calcul start the closest
@@ -20,12 +20,12 @@ public class FishPurple extends Fish {
     }
 
     ///////////////////////////////////
-    // Method called every moment for a change, here for move
+    // Method update called in Board for do something every x milisecond (timer)
     //////////////////////////////////
 
     @Override
     public void update() {
-        ifTheOrangeFishTouchAnInsectPlusPellet();
+        ifThePurpleFishTouchAnInsectPlusPellet();
     }
 
     ///////////////////////////////////
@@ -33,7 +33,7 @@ public class FishPurple extends Fish {
     // hes speed upgrade for a definite time in the class insect
     //////////////////////////////////
 
-    public void ifTheOrangeFishTouchAnInsectPlusPellet() {
+    public void ifThePurpleFishTouchAnInsectPlusPellet() {
         if (Insect.get_timmerSpeedFish() != 0) {
             speedFish = 8;
             ifThePurpleFishTouchAPellet();
