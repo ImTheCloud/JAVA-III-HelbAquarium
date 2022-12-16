@@ -47,7 +47,12 @@ public class Board extends JPanel implements ActionListener {
     private int numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 1);
     private static int numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 1);
     private int ediblePelletCounter = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
-
+    private double calculDistance;
+    private double closestDistance = Board.getB_WIDTH();
+    // by default its the width but when the calcul start the closest
+    // distance become the closest distance of the fish
+    private int x;// calcul for the closest distance
+    private int y;
     ///////////////////////////////////
     // The Array lists
     ///////////////////////////////////
@@ -290,6 +295,10 @@ public class Board extends JPanel implements ActionListener {
             ediblePelletList.get(i).update();
         }
 
+        for (int i = 0; i < obstacleList.size(); i++) {
+            obstacleList.get(i).update();
+        }
+
     }
 
     ///////////////////////////////////
@@ -339,6 +348,24 @@ public class Board extends JPanel implements ActionListener {
         }
     }
 
+    public void goToTheClosestPellet() {
+        for (int j = 0; j < Board.get_listFish().size(); j++) {
+            for (int i = 0; i < Board.get_ediblePellet().size(); i++) {
+                x = Board.get_ediblePellet().get(i).getPos_x_pellet() - Board.get_listFish().get(i).getPos_x_fish();
+                y = Board.get_ediblePellet().get(i).getPos_y_pellet() - Board.get_listFish().get(i).getPos_y_fish();
+                calculDistance = Math.sqrt(x * x + y * y);
+
+                if (closestDistance > calculDistance) {
+                    closestDistance = calculDistance;
+
+                    // Fish.setPos_x_target(Board.get_ediblePellet().get(i).getPos_x_pellet());
+                    // Fish.setPos_y_target(Board.get_ediblePellet().get(i).getPos_y_pellet());
+
+                }
+            }
+        }
+    }
+
     ///////////////////////////////////
     // keyboard key
     ///////////////////////////////////
@@ -376,7 +403,7 @@ public class Board extends JPanel implements ActionListener {
 
             }
             if (keyEvent == KeyEvent.VK_7) {
-
+                goToTheClosestPellet();
             }
             if (keyEvent == KeyEvent.VK_8) {
 

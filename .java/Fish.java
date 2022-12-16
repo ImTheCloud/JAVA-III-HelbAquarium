@@ -12,8 +12,16 @@ public class Fish {
     // - sizeFish, if not its possible to see the pellet halfway
     // if is appear at the limit of the screen
     protected static int screen_H = Board.getB_HEIGHT() - sizeFish;
-    private static int hitBoxOBstacle = 100; // 40 W / 20 H
     private int speedFish;
+
+    ///////////////////////////////////
+    // Constructor
+    //////////////////////////////////
+
+    public Fish() {
+        positionFish();
+
+    }
 
     ///////////////////////////////////
     // get and set
@@ -71,15 +79,6 @@ public class Fish {
     }
 
     ///////////////////////////////////
-    // Constructor
-    //////////////////////////////////
-
-    public Fish() {
-        positionFish();
-
-    }
-
-    ///////////////////////////////////
     // Method update called in Board for do something every x milisecond (timer)
     //////////////////////////////////
 
@@ -133,36 +132,6 @@ public class Fish {
 
                     // Board.addNewFish(this.getClass().getName());
 
-                }
-
-            }
-
-        }
-    }
-
-    ///////////////////////////////////
-    // Method for the obstacle
-    // when a obstacle is touched it bypasses it
-    //////////////////////////////////
-
-    public void obstacleTouched() {
-        for (int i = 0; i < Board.get_listFish().size(); i++) {
-
-            if ((getPos_x_fish() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_x_fish())
-                    && (getPos_x_fish() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_x_fish())
-                    && (getPos_y_fish() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_y_fish())
-                    && (getPos_y_fish() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_y_fish())) {
-                // System.out.println("obstacle touched");
-
-                if ((getPos_y_fish() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_y_fish())
-                        || (getPos_y_fish() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_y_fish())) {
-                    // Board.get_listFish().get(i).setPos_x(Board.get_listFish().get(i).getPos_y() +
-                    // 1);
-
-                } else if ((getPos_x_fish() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_x_fish())
-                        || (getPos_x_fish() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_x_fish())) {
-                    // Board.get_listFish().get(i).setPos_y(Board.get_listFish().get(i).getPos_x() +
-                    // 1);
                 }
 
             }

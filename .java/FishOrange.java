@@ -95,7 +95,7 @@ public class FishOrange extends Fish {
                     && getPos_y_fish() <= getPos_y_target() + hitboxTarget
                     && getPos_y_fish() >= getPos_y_target() - hitboxTarget) {
                 // hitbox of the target because hes speed his more than 1
-                // so in x,y its important to enteer its the hitbox of the target
+                // so in x,y its important to enter its the hitbox of the target
                 // to change the edge
 
                 randomEdgePosition();
