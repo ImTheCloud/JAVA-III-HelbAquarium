@@ -60,8 +60,15 @@ public class Obstacle {
                     && (getPos_y_obstacle() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_y_fish())
                     && (getPos_y_obstacle() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_y_fish())) {
 
-                Board.get_listFish().get(i).setPos_x_Fish(Board.get_listFish().get(i).getPos_y_fish() + 1);
-                Board.get_listFish().get(i).setPos_y_Fish(Board.get_listFish().get(i).getPos_x_fish() + 1);
+                if ((getPos_x_obstacle() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_x_fish())
+                        && (getPos_x_obstacle() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_x_fish())) {
+                    Board.get_listFish().get(i).setPos_x_target(Board.get_listFish().get(i).getPos_y_target() + 1);
+                }
+
+                if ((getPos_y_obstacle() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_y_fish())
+                        && (getPos_y_obstacle() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_y_fish())) {
+                    Board.get_listFish().get(i).setPos_y_target(Board.get_listFish().get(i).getPos_x_target() + 1);
+                }
 
             }
         }

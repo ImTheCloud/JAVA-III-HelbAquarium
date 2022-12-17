@@ -79,9 +79,7 @@ public class FishBlue extends Fish {
     private void directionToFishBlueOrPurple() {
 
         for (int i = 0; i < Board.get_listFish().size(); i++) {
-            if (FishPurple.class.getName() == Board.get_listFish().get(i).getClass().getName()
-                    || ((FishBlue.class.getName() == Board.get_listFish().get(i).getClass().getName())
-                            && (FishBlue.class.getName() != Board.get_listFish().get(i).getClass().getName()))) {
+            if (FishPurple.class.getName() == Board.get_listFish().get(i).getClass().getName()) {
 
                 x = Board.get_listFish().get(i).getPos_x_fish() - this.getPos_x_fish();
                 y = Board.get_listFish().get(i).getPos_y_fish() - this.getPos_y_fish();
