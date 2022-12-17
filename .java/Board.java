@@ -69,7 +69,7 @@ public class Board extends JPanel implements ActionListener {
         return fishList;
     }
 
-    public static ArrayList<EdiblePellet> get_ediblePellet() {
+    public static ArrayList<EdiblePellet> get_ediblePellet_list() {
         return ediblePelletList;
     }
 
@@ -335,6 +335,7 @@ public class Board extends JPanel implements ActionListener {
 
     }
 
+    // add fish random colour but not the black
     public void addFishKeyboardKey() {
         fishColourAddForKeyEvent = (int) (Math.random() * numberFishDifferentExisting);
         if (fishColourAddForKeyEvent == 0) {
@@ -348,22 +349,64 @@ public class Board extends JPanel implements ActionListener {
         }
     }
 
-    public void goToTheClosestPellet() {
-        for (int j = 0; j < Board.get_listFish().size(); j++) {
-            for (int i = 0; i < Board.get_ediblePellet().size(); i++) {
-                x = Board.get_ediblePellet().get(i).getPos_x_pellet() - Board.get_listFish().get(i).getPos_x_fish();
-                y = Board.get_ediblePellet().get(i).getPos_y_pellet() - Board.get_listFish().get(i).getPos_y_fish();
+    // every fish go to the closest insect
+    public void goToTheClosestInsect() {
+        for (int j = 0; j < get_listFish().size(); j++) {
+            for (int i = 0; i < get_insectList().size(); i++) {
+                x = get_insectList().get(i).getPos_x_insect() - get_listFish().get(i).getPos_x_fish();
+                y = get_insectList().get(i).getPos_y_insect() - get_listFish().get(i).getPos_y_fish();
                 calculDistance = Math.sqrt(x * x + y * y);
 
                 if (closestDistance > calculDistance) {
                     closestDistance = calculDistance;
 
-                    // Fish.setPos_x_target(Board.get_ediblePellet().get(i).getPos_x_pellet());
-                    // Fish.setPos_y_target(Board.get_ediblePellet().get(i).getPos_y_pellet());
+                    // Fish.setPos_x_target(get_insectList().get(i).getPos_x_pellet());
+                    // Fish.setPos_y_target(get_insectList().get(i).getPos_y_pellet());
 
                 }
             }
         }
+        closestDistance = Board.getB_WIDTH();
+    }
+    // every fish go to the closest pellet
+
+    public void goToTheClosestPellet() {
+        for (int j = 0; j < get_listFish().size(); j++) {
+            for (int i = 0; i < get_ediblePellet_list().size(); i++) {
+                x = get_ediblePellet_list().get(i).getPos_x_pellet() - get_listFish().get(i).getPos_x_fish();
+                y = get_ediblePellet_list().get(i).getPos_y_pellet() - get_listFish().get(i).getPos_y_fish();
+                calculDistance = Math.sqrt(x * x + y * y);
+
+                if (closestDistance > calculDistance) {
+                    closestDistance = calculDistance;
+
+                    // Fish.setPos_x_target(get_ediblePellet_list().get(i).getPos_x_pellet());
+                    // Fish.setPos_y_target(get_ediblePellet_list().get(i).getPos_y_pellet());
+
+                }
+            }
+        }
+        closestDistance = Board.getB_WIDTH();
+    }
+
+    // every fish go to the closest fish ( same colour)
+    public void goToTheClosestFishSameColour() {
+        for (int j = 0; j < get_listFish().size(); j++) {
+            for (int i = 0; i < get_listFish().size(); i++) {
+                x = get_listFish().get(i).getPos_x_fish() - get_listFish().get(i).getPos_x_fish();
+                y = get_listFish().get(i).getPos_y_fish() - get_listFish().get(i).getPos_y_fish();
+                calculDistance = Math.sqrt(x * x + y * y);
+
+                if (closestDistance > calculDistance) {
+                    closestDistance = calculDistance;
+
+                    // Fish.setPos_x_target(get_listFish().get(i).getPos_x_fish());
+                    // Fish.setPos_y_target(get_listFish().get(i).getPos_y_fish());
+
+                }
+            }
+        }
+        closestDistance = Board.getB_WIDTH();
     }
 
     ///////////////////////////////////
@@ -394,19 +437,18 @@ public class Board extends JPanel implements ActionListener {
             }
             if (keyEvent == KeyEvent.VK_4) { // add insect
                 insectList.add(new Insect());
-
             }
             if (keyEvent == KeyEvent.VK_5) { // add edible pellet
                 ediblePelletList.add(new EdiblePellet());
             }
             if (keyEvent == KeyEvent.VK_6) {
-
+                goToTheClosestInsect();
             }
             if (keyEvent == KeyEvent.VK_7) {
                 goToTheClosestPellet();
             }
             if (keyEvent == KeyEvent.VK_8) {
-
+                goToTheClosestFishSameColour();
             }
             if (keyEvent == KeyEvent.VK_9) { // add fish random
                 addFishKeyboardKey();
@@ -429,9 +471,7 @@ public class Board extends JPanel implements ActionListener {
             }
             if (keyEvent == KeyEvent.VK_A) {// add Fish Black and 2 fish red
                 fishList.add(new FishBlack());
-
                 fishList.add(new FishRed());
-
             }
         }
     }
