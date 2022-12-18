@@ -34,7 +34,9 @@ public class FishOrange extends Fish {
 
     @Override
     public void update() {
+        obstacleTouched();
         ifTheOrangeFishTouchAnInsectPlusPellet();
+
     }
 
     ///////////////////////////////////
@@ -107,6 +109,18 @@ public class FishOrange extends Fish {
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishPurple" == EdiblePellet.get_NameFishTouchPellet() && stopMoveFishFromKeyEvent == false) {
             EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - 1);
+        }
+    }
+
+    ///////////////////////////////////
+    // What does the fish if he touch an obstacle
+    //////////////////////////////////
+
+    public void obstacleTouched() {
+
+        if (Obstacle.getnameFishTouchedTheObstacle() == this.getClass().getName()) {
+
+            randomEdgePosition();
         }
     }
 

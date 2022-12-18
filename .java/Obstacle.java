@@ -5,8 +5,11 @@ public class Obstacle {
 
     private int pos_x_obstacle;
     private int pos_y_obstacle;
+    private static String nameFishTouchedTheObstacle;
+    private static String sideObstacle;
 
-    private static int hitBoxOBstacle = 20; // 40 W / 20 H
+    private final int hitBoxOBstacle = 20; // 40 W / 20 H
+
     protected int screen_W = Board.getB_WIDTH() - (hitBoxOBstacle * 2); // *2 because it's a rectangle not a square
     protected int screen_H = Board.getB_HEIGHT() - hitBoxOBstacle;
     // - hitbox, if not its possible to see the obstacle halfway
@@ -30,6 +33,22 @@ public class Obstacle {
 
     public int getPos_y_obstacle() {
         return pos_y_obstacle;
+    }
+
+    public int getHitBoxOBstacle() {
+        return hitBoxOBstacle;
+    }
+
+    public static String getnameFishTouchedTheObstacle() {
+        return nameFishTouchedTheObstacle;
+    }
+
+    public static void getnameFishTouchedTheObstacle(String nameFishToucehdTheObstacleChange) {
+        nameFishTouchedTheObstacle = nameFishToucehdTheObstacleChange;
+    }
+
+    public static String getSideObstacle() {
+        return sideObstacle;
     }
 
     ///////////////////////////////////
@@ -62,14 +81,17 @@ public class Obstacle {
 
                 if ((getPos_x_obstacle() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_x_fish())
                         && (getPos_x_obstacle() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_x_fish())) {
-                    Board.get_listFish().get(i).setPos_x_target(Board.get_listFish().get(i).getPos_y_target() + 1);
-                }
+                    getnameFishTouchedTheObstacle(Board.get_listFish().get(i).getClass().getName());
+                    sideObstacle = "botTop";
 
-                if ((getPos_y_obstacle() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_y_fish())
+                } else if ((getPos_y_obstacle() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_y_fish())
                         && (getPos_y_obstacle() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_y_fish())) {
-                    Board.get_listFish().get(i).setPos_y_target(Board.get_listFish().get(i).getPos_x_target() + 1);
+                    getnameFishTouchedTheObstacle(Board.get_listFish().get(i).getClass().getName());
+                    sideObstacle = "rightLeft";
                 }
 
+            } else {
+                getnameFishTouchedTheObstacle("");
             }
         }
     }

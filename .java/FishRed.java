@@ -4,7 +4,7 @@ public class FishRed extends Fish {
     //////////////////////////////////
     private static int speedFish = 5;
     private Fish deathFish;
-    private int hitBoxFish = 6;
+    private int hitBoxFish = 10;
     private double calculDistance = 0;
     private double closestDistance = Board.getB_WIDTH();
     // by default its the width but when the calcul start the closest
@@ -32,6 +32,7 @@ public class FishRed extends Fish {
 
     @Override
     public void update() {
+        obstacleTouched();
         ifTheRedFishTouchAnInsectPlusPellet();
     }
     ///////////////////////////////////
@@ -123,6 +124,22 @@ public class FishRed extends Fish {
     private void fishKilling() {
         Board.get_listFish().remove(deathFish);
 
+    }
+
+    ///////////////////////////////////
+    // What does the fish if he touch an obstacle
+    //////////////////////////////////
+
+    public void obstacleTouched() {
+
+        if (Obstacle.getnameFishTouchedTheObstacle() == this.getClass().getName()) {
+            if (Obstacle.getSideObstacle() == "botTop") {
+                setPos_x_target(getPos_x_fish() + 1);
+            } else {
+                setPos_y_target(getPos_y_fish() + 1);
+            }
+
+        }
     }
 
 }

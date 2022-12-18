@@ -35,6 +35,9 @@ public class Board extends JPanel implements ActionListener {
     private final static int B_WIDTH = 1000; // Size screen Width
     private final static int B_HEIGHT = 500; // Size screen Height
     private final int Delay = 50; // every 50 milisecond, it's the timmer
+    private final Color backGroundCold = new Color(102, 178, 255);
+    private final Color backGroundDefault = new Color(0, 128, 255);
+    private final Color backGroundHot = new Color(51, 51, 255);
     private Timer timer = new Timer(Delay, this);
     private int keyEvent;
     private int numberFishDifferentExisting = 4;
@@ -53,6 +56,7 @@ public class Board extends JPanel implements ActionListener {
     // distance become the closest distance of the fish
     private int x;// calcul for the closest distance
     private int y;
+
     ///////////////////////////////////
     // The Array lists
     ///////////////////////////////////
@@ -142,9 +146,8 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void initBoard() {
-
         addKeyListener(new TAdapter());
-        setBackground(Color.gray);
+        setBackground(backGroundDefault);
         setFocusable(true);
 
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
@@ -330,7 +333,7 @@ public class Board extends JPanel implements ActionListener {
         insectList.removeAll(insectList);
         EdiblePellet.set_counterToStopMoveFish(0);
 
-        setBackground(Color.gray);
+        setBackground(backGroundDefault);
         initGame();
 
     }
@@ -424,16 +427,16 @@ public class Board extends JPanel implements ActionListener {
                 resetAquarium();
             }
             if (keyEvent == KeyEvent.VK_1) {
-                setBackground(Color.lightGray); // cold Background
+                setBackground(backGroundCold); // cold Background
                 FishRed.setSpeedUpgrade(4);
             }
             if (keyEvent == KeyEvent.VK_2) {
-                setBackground(Color.gray); // warm Background
+                setBackground(backGroundDefault); // warm Background
                 FishRed.setSpeedUpgrade(5);
             }
             if (keyEvent == KeyEvent.VK_3) {
-                setBackground(Color.darkGray); // hot Background
-                FishRed.setSpeedUpgrade(6);
+                setBackground(backGroundHot); // hot Background
+                FishRed.setSpeedUpgrade(9);
             }
             if (keyEvent == KeyEvent.VK_4) { // add insect
                 insectList.add(new Insect());

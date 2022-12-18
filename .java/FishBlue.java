@@ -26,6 +26,7 @@ public class FishBlue extends Fish {
 
     @Override
     public void update() {
+        obstacleTouched();
         ifTheBlueFishTouchAnInsectPlusPellet();
     }
 
@@ -38,7 +39,7 @@ public class FishBlue extends Fish {
         if (Insect.get_timmerSpeedFish() != 0) {
             speedFish = 8;
             ifTheBlueFishTouchAPellet();
-            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - 1);
+            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - 1); // -1 because the
         } else {
             speedFish = 6;
             ifTheBlueFishTouchAPellet();
@@ -97,6 +98,20 @@ public class FishBlue extends Fish {
 
         }
         closestDistance = Board.getB_WIDTH();
+    }
+
+    ///////////////////////////////////
+    // What does the fish if he touch an obstacle
+    //////////////////////////////////
+
+    public void obstacleTouched() {
+        if (Obstacle.getnameFishTouchedTheObstacle() == this.getClass().getName()) {
+            if (Obstacle.getSideObstacle() == "botTop") {
+                setPos_x_target(getPos_x_fish() + 1);
+            } else {
+                setPos_y_target(getPos_y_fish() + 1);
+            }
+        }
     }
 
 }
