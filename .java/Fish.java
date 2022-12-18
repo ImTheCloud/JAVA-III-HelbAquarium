@@ -84,7 +84,7 @@ public class Fish {
 
     public void update() {
         move();
-        // couplingFish();
+        couplingFish();
     }
 
     ///////////////////////////////////
@@ -126,8 +126,6 @@ public class Fish {
             if (Board.get_listFish().get(j).getPos_x_fish() == this.getPos_x_fish()) {
                 if (Board.get_listFish().get(j).getClass().getName() == this.getClass().getName()) {
 
-                    // System.out.println("test");
-                    // Board.get_listFish().remove(this);
                     // Board.get_listFish().remove(Board.get_listFish().get(j));
 
                     // Board.addNewFish(this.getClass().getName());

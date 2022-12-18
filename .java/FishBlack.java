@@ -39,14 +39,14 @@ public class FishBlack extends Fish {
 
     @Override
     public void update() {
-        ifTheBlackFishTouchAnInsectPlusPellet();
+        ifTheBlackFishTouchAnInsect();
     }
     ///////////////////////////////////
     // If the fish touch an insect
     // hes speed upgrade for a definite time in the class insect
     //////////////////////////////////
 
-    public void ifTheBlackFishTouchAnInsectPlusPellet() {
+    public void ifTheBlackFishTouchAnInsect() {
         if (Insect.get_timmerSpeedFish() != 0) {
             speedFish = 8;
             killFishRed();

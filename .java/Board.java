@@ -49,7 +49,7 @@ public class Board extends JPanel implements ActionListener {
     // +1 bcs at least 1 (for all +1 in a random)
     private int numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 1);
     private static int numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 1);
-    private int ediblePelletCounter = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
+    private int numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
     private double calculDistance;
     private double closestDistance = Board.getB_WIDTH();
     // by default its the width but when the calcul start the closest
@@ -173,16 +173,15 @@ public class Board extends JPanel implements ActionListener {
     private void addFish() {
         fishList.add(new FishRed());
 
-        fishList.add(new FishPurple());
-        fishList.add(new FishPurple());
+        fishList.add(new FishOrange());
+        fishList.add(new FishOrange());
+        fishList.add(new FishOrange());
+        fishList.add(new FishOrange());
 
         fishList.add(new FishBlue());
         fishList.add(new FishBlue());
-
-        fishList.add(new FishOrange());
-        fishList.add(new FishOrange());
-        fishList.add(new FishOrange());
-        fishList.add(new FishOrange());
+        fishList.add(new FishPurple());
+        fishList.add(new FishPurple());
 
     }
 
@@ -200,7 +199,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void addEdiblePellet() {
-        for (int i = 0; i < ediblePelletCounter; i++) {
+        for (int i = 0; i < numberEdiblePellet; i++) {
             ediblePelletList.add(new EdiblePellet());
         }
     }
@@ -458,18 +457,18 @@ public class Board extends JPanel implements ActionListener {
             }
             if (keyEvent == KeyEvent.VK_R) { // stop move fish all but not red
                 colourFishKeyEvent = "FishRed";
-                EdiblePellet.set_counterToStopMoveFish(100000000);
+                EdiblePellet.set_counterToStopMoveFish(Integer.MAX_VALUE);
             }
             if (keyEvent == KeyEvent.VK_B) {// stop move fish all but not blue
                 colourFishKeyEvent = "FishBlue";
-                EdiblePellet.set_counterToStopMoveFish(100000000);
+                EdiblePellet.set_counterToStopMoveFish(Integer.MAX_VALUE);
             }
             if (keyEvent == KeyEvent.VK_M) {// stop move fish all but not purple
-                EdiblePellet.set_counterToStopMoveFish(100000000);
+                EdiblePellet.set_counterToStopMoveFish(Integer.MAX_VALUE);
                 colourFishKeyEvent = "FishPurple";
             }
             if (keyEvent == KeyEvent.VK_O) {// stop move fish all but not orange
-                EdiblePellet.set_counterToStopMoveFish(100000000);
+                EdiblePellet.set_counterToStopMoveFish(Integer.MAX_VALUE);
                 colourFishKeyEvent = "FishOrange";
             }
             if (keyEvent == KeyEvent.VK_A) {// add Fish Black and 2 fish red

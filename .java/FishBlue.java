@@ -59,6 +59,7 @@ public class FishBlue extends Fish {
             stopMoveFishFromKeyEvent = false;
         }
         if (EdiblePellet.get_counterToStopMoveFish() == 0 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
+                || "FishBlack" == EdiblePellet.get_NameFishTouchPellet()
                 || stopMoveFishFromKeyEvent == true) {
 
             directionToFishBlueOrPurple();
@@ -67,7 +68,7 @@ public class FishBlue extends Fish {
 
         } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()
-                || "FishPurple" == EdiblePellet.get_NameFishTouchPellet() && stopMoveFishFromKeyEvent == false) {
+                || "FishPurple" == EdiblePellet.get_NameFishTouchPellet() || stopMoveFishFromKeyEvent == false) {
             EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - 1);
 
         }

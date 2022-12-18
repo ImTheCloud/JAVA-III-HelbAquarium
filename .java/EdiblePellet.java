@@ -83,17 +83,14 @@ public class EdiblePellet {
                     && (Board.get_listFish().get(i).getPos_y_fish() - hitBoxPellet <= getPos_y_pellet())
                     && (Board.get_listFish().get(i).getPos_y_fish() + hitBoxPellet >= getPos_y_pellet())) {
 
-                if (Board.get_listFish().get(i).getClass().getName() != "FishBlack") {
-                    positionRandomEdiblePellet();
+                positionRandomEdiblePellet();
 
-                    counterToStopMoveFish = milisecond * Board.get_listFish().size();
+                counterToStopMoveFish = milisecond * Board.get_listFish().size();
 
-                    // 10 second and * the number of the fish
-                    // because the counter decremente faster when there more fish in the aquarium
+                // 10 second and * the number of the fish
+                // because the counter decremente faster when there more fish in the aquarium
 
-                    nameFishTouchPellet = Board.get_listFish().get(i).getClass().getName();
-
-                }
+                nameFishTouchPellet = Board.get_listFish().get(i).getClass().getName();
 
             }
 
