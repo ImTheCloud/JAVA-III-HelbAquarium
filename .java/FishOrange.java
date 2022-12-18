@@ -71,6 +71,7 @@ public class FishOrange extends Fish {
             speedFish = 8;
             ifTheOrangeFishTouchAPellet();
             Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - 1);
+
         } else {
             speedFish = 5;
             ifTheOrangeFishTouchAPellet();

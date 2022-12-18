@@ -39,7 +39,8 @@ public class FishBlue extends Fish {
         if (Insect.get_timmerSpeedFish() != 0) {
             speedFish = 8;
             ifTheBlueFishTouchAPellet();
-            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - 1); // -1 because the
+            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - 1);
+
         } else {
             speedFish = 6;
             ifTheBlueFishTouchAPellet();

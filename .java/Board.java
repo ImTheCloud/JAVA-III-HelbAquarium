@@ -474,6 +474,7 @@ public class Board extends JPanel implements ActionListener {
             if (keyEvent == KeyEvent.VK_A) {// add Fish Black and 2 fish red
                 fishList.add(new FishBlack());
                 fishList.add(new FishRed());
+
             }
         }
     }

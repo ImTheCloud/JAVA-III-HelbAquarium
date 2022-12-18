@@ -39,6 +39,7 @@ public class FishPurple extends Fish {
             speedFish = 8;
             ifThePurpleFishTouchAPellet();
             Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - 1);
+
         } else {
             speedFish = 5 + Board.get_numberObstacle();
             ifThePurpleFishTouchAPellet();
