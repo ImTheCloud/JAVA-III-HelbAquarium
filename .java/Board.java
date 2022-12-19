@@ -43,13 +43,13 @@ public class Board extends JPanel implements ActionListener {
     private int numberFishDifferentExisting = 4;
     private int numberInsectmaxInTheGame = 5;
     private int numberEdiblePelletMaxInTheGame = 3;
-    private static int numberObstacleMaxInTheGame = 2;
+    private static int numberObstacleMaxInTheGame = 4;
     private int fishColourAddForKeyEvent = 0;
     private static String colourFishKeyEvent = "Default";
     // +1 bcs at least 1 (for all +1 in a random)
     private int numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 1);
     private static int numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 1);
-    private int numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
+    private int numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 19);
     private double calculDistance;
     private double closestDistance = Board.getB_WIDTH();
     // by default its the width but when the calcul start the closest
@@ -331,7 +331,10 @@ public class Board extends JPanel implements ActionListener {
         ediblePelletList.removeAll(ediblePelletList);
         insectList.removeAll(insectList);
         EdiblePellet.set_counterToStopMoveFish(0);
-        FishRed.setSpeedUpgrade(5);
+        FishRed.setSpeedUpgrade(6);
+        numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 1);
+        numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 1);
+        numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
 
         setBackground(backGroundDefault);
         initGame();
@@ -377,7 +380,6 @@ public class Board extends JPanel implements ActionListener {
 
     public void goToTheClosestPellet() {
         if (EdiblePellet.get_counterToStopMoveFish() != 0) {
-
             for (int j = 0; j < get_listFish().size(); j++) {
                 for (int i = 0; i < get_ediblePellet_list().size(); i++) {
                     x = get_ediblePellet_list().get(i).getPos_x_pellet() - get_listFish().get(i).getPos_x_fish();
@@ -478,6 +480,7 @@ public class Board extends JPanel implements ActionListener {
             if (keyEvent == KeyEvent.VK_O) {// stop move fish all but not orange
                 EdiblePellet.set_counterToStopMoveFish(Integer.MAX_VALUE);
                 colourFishKeyEvent = "FishOrange";
+                System.out.println(EdiblePellet.get_counterToStopMoveFish());
             }
             if (keyEvent == KeyEvent.VK_A) {// add Fish Black and 2 fish red
                 fishList.add(new FishBlack());

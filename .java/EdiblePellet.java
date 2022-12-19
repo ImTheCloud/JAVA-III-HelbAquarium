@@ -85,8 +85,13 @@ public class EdiblePellet {
 
                 positionRandomEdiblePellet();
 
-                counterToStopMoveFish = milisecond * Board.get_listFish().size();
+                if (counterToStopMoveFish > 1000000) {
+                    counterToStopMoveFish = Integer.MAX_VALUE;
+                } else {
+                    counterToStopMoveFish = milisecond * Board.get_listFish().size();
+                }
 
+                System.out.println(counterToStopMoveFish);
                 // 10 second and * the number of the fish
                 // because the counter decremente faster when there more fish in the aquarium
 
