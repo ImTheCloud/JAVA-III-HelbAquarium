@@ -2,17 +2,17 @@ public class FishBlack extends Fish {
     ///////////////////////////////////
     // The variables&
     //////////////////////////////////
+    private final int endOfTheCounter = 0;
+    private final int counterDecrement = 1;
+    private final int hitBoxFish = 10;
     private static int speedFish = 6;
     private Fish deathFish;
-    private int hitBoxFish = 6;
     private double calculDistance = 0;
     private double closestDistance = Board.getB_WIDTH();
     // by default its the width but when the calcul start the closest
     // distance become the closest distance of the fish
     private int x;// calcul for the closest distance
     private int y;
-    private final int endOfTheCounter = 0;
-    private final int counterDecrement = 1;
 
     ///////////////////////////////////
     // Constructor

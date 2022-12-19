@@ -3,13 +3,13 @@ public class FishOrange extends Fish {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-    private static int speedFish = 6; // base speed
-    private static int numberEdgeExisting = 3; // 0,1,2,3 = 4 edge
-    private static int randomEdge;
-    private int hitboxTarget = 8;
-    private boolean stopMoveFishFromKeyEvent = false;
+    private final static int numberEdgeExisting = 3; // 0,1,2,3 = 4 edge
+    private final int hitboxTarget = 8;
     private final int endOfTheCounter = 0;
     private final int counterDecrement = 1;
+    private static int speedFish = 6; // base speed
+    private static int randomEdge;
+    private boolean stopMoveFishFromKeyEvent = false;
 
     ///////////////////////////////////
     // Constructor

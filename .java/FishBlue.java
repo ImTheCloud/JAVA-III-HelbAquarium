@@ -2,7 +2,8 @@ public class FishBlue extends Fish {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-
+    private final int endOfTheCounter = 0;
+    private final int counterDecrement = 1;
     private int speedFish = 7;
     private double calculDistance;
     private double closestDistance = Board.getB_WIDTH();
@@ -11,8 +12,6 @@ public class FishBlue extends Fish {
     private int x;// calcul for the closest distance
     private int y;
     private boolean stopMoveFishFromKeyEvent = false;
-    private final int endOfTheCounter = 0;
-    private final int counterDecrement = 1;
 
     ///////////////////////////////////
     // Constructor

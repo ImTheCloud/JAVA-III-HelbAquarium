@@ -2,6 +2,8 @@ public class FishPurple extends Fish {
     //////////////////////////////////
     // The variables
     //////////////////////////////////
+    private final int endOfTheCounter = 0;
+    private final int counterDecrement = 1;
     private final int corner = 20;// 20 because 0 its the corner and we cant see the fish
     private double calculDistance = 0;
     private double closestDistance = Board.getB_WIDTH();
@@ -11,8 +13,6 @@ public class FishPurple extends Fish {
     private int y;
     private int speedFish = 6 + Board.get_numberObstacle();
     private boolean stopMoveFishFromKeyEvent = false;
-    private final int endOfTheCounter = 0;
-    private final int counterDecrement = 1;
 
     ///////////////////////////////////
     // Constructor

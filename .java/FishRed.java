@@ -2,9 +2,13 @@ public class FishRed extends Fish {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
+    private final int endOfTheCounter = 0;
+    private final int counterDecrement = 1;
+    private final int key3Press = 10;// 10 its the upgrade speed of the fish red, when key 3 its pressed
+    private final int key1Press = 3;// 3 its the decrease speed of the fish red, when key 1 its pressed
+    private final int hitBoxFish = 10;
     private static int speedFish = 6;
     private Fish deathFish;
-    private int hitBoxFish = 10;
     private double calculDistance = 0;
     private double closestDistance = Board.getB_WIDTH();
     // by default its the width but when the calcul start the closest
@@ -12,10 +16,6 @@ public class FishRed extends Fish {
     private int x;// calcul for the closest distance
     private int y;
     private boolean stopMoveFishFromKeyEvent = false;
-    private final int endOfTheCounter = 0;
-    private final int counterDecrement = 1;
-    private final int key3Press = 10;// 10 its the upgrade speed of the fish red, when key 3 its pressed
-    private final int key1Press = 3;// 3 its the decrease speed of the fish red, when key 1 its pressed
 
     ///////////////////////////////////
     // the get/set
@@ -48,7 +48,7 @@ public class FishRed extends Fish {
         set_speedFish(speedFish);
 
         if (Insect.get_timmerSpeedFish() != endOfTheCounter && Insect.getNameFishTouchInsect() == "FishRed") {
-            speedFish = 11;
+            speedFish = 11; // upgrade speed insect = 11
 
             ifTheRedFishTouchAPellet();
             Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - counterDecrement);
@@ -60,7 +60,7 @@ public class FishRed extends Fish {
         } else if (speedFish == key1Press) {
             ifTheRedFishTouchAPellet();
         } else {
-            speedFish = 6;
+            speedFish = 6; // base speed = 6
             ifTheRedFishTouchAPellet();
 
         }
@@ -78,7 +78,8 @@ public class FishRed extends Fish {
         } else {
             stopMoveFishFromKeyEvent = false;
         }
-        if (EdiblePellet.get_counterToStopMoveFish() == 0 || "FishRed" == EdiblePellet.get_NameFishTouchPellet()
+        if (EdiblePellet.get_counterToStopMoveFish() == endOfTheCounter
+                || "FishRed" == EdiblePellet.get_NameFishTouchPellet()
                 || stopMoveFishFromKeyEvent == true) {
             closestFish();
             if ((getPos_x_fish() >= getPos_x_target() - hitBoxFish)

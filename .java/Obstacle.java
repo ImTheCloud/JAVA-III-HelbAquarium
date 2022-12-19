@@ -2,18 +2,15 @@ public class Obstacle {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-
+    private final int hitBoxOBstacle = 20; // 40 W / 20 H
+    private final int screen_W = Board.getB_WIDTH() - (hitBoxOBstacle * 2); // *2 because it's a rectangle not a square
+    private final int screen_H = Board.getB_HEIGHT() - hitBoxOBstacle;
+    // - hitbox, if not its possible to see the obstacle halfway
+    // if is appear at the limit of the screen
     private int pos_x_obstacle;
     private int pos_y_obstacle;
     private static String nameFishTouchedTheObstacle;
     private static String sideObstacle;
-
-    private final int hitBoxOBstacle = 20; // 40 W / 20 H
-
-    protected int screen_W = Board.getB_WIDTH() - (hitBoxOBstacle * 2); // *2 because it's a rectangle not a square
-    protected int screen_H = Board.getB_HEIGHT() - hitBoxOBstacle;
-    // - hitbox, if not its possible to see the obstacle halfway
-    // if is appear at the limit of the screen
 
     ///////////////////////////////////
     // Constructor

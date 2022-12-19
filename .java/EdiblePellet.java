@@ -3,16 +3,17 @@ public class EdiblePellet {
     // The variables
     //////////////////////////////////
 
-    private int pos_x_Pellet;
-    private int pos_y_Pellet;
-    private static int hitBoxPellet = 7;
-    protected int screen_W = Board.getB_WIDTH() - hitBoxPellet;
+    private final int milisecond = 100;
+    private final int hightNumberToVerifyKeyPress = 1000000;
+    private final static int hitBoxPellet = 7;
+    private final int screen_W = Board.getB_WIDTH() - hitBoxPellet;
     // - hitbox, if not its possible to see the pellet halfway
     // if is appear at the limit of the screen
-    protected int screen_H = Board.getB_HEIGHT() - hitBoxPellet;
+    private final int screen_H = Board.getB_HEIGHT() - hitBoxPellet;
+    private int pos_x_Pellet;
+    private int pos_y_Pellet;
     private static int counterToStopMoveFish = 0;
     private static String nameFishTouchPellet;
-    private int milisecond = 100;
 
     ///////////////////////////////////
     // Constructor
@@ -85,13 +86,12 @@ public class EdiblePellet {
 
                 positionRandomEdiblePellet();
 
-                if (counterToStopMoveFish > 1000000) {
+                if (counterToStopMoveFish > hightNumberToVerifyKeyPress) {
                     counterToStopMoveFish = Integer.MAX_VALUE;
                 } else {
                     counterToStopMoveFish = milisecond * Board.get_listFish().size();
                 }
 
-                System.out.println(counterToStopMoveFish);
                 // 10 second and * the number of the fish
                 // because the counter decremente faster when there more fish in the aquarium
 

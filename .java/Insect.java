@@ -2,14 +2,13 @@ public class Insect {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-
-    private int pos_x_insect;
-    private int pos_y_insect;
-    private int hitBoxInsect = 15;
-    protected int screen_W = Board.getB_WIDTH() - hitBoxInsect;
-    protected int screen_H = Board.getB_HEIGHT() - hitBoxInsect;
+    private final int hitBoxInsect = 15;
+    private final int screen_W = Board.getB_WIDTH() - hitBoxInsect;
+    private final int screen_H = Board.getB_HEIGHT() - hitBoxInsect;
     // - hitbox, if not its possible to see the insect halfway
     // if is appear at the limit of the screen
+    private int pos_x_insect;
+    private int pos_y_insect;
     private int randomInsectTimmer = (int) (Math.random() * 3);
     private String insecTimmerName;
     private static int timmerSpeedInsect = 0;

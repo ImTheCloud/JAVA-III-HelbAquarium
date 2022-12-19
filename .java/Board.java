@@ -40,16 +40,19 @@ public class Board extends JPanel implements ActionListener {
     private final Color backGroundHot = new Color(51, 51, 255);
     private Timer timer = new Timer(Delay, this);
     private int keyEvent;
-    private int numberFishDifferentExisting = 4;
-    private int numberInsectmaxInTheGame = 5;
-    private int numberEdiblePelletMaxInTheGame = 3;
-    private static int numberObstacleMaxInTheGame = 4;
-    private int fishColourAddForKeyEvent = 0;
+    private final int numberFishDifferentExisting = 4;
+    private final int numberInsectmaxInTheGame = 5;
+    private final int numberEdiblePelletMaxInTheGame = 3;
+    private final static int numberObstacleMaxInTheGame = 4;
+    private final int speedUpgradeFishRed = 10;
+    private final int speedSlowFishRed = 3;
+    private final int baseSpeedFishRed = 10;
+    private int fishColourAddForKeyEvent;
     private static String colourFishKeyEvent = "Default";
     // +1 bcs at least 1 (for all +1 in a random)
     private int numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 1);
     private static int numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 1);
-    private int numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 19);
+    private int numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
     private double calculDistance;
     private double closestDistance = Board.getB_WIDTH();
     // by default its the width but when the calcul start the closest
@@ -437,15 +440,15 @@ public class Board extends JPanel implements ActionListener {
             }
             if (keyEvent == KeyEvent.VK_1) {
                 setBackground(backGroundCold); // cold Background
-                FishRed.setSpeedUpgrade(3);
+                FishRed.setSpeedUpgrade(speedSlowFishRed);
             }
             if (keyEvent == KeyEvent.VK_2) {
                 setBackground(backGroundDefault); // warm Background
-                FishRed.setSpeedUpgrade(6);
+                FishRed.setSpeedUpgrade(baseSpeedFishRed);
             }
             if (keyEvent == KeyEvent.VK_3) {
                 setBackground(backGroundHot); // hot Background
-                FishRed.setSpeedUpgrade(10);
+                FishRed.setSpeedUpgrade(speedUpgradeFishRed);
             }
             if (keyEvent == KeyEvent.VK_4) { // add insect
                 insectList.add(new Insect());

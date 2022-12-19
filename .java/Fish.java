@@ -2,15 +2,16 @@ public class Fish {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
+    private final static int sizeFish = 20; // 20 beacause its the zise of the fish
+    protected final static int screen_W = Board.getB_WIDTH() - sizeFish;
+    // protected, this variable can be used in other class extends the fish
+    // - sizeFish, if not its possible to see the fish halfway
+    // if is appear at the limit of the screen
+    protected final static int screen_H = Board.getB_HEIGHT() - sizeFish;
     private int pos_x_Fish; // position of the fish will be random
     private int pos_y_Fish;
     private int pos_x_target; // target of every fish
     private int pos_y_target;
-    private static int sizeFish = 20; // 20 beacause its the zise of the fish
-    protected static int screen_W = Board.getB_WIDTH() - sizeFish;
-    // - sizeFish, if not its possible to see the fish halfway
-    // if is appear at the limit of the screen
-    protected static int screen_H = Board.getB_HEIGHT() - sizeFish;
     private int speedFish; // important to put the good speed for every fish
 
     ///////////////////////////////////
