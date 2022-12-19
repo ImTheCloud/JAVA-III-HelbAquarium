@@ -70,7 +70,8 @@ public class Obstacle {
 
     ///////////////////////////////////
     // Method for the obstacle
-    // when a obstacle is touched it bypasses it
+    // when a obstacle is touched it bypasses it or for the orange take
+    // an other random edge
     //////////////////////////////////
     public void obstacleTouched() {
         for (int i = 0; i < Board.get_listFish().size(); i++) {
@@ -87,7 +88,6 @@ public class Obstacle {
                 } else if ((getPos_y_obstacle() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_y_fish())
                         && (getPos_y_obstacle() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_y_fish())) {
                     getnameFishTouchedTheObstacle(Board.get_listFish().get(i).getClass().getName());
-                    sideObstacle = "rightLeft";
                 }
 
             } else {

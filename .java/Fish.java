@@ -2,25 +2,23 @@ public class Fish {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-
-    private int pos_x_Fish;
+    private int pos_x_Fish; // position of the fish will be random
     private int pos_y_Fish;
-    private int pos_x_target;
+    private int pos_x_target; // target of every fish
     private int pos_y_target;
-    private static int sizeFish = 20;
+    private static int sizeFish = 20; // 20 beacause its the zise of the fish
     protected static int screen_W = Board.getB_WIDTH() - sizeFish;
-    // - sizeFish, if not its possible to see the pellet halfway
+    // - sizeFish, if not its possible to see the fish halfway
     // if is appear at the limit of the screen
     protected static int screen_H = Board.getB_HEIGHT() - sizeFish;
-    private int speedFish;
+    private int speedFish; // important to put the good speed for every fish
 
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
 
     public Fish() {
-        positionFish();
-
+        positionFish(); // put a random position for every fish
     }
 
     ///////////////////////////////////
@@ -83,15 +81,18 @@ public class Fish {
     //////////////////////////////////
 
     public void update() {
-        move();
+        movefishToTarget();
         couplingFish();
     }
 
     ///////////////////////////////////
-    // Movement for every fish
+    // Movement for the fish, same just a different target dependant
+    // of the behavior of the fish
+    // if the pos x its smaler than the pos x target the pos x
+    // will just decrement (speed), etc..
     //////////////////////////////////
 
-    public void move() {
+    public void movefishToTarget() {
 
         if (getPos_y_fish() < getPos_y_target()) {
             setPos_y_Fish(getPos_y_fish() + speedFish);
@@ -127,8 +128,9 @@ public class Fish {
                 if (Board.get_listFish().get(j).getClass().getName() == this.getClass().getName()) {
 
                     // Board.get_listFish().remove(Board.get_listFish().get(j));
-
+                    // for (int i = 0; i < 3; i++) {
                     // Board.addNewFish(this.getClass().getName());
+                    // }
 
                 }
 

@@ -2,7 +2,7 @@ public class FishBlack extends Fish {
     ///////////////////////////////////
     // The variables&
     //////////////////////////////////
-    private static int speedFish = 5;
+    private static int speedFish = 6;
     private Fish deathFish;
     private int hitBoxFish = 6;
     private double calculDistance = 0;
@@ -11,6 +11,8 @@ public class FishBlack extends Fish {
     // distance become the closest distance of the fish
     private int x;// calcul for the closest distance
     private int y;
+    private final int endOfTheCounter = 0;
+    private final int counterDecrement = 1;
 
     ///////////////////////////////////
     // Constructor
@@ -19,18 +21,6 @@ public class FishBlack extends Fish {
     public FishBlack() {
         set_speedFish(speedFish);
 
-    }
-
-    ///////////////////////////////////
-    // the get/set
-    //////////////////////////////////
-
-    public static int getSpeed() {
-        return speedFish;
-    }
-
-    public static void setSpeedUpgrade(int speeedFish) {
-        speedFish = speeedFish;
     }
 
     ///////////////////////////////////
@@ -47,12 +37,12 @@ public class FishBlack extends Fish {
     //////////////////////////////////
 
     public void ifTheBlackFishTouchAnInsect() {
-        if (Insect.get_timmerSpeedFish() != 0) {
-            speedFish = 8;
+        if (Insect.get_timmerSpeedFish() != endOfTheCounter && Insect.getNameFishTouchInsect() == "FishBlack") {
+            speedFish = 11; // boost speed 11
             killFishRed();
-            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - 1);
+            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - counterDecrement);
         } else {
-            speedFish = 5;
+            speedFish = 6; // base speed
             killFishRed();
         }
     }

@@ -34,7 +34,7 @@ public class Board extends JPanel implements ActionListener {
     //////////////////////////////////
     private final static int B_WIDTH = 1000; // Size screen Width
     private final static int B_HEIGHT = 500; // Size screen Height
-    private final int Delay = 50; // every 50 milisecond, it's the timmer
+    private final int Delay = 60; // every 60 milisecond, it's the timmer
     private final Color backGroundCold = new Color(102, 178, 255);
     private final Color backGroundDefault = new Color(0, 128, 255);
     private final Color backGroundHot = new Color(51, 51, 255);
@@ -331,6 +331,7 @@ public class Board extends JPanel implements ActionListener {
         ediblePelletList.removeAll(ediblePelletList);
         insectList.removeAll(insectList);
         EdiblePellet.set_counterToStopMoveFish(0);
+        FishRed.setSpeedUpgrade(5);
 
         setBackground(backGroundDefault);
         initGame();
@@ -353,62 +354,69 @@ public class Board extends JPanel implements ActionListener {
 
     // every fish go to the closest insect
     public void goToTheClosestInsect() {
-        for (int j = 0; j < get_listFish().size(); j++) {
-            for (int i = 0; i < get_insectList().size(); i++) {
-                x = get_insectList().get(i).getPos_x_insect() - get_listFish().get(i).getPos_x_fish();
-                y = get_insectList().get(i).getPos_y_insect() - get_listFish().get(i).getPos_y_fish();
-                calculDistance = Math.sqrt(x * x + y * y);
+        if (EdiblePellet.get_counterToStopMoveFish() != 0) {
+            for (int j = 0; j < get_listFish().size(); j++) {
+                for (int i = 0; i < get_insectList().size(); i++) {
+                    x = get_insectList().get(i).getPos_x_insect() - get_listFish().get(i).getPos_x_fish();
+                    y = get_insectList().get(i).getPos_y_insect() - get_listFish().get(i).getPos_y_fish();
+                    calculDistance = Math.sqrt(x * x + y * y);
 
-                if (closestDistance > calculDistance) {
-                    closestDistance = calculDistance;
+                    if (closestDistance > calculDistance) {
+                        closestDistance = calculDistance;
 
-                    // Fish.setPos_x_target(get_insectList().get(i).getPos_x_pellet());
-                    // Fish.setPos_y_target(get_insectList().get(i).getPos_y_pellet());
+                        // Fish.setPos_x_target(get_insectList().get(i).getPos_x_pellet());
+                        // Fish.setPos_y_target(get_insectList().get(i).getPos_y_pellet());
 
+                    }
                 }
             }
+            closestDistance = Board.getB_WIDTH();
         }
-        closestDistance = Board.getB_WIDTH();
     }
     // every fish go to the closest pellet
 
     public void goToTheClosestPellet() {
-        for (int j = 0; j < get_listFish().size(); j++) {
-            for (int i = 0; i < get_ediblePellet_list().size(); i++) {
-                x = get_ediblePellet_list().get(i).getPos_x_pellet() - get_listFish().get(i).getPos_x_fish();
-                y = get_ediblePellet_list().get(i).getPos_y_pellet() - get_listFish().get(i).getPos_y_fish();
-                calculDistance = Math.sqrt(x * x + y * y);
+        if (EdiblePellet.get_counterToStopMoveFish() != 0) {
 
-                if (closestDistance > calculDistance) {
-                    closestDistance = calculDistance;
+            for (int j = 0; j < get_listFish().size(); j++) {
+                for (int i = 0; i < get_ediblePellet_list().size(); i++) {
+                    x = get_ediblePellet_list().get(i).getPos_x_pellet() - get_listFish().get(i).getPos_x_fish();
+                    y = get_ediblePellet_list().get(i).getPos_y_pellet() - get_listFish().get(i).getPos_y_fish();
+                    calculDistance = Math.sqrt(x * x + y * y);
 
-                    // Fish.setPos_x_target(get_ediblePellet_list().get(i).getPos_x_pellet());
-                    // Fish.setPos_y_target(get_ediblePellet_list().get(i).getPos_y_pellet());
+                    if (closestDistance > calculDistance) {
+                        closestDistance = calculDistance;
 
+                        // Fish.setPos_x_target(get_ediblePellet_list().get(i).getPos_x_pellet());
+                        // Fish.setPos_y_target(get_ediblePellet_list().get(i).getPos_y_pellet());
+
+                    }
                 }
             }
+            closestDistance = Board.getB_WIDTH();
         }
-        closestDistance = Board.getB_WIDTH();
     }
 
     // every fish go to the closest fish ( same colour)
     public void goToTheClosestFishSameColour() {
-        for (int j = 0; j < get_listFish().size(); j++) {
-            for (int i = 0; i < get_listFish().size(); i++) {
-                x = get_listFish().get(i).getPos_x_fish() - get_listFish().get(i).getPos_x_fish();
-                y = get_listFish().get(i).getPos_y_fish() - get_listFish().get(i).getPos_y_fish();
-                calculDistance = Math.sqrt(x * x + y * y);
+        if (EdiblePellet.get_counterToStopMoveFish() != 0) {
+            for (int j = 0; j < get_listFish().size(); j++) {
+                for (int i = 0; i < get_listFish().size(); i++) {
+                    x = get_listFish().get(i).getPos_x_fish() - get_listFish().get(i).getPos_x_fish();
+                    y = get_listFish().get(i).getPos_y_fish() - get_listFish().get(i).getPos_y_fish();
+                    calculDistance = Math.sqrt(x * x + y * y);
 
-                if (closestDistance > calculDistance) {
-                    closestDistance = calculDistance;
+                    if (closestDistance > calculDistance) {
+                        closestDistance = calculDistance;
 
-                    // Fish.setPos_x_target(get_listFish().get(i).getPos_x_fish());
-                    // Fish.setPos_y_target(get_listFish().get(i).getPos_y_fish());
+                        // Fish.setPos_x_target(get_listFish().get(i).getPos_x_fish());
+                        // Fish.setPos_y_target(get_listFish().get(i).getPos_y_fish());
 
+                    }
                 }
             }
+            closestDistance = Board.getB_WIDTH();
         }
-        closestDistance = Board.getB_WIDTH();
     }
 
     ///////////////////////////////////
@@ -427,15 +435,15 @@ public class Board extends JPanel implements ActionListener {
             }
             if (keyEvent == KeyEvent.VK_1) {
                 setBackground(backGroundCold); // cold Background
-                FishRed.setSpeedUpgrade(4);
+                FishRed.setSpeedUpgrade(3);
             }
             if (keyEvent == KeyEvent.VK_2) {
                 setBackground(backGroundDefault); // warm Background
-                FishRed.setSpeedUpgrade(5);
+                FishRed.setSpeedUpgrade(6);
             }
             if (keyEvent == KeyEvent.VK_3) {
                 setBackground(backGroundHot); // hot Background
-                FishRed.setSpeedUpgrade(9);
+                FishRed.setSpeedUpgrade(10);
             }
             if (keyEvent == KeyEvent.VK_4) { // add insect
                 insectList.add(new Insect());

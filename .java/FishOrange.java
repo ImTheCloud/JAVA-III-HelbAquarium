@@ -3,18 +3,19 @@ public class FishOrange extends Fish {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-    private static int speedFish = 5;
-    private static int numberEdgeExisting = 3;
+    private static int speedFish = 6; // base speed
+    private static int numberEdgeExisting = 3; // 0,1,2,3 = 4 edge
     private static int randomEdge;
-    private int hitboxTarget = 7;
+    private int hitboxTarget = 8;
     private boolean stopMoveFishFromKeyEvent = false;
+    private final int endOfTheCounter = 0;
+    private final int counterDecrement = 1;
 
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
     public FishOrange() {
         set_speedFish(speedFish);
-
     }
     ///////////////////////////////////
     // the get/set
@@ -36,11 +37,11 @@ public class FishOrange extends Fish {
     public void update() {
         obstacleTouched();
         ifTheOrangeFishTouchAnInsectPlusPellet();
-
     }
 
     ///////////////////////////////////
     // Method for a random Edge (target of the orange fish)
+    // calculate exactly for evry condition a random position in the edge
     //////////////////////////////////
 
     public void randomEdgePosition() {
@@ -67,13 +68,13 @@ public class FishOrange extends Fish {
     //////////////////////////////////
 
     public void ifTheOrangeFishTouchAnInsectPlusPellet() {
-        if (Insect.get_timmerSpeedFish() != 0) {
-            speedFish = 8;
+        if (Insect.get_timmerSpeedFish() != endOfTheCounter && Insect.getNameFishTouchInsect() == "FishOrange") {
+            speedFish = 11; // upgrade speed 6 to 11
             ifTheOrangeFishTouchAPellet();
-            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - 1);
+            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - counterDecrement);
 
         } else {
-            speedFish = 5;
+            speedFish = 6; // base speed = 6
             ifTheOrangeFishTouchAPellet();
         }
     }
@@ -90,7 +91,8 @@ public class FishOrange extends Fish {
         } else {
             stopMoveFishFromKeyEvent = false;
         }
-        if (EdiblePellet.get_counterToStopMoveFish() == 0 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()
+        if (EdiblePellet.get_counterToStopMoveFish() == endOfTheCounter
+                || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlack" == EdiblePellet.get_NameFishTouchPellet()
                 || stopMoveFishFromKeyEvent == true) {
 
@@ -110,7 +112,7 @@ public class FishOrange extends Fish {
         } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishPurple" == EdiblePellet.get_NameFishTouchPellet() || stopMoveFishFromKeyEvent == false) {
-            EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - 1);
+            EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - counterDecrement);
         }
     }
 
@@ -122,7 +124,7 @@ public class FishOrange extends Fish {
 
         if (Obstacle.getnameFishTouchedTheObstacle() == this.getClass().getName()) {
 
-            randomEdgePosition();
+            randomEdgePosition(); // juste take an other random edge
         }
     }
 

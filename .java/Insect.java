@@ -13,6 +13,7 @@ public class Insect {
     private int randomInsectTimmer = (int) (Math.random() * 3);
     private String insecTimmerName;
     private static int timmerSpeedInsect = 0;
+    private static String nameFishTouchInsect;
 
     ///////////////////////////////////
     // Constructor
@@ -26,6 +27,13 @@ public class Insect {
     ///////////////////////////////////
     // The Get for other class
     //////////////////////////////////
+    public static String getNameFishTouchInsect() {
+        return nameFishTouchInsect;
+    }
+
+    public static void setNameFishTouchInsect(String nameFishTouchInsect) {
+        Insect.nameFishTouchInsect = nameFishTouchInsect;
+    }
 
     public int getPos_x_insect() {
         return pos_x_insect;
@@ -91,6 +99,7 @@ public class Insect {
                     && (getPos_x_insect() + hitBoxInsect >= Board.get_listFish().get(i).getPos_x_fish())
                     && (getPos_y_insect() - hitBoxInsect <= Board.get_listFish().get(i).getPos_y_fish())
                     && (getPos_y_insect() + hitBoxInsect >= Board.get_listFish().get(i).getPos_y_fish())) {
+                nameFishTouchInsect = Board.get_listFish().get(i).getClass().getName();
 
                 if (insecTimmerName == "timmerLow") {
                     timmerSpeedInsect = 100;

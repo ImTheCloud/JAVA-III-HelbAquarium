@@ -9,8 +9,10 @@ public class FishPurple extends Fish {
     // distance become the closest distance of the fish
     private int x; // calcul for the closest distance
     private int y;
-    private int speedFish = 5 + Board.get_numberObstacle();
+    private int speedFish = 6 + Board.get_numberObstacle();
     private boolean stopMoveFishFromKeyEvent = false;
+    private final int endOfTheCounter = 0;
+    private final int counterDecrement = 1;
 
     ///////////////////////////////////
     // Constructor
@@ -35,13 +37,13 @@ public class FishPurple extends Fish {
     //////////////////////////////////
 
     public void ifThePurpleFishTouchAnInsectPlusPellet() {
-        if (Insect.get_timmerSpeedFish() != 0) {
-            speedFish = 8;
+        if (Insect.get_timmerSpeedFish() != endOfTheCounter && Insect.getNameFishTouchInsect() == "FishPurple") {
+            speedFish = 11; // 11 is the boost speed
             ifThePurpleFishTouchAPellet();
-            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - 1);
+            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - counterDecrement);
 
         } else {
-            speedFish = 5 + Board.get_numberObstacle();
+            speedFish = 6 + Board.get_numberObstacle(); // base speed
             ifThePurpleFishTouchAPellet();
         }
     }
@@ -69,7 +71,7 @@ public class FishPurple extends Fish {
         } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet() || stopMoveFishFromKeyEvent == false) {
-            EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - 1);
+            EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - counterDecrement);
             // System.out.println(EdiblePellet.get_counterToStopMoveFish() + "M");
 
         }
@@ -126,9 +128,9 @@ public class FishPurple extends Fish {
         if (Obstacle.getnameFishTouchedTheObstacle() == this.getClass().getName()) {
 
             if (Obstacle.getSideObstacle() == "botTop") {
-                setPos_x_target(getPos_x_fish() + 1);
+                setPos_x_target(getPos_x_fish() - counterDecrement);
             } else {
-                setPos_y_target(getPos_y_fish() + 1);
+                setPos_y_target(getPos_y_fish() - counterDecrement);
             }
         }
     }

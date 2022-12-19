@@ -3,15 +3,17 @@ public class FishBlue extends Fish {
     // The variables
     //////////////////////////////////
 
-    private int speedFish = 6;
+    private int speedFish = 7;
     private double calculDistance;
     private double closestDistance = Board.getB_WIDTH();
     // by default its the width but when the calcul start the closest
     // distance become the closest distance of the fish
     private int x;// calcul for the closest distance
     private int y;
-
     private boolean stopMoveFishFromKeyEvent = false;
+    private final int endOfTheCounter = 0;
+    private final int counterDecrement = 1;
+
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
@@ -36,13 +38,13 @@ public class FishBlue extends Fish {
     //////////////////////////////////
 
     public void ifTheBlueFishTouchAnInsectPlusPellet() {
-        if (Insect.get_timmerSpeedFish() != 0) {
-            speedFish = 8;
+        if (Insect.get_timmerSpeedFish() != endOfTheCounter && Insect.getNameFishTouchInsect() == "FishBlue") {
+            speedFish = 11; // upgrade speed 7 to 11
             ifTheBlueFishTouchAPellet();
-            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - 1);
+            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - counterDecrement);
 
         } else {
-            speedFish = 6;
+            speedFish = 7;// base speed
             ifTheBlueFishTouchAPellet();
         }
     }
@@ -70,7 +72,7 @@ public class FishBlue extends Fish {
         } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishPurple" == EdiblePellet.get_NameFishTouchPellet() || stopMoveFishFromKeyEvent == false) {
-            EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - 1);
+            EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - counterDecrement);
 
         }
     }
@@ -83,7 +85,6 @@ public class FishBlue extends Fish {
 
         for (int i = 0; i < Board.get_listFish().size(); i++) {
             if (FishPurple.class.getName() == Board.get_listFish().get(i).getClass().getName()) {
-
                 x = Board.get_listFish().get(i).getPos_x_fish() - this.getPos_x_fish();
                 y = Board.get_listFish().get(i).getPos_y_fish() - this.getPos_y_fish();
 
@@ -109,9 +110,9 @@ public class FishBlue extends Fish {
     public void obstacleTouched() {
         if (Obstacle.getnameFishTouchedTheObstacle() == this.getClass().getName()) {
             if (Obstacle.getSideObstacle() == "botTop") {
-                setPos_x_target(getPos_x_fish() + 1);
+                setPos_x_target(getPos_x_fish() - counterDecrement);
             } else {
-                setPos_y_target(getPos_y_fish() + 1);
+                setPos_y_target(getPos_y_fish() - counterDecrement);
             }
         }
     }
