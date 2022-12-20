@@ -2,17 +2,29 @@ public class Fish {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
+    protected final int endOfTheCounter = 0;
+    private final int counterDecrement = 1;
     private final static int sizeFish = 20; // 20 beacause its the zise of the fish
     protected final static int screen_W = Board.getB_WIDTH() - sizeFish;
     // protected, this variable can be used in other class extends the fish
     // - sizeFish, if not its possible to see the fish halfway
     // if is appear at the limit of the screen
-    protected final static int screen_H = Board.getB_HEIGHT() - sizeFish;
+    private final static int screen_H = Board.getB_HEIGHT() - sizeFish;
+    private final int speedUpgrade = 11; // 11 if a fish touch a insect
+    private Fish deathFish;
     private int pos_x_Fish; // position of the fish will be random
     private int pos_y_Fish;
     private int pos_x_target; // target of every fish
     private int pos_y_target;
     private int speedFish; // important to put the good speed for every fish
+    private double calculDistance = 0;
+    private double closestDistance = Board.getB_WIDTH();
+    // by default its the width but when the calcul start the closest
+    // distance become the closest distance of the fish
+    private int x;// calcul for the closest distance
+    private int y;
+    private boolean stopMoveFishFromKeyEvent = false; // stop move fish from key R,M,B,O
+    private static int hitBoxFish = 12; // 12 bcs if the speed upgrade to 11, the hitbox need to be bigger
 
     ///////////////////////////////////
     // Constructor
@@ -25,6 +37,49 @@ public class Fish {
     ///////////////////////////////////
     // get and set
     //////////////////////////////////
+    // Hitbox
+    public static int getHitBoxFish() {
+        return hitBoxFish;
+    }
+
+    // speed upgrade
+    public int getSpeedUpgrade() {
+        return speedUpgrade;
+    }
+
+    // calcul closest distance
+    public double getCalculDistance() {
+        return calculDistance;
+    }
+
+    public void setCalculDistance(double calculDistance) {
+        this.calculDistance = calculDistance;
+    }
+
+    public double getClosestDistance() {
+        return closestDistance;
+    }
+
+    public void setClosestDistance(double closestDistance) {
+        this.closestDistance = closestDistance;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     // screen
     public int get_screen_W() {
         return screen_W;
@@ -75,6 +130,33 @@ public class Fish {
 
     public void setPos_y_target(int pos_y_target) {
         this.pos_y_target = pos_y_target;
+    }
+
+    // counter
+    public int getEndOfTheCounter() {
+        return endOfTheCounter;
+    }
+
+    public int getCounterDecrement() {
+        return counterDecrement;
+    }
+
+    // death fish
+    public Fish getDeathFish() {
+        return deathFish;
+    }
+
+    public void setDeathFish(Fish deathFish) {
+        this.deathFish = deathFish;
+    }
+    // boolean to stop or not the fish from touch key
+
+    public boolean getIsStopMoveFishFromKeyEvent() {
+        return stopMoveFishFromKeyEvent;
+    }
+
+    public void setStopMoveFishFromKeyEvent(boolean stopMoveFishFromKeyEvent) {
+        this.stopMoveFishFromKeyEvent = stopMoveFishFromKeyEvent;
     }
 
     ///////////////////////////////////

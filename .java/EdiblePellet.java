@@ -6,10 +6,6 @@ public class EdiblePellet {
     private final int milisecond = 100;
     private final int hightNumberToVerifyKeyPress = 1000000;
     private final static int hitBoxPellet = 7;
-    private final int screen_W = Board.getB_WIDTH() - hitBoxPellet;
-    // - hitbox, if not its possible to see the pellet halfway
-    // if is appear at the limit of the screen
-    private final int screen_H = Board.getB_HEIGHT() - hitBoxPellet;
     private int pos_x_Pellet;
     private int pos_y_Pellet;
     private static int counterToStopMoveFish = 0;
@@ -61,8 +57,10 @@ public class EdiblePellet {
     //////////////////////////////////
 
     public void positionRandomEdiblePellet() {
-        pos_x_Pellet = (int) (Math.random() * screen_W);
-        pos_y_Pellet = (int) (Math.random() * screen_H);
+        pos_x_Pellet = (int) (Math.random() * Board.getB_WIDTH() - hitBoxPellet);
+        pos_y_Pellet = (int) (Math.random() * Board.getB_HEIGHT() - hitBoxPellet);
+        // - hitbox, if not its possible to see the pellet halfway
+        // if is appear at the limit of the screen
     }
 
     ///////////////////////////////////

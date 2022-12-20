@@ -2,26 +2,7 @@ public class FishBlack extends Fish {
     ///////////////////////////////////
     // The variables&
     //////////////////////////////////
-    private final int endOfTheCounter = 0;
-    private final int counterDecrement = 1;
-    private final int hitBoxFish = 10;
-    private static int speedFish = 6;
-    private Fish deathFish;
-    private double calculDistance = 0;
-    private double closestDistance = Board.getB_WIDTH();
-    // by default its the width but when the calcul start the closest
-    // distance become the closest distance of the fish
-    private int x;// calcul for the closest distance
-    private int y;
-
-    ///////////////////////////////////
-    // Constructor
-    //////////////////////////////////
-
-    public FishBlack() {
-        set_speedFish(speedFish);
-
-    }
+    private final int speedFish = 6; // base speed
 
     ///////////////////////////////////
     // Method update called in Board for do something every x milisecond (timer)
@@ -37,12 +18,12 @@ public class FishBlack extends Fish {
     //////////////////////////////////
 
     public void ifTheBlackFishTouchAnInsect() {
-        if (Insect.get_timmerSpeedFish() != endOfTheCounter && Insect.getNameFishTouchInsect() == "FishBlack") {
-            speedFish = 11; // boost speed 11
+        if (Insect.get_timmerSpeedFish() != getEndOfTheCounter() && Insect.getNameFishTouchInsect() == "FishBlack") {
+            set_speedFish(getSpeedUpgrade()); // boost speed 11
             killFishRed();
-            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - counterDecrement);
+            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - getCounterDecrement());
         } else {
-            speedFish = 6; // base speed
+            set_speedFish(speedFish); // base speed
             killFishRed();
         }
     }
@@ -53,9 +34,10 @@ public class FishBlack extends Fish {
     public void killFishRed() {
 
         closestFish();
-        if ((getPos_x_fish() >= getPos_x_target() - hitBoxFish) && (getPos_x_fish() <= getPos_x_target() + hitBoxFish)
-                && (getPos_y_fish() >= getPos_y_target() - hitBoxFish)
-                && (getPos_y_fish() <= getPos_y_target() + hitBoxFish)) {
+        if ((getPos_x_fish() >= getPos_x_target() - getHitBoxFish())
+                && (getPos_x_fish() <= getPos_x_target() + getHitBoxFish())
+                && (getPos_y_fish() >= getPos_y_target() - getHitBoxFish())
+                && (getPos_y_fish() <= getPos_y_target() + getHitBoxFish())) {
             fishKilling();
         }
         super.update();
@@ -72,24 +54,24 @@ public class FishBlack extends Fish {
 
             if (FishRed.class.getName() == Board.get_listFish().get(i).getClass().getName()) {
 
-                x = Board.get_listFish().get(i).getPos_x_fish() - this.getPos_x_fish();
-                y = Board.get_listFish().get(i).getPos_y_fish() - this.getPos_y_fish();
+                setX(Board.get_listFish().get(i).getPos_x_fish() - this.getPos_x_fish());
+                setY(Board.get_listFish().get(i).getPos_y_fish() - this.getPos_y_fish());
 
-                calculDistance = Math.sqrt(x * x + y * y);
+                setCalculDistance(Math.sqrt(getX() * getX() + getY() * getY()));
 
-                if (closestDistance > calculDistance) {
-                    closestDistance = calculDistance;
+                if (getClosestDistance() > getCalculDistance()) {
+                    setClosestDistance(getCalculDistance());
 
                     setPos_x_target(Board.get_listFish().get(i).getPos_x_fish());
                     setPos_y_target(Board.get_listFish().get(i).getPos_y_fish());
 
-                    deathFish = Board.get_listFish().get(i);
+                    setDeathFish(Board.get_listFish().get(i));
                 }
 
             }
 
         }
-        closestDistance = Board.getB_WIDTH();
+        setClosestDistance(get_screen_W());
     }
 
     ///////////////////////////////////
@@ -97,7 +79,7 @@ public class FishBlack extends Fish {
     //////////////////////////////////
 
     private void fishKilling() {
-        Board.get_listFish().remove(deathFish);
+        Board.get_listFish().remove(getDeathFish());
 
     }
 
