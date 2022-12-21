@@ -70,9 +70,11 @@ public class FishOrange extends Fish {
                 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlack" == EdiblePellet.get_NameFishTouchPellet()) {
 
-            if (Obstacle.getnameFishTouchedTheObstacle() == this.getClass().getName()) {
+            if (Obstacle.getnameFishTouchedTheObstacle() == "FishOrange") {
 
                 randomEdgePosition(); // juste take an other random edge
+                Obstacle.setnameFishTouchedTheObstacle("");
+
             } else if (getPos_x_fish() <= getPos_x_target() + getHitBoxFish()
                     && getPos_x_fish() >= getPos_x_target() - getHitBoxFish()
                     && getPos_y_fish() <= getPos_y_target() + getHitBoxFish()

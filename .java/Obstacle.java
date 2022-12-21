@@ -2,9 +2,10 @@ public class Obstacle {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-    private final int hitBoxOBstacle = 20; // / 20 H
+    private final int hitBoxOBstacleWidth = 40; // / 20 H
+    private final int hitBoxOBstacleHeight = 12; // / 20 H
     private static String nameFishTouchedTheObstacle;
-    private static String sideObstacle;
+
     private int pos_x_obstacle;
     private int pos_y_obstacle;
 
@@ -28,20 +29,12 @@ public class Obstacle {
         return pos_y_obstacle;
     }
 
-    public int getHitBoxOBstacle() {
-        return hitBoxOBstacle;
-    }
-
     public static String getnameFishTouchedTheObstacle() {
         return nameFishTouchedTheObstacle;
     }
 
-    public static void getnameFishTouchedTheObstacle(String nameFishToucehdTheObstacleChange) {
+    public static void setnameFishTouchedTheObstacle(String nameFishToucehdTheObstacleChange) {
         nameFishTouchedTheObstacle = nameFishToucehdTheObstacleChange;
-    }
-
-    public static String getSideObstacle() {
-        return sideObstacle;
     }
 
     ///////////////////////////////////
@@ -57,8 +50,8 @@ public class Obstacle {
     //////////////////////////////////
 
     public void positionRandomObstacle() {
-        pos_x_obstacle = (int) (Math.random() * Board.getB_WIDTH() - (hitBoxOBstacle * 2));
-        pos_y_obstacle = (int) (Math.random() * Board.getB_HEIGHT() - hitBoxOBstacle);
+        pos_x_obstacle = (int) (Math.random() * Board.getB_WIDTH() - hitBoxOBstacleWidth);
+        pos_y_obstacle = (int) (Math.random() * Board.getB_HEIGHT() - hitBoxOBstacleHeight);
         // - hitbox, if not its possible to see the obstacle halfway
         // if is appear at the limit of the screen
     }
@@ -70,27 +63,14 @@ public class Obstacle {
     //////////////////////////////////
     public void obstacleTouched() {
         for (int i = 0; i < Board.get_listFish().size(); i++) {
-            if ((getPos_x_obstacle() - (hitBoxOBstacle * 2) <= Board.get_listFish().get(i).getPos_x_fish())
+            if ((getPos_x_obstacle() - hitBoxOBstacleWidth <= Board.get_listFish().get(i).getPos_x_fish())
                     // for x its *2 hitbox bcs width its longer than height
-                    && (getPos_x_obstacle() + (hitBoxOBstacle * 2) >= Board.get_listFish().get(i).getPos_x_fish())
-                    && (getPos_y_obstacle() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_y_fish())
-                    && (getPos_y_obstacle() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_y_fish())) {
+                    && (getPos_x_obstacle() + hitBoxOBstacleWidth >= Board.get_listFish().get(i).getPos_x_fish())
+                    && (getPos_y_obstacle() - hitBoxOBstacleHeight <= Board.get_listFish().get(i).getPos_y_fish())
+                    && (getPos_y_obstacle() + hitBoxOBstacleHeight >= Board.get_listFish().get(i).getPos_y_fish())) {
 
-                if ((getPos_x_obstacle() - (hitBoxOBstacle * 2) <= Board.get_listFish().get(i).getPos_x_fish())
-                        && (getPos_x_obstacle() + (hitBoxOBstacle * 2) >= Board.get_listFish().get(i)
-                                .getPos_x_fish())) {
-                    // verify if its touche in bot or top
-                    getnameFishTouchedTheObstacle(Board.get_listFish().get(i).getClass().getName());
-                    sideObstacle = "botTop";
+                setnameFishTouchedTheObstacle(Board.get_listFish().get(i).getClass().getName());
 
-                } else if ((getPos_y_obstacle() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_y_fish())
-                        && (getPos_y_obstacle() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_y_fish())) {
-                    // verify if its touche in left or right
-                    getnameFishTouchedTheObstacle(Board.get_listFish().get(i).getClass().getName());
-                }
-
-            } else {
-                getnameFishTouchedTheObstacle("");
             }
         }
     }

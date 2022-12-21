@@ -42,7 +42,7 @@ public class Board extends JPanel implements ActionListener {
     private final int numberFishDifferentExisting = 4;
     private final int numberInsectmaxInTheGame = 3;
     private final int numberEdiblePelletMaxInTheGame = 3;
-    private final static int numberObstacleMaxInTheGame = 4; // 1,2,3
+    private final static int numberObstacleMaxInTheGame = 10; // 1,2,3
     private final int speedUpgradeFishRed = 11;
     private final int speedSlowFishRed = 3;
     private final int baseSpeedFishRed = 6;

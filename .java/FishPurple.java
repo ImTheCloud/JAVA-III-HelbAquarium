@@ -53,11 +53,9 @@ public class FishPurple extends Fish {
 
             if (Obstacle.getnameFishTouchedTheObstacle() == this.getClass().getName()) {
 
-                if (Obstacle.getSideObstacle() == "botTop") {
-                    setPos_x_target(getPos_x_fish() - getCounterDecrement());
-                } else {
-                    setPos_y_target(getPos_y_fish() - getCounterDecrement());
-                }
+                setPos_x_target(getPos_x_fish() - getCounterDecrement());
+                Obstacle.setnameFishTouchedTheObstacle("");
+
             } else {
                 oppositeDirectionofTheRedFish();
 
@@ -66,7 +64,9 @@ public class FishPurple extends Fish {
             super.update();
         } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
-                || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()) {
+                || "FishOrange" == EdiblePellet.get_NameFishTouchPellet())
+
+        {
             EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - getCounterDecrement());
             // System.out.println(EdiblePellet.get_counterToStopMoveFish() + "M");
 

@@ -34,11 +34,9 @@ public class FishBlack extends Fish {
     public void killFishRed() {
 
         if (Obstacle.getnameFishTouchedTheObstacle() == this.getClass().getName()) {
-            if (Obstacle.getSideObstacle() == "botTop") {
-                setPos_x_target(getPos_x_fish() - getCounterDecrement());
-            } else {
-                setPos_y_target(getPos_y_fish() - getCounterDecrement());
-            }
+
+            setPos_x_target(getPos_x_fish() - getCounterDecrement());
+            Obstacle.setnameFishTouchedTheObstacle("");
 
         } else {
             closestFish();

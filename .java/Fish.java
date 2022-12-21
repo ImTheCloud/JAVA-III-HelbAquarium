@@ -26,6 +26,8 @@ public class Fish {
     private int idFish = idCount; // id fish for to know who fish need to be kill
     private static int idCount;
     private int idTargetDeathFish;
+    private int chanceToCouplingFish;
+    private int coupleFishOk;
 
     ///////////////////////////////////
     // Constructor
@@ -208,17 +210,25 @@ public class Fish {
         for (int j = 0; j < Board.get_listFish().size(); j++) {
             if (Board.get_listFish().get(j).getPos_x_fish() != this.getPos_x_fish()
                     && Board.get_listFish().get(j).getPos_y_fish() != this.getPos_y_fish()) {
+                // if its not the same fish
+
                 if (Board.get_listFish().get(j).getPos_x_fish() <= this.getPos_x_fish() + hitBoxFish
                         && Board.get_listFish().get(j).getPos_x_fish() >= this.getPos_x_fish() - hitBoxFish
                         && Board.get_listFish().get(j).getPos_y_fish() <= this.getPos_y_fish() + hitBoxFish
                         && Board.get_listFish().get(j).getPos_y_fish() >= this.getPos_y_fish() - hitBoxFish) {
 
+                    // if they have the same colour
                     if (Board.get_listFish().get(j).getClass().getName() == this.getClass().getName()) {
 
-                        Board.deleteFish(Board.get_listFish().get(j).idFish);
-                        Board.deleteFish(this.idFish);
+                        chanceToCouplingFish = Board.get_listFish().size(); // get the number of the fish in a variable
+                        coupleFishOk = (int) (Math.random() * chanceToCouplingFish); // make a random from the vairable
 
-                        Board.addNewFish(this.getClass().getName());
+                        if (coupleFishOk == 0) {
+                            // if the random is 0, they can be a couple
+                            Board.deleteFish(Board.get_listFish().get(j).idFish);
+                            Board.deleteFish(this.idFish);
+                            Board.addNewFish(this.getClass().getName());
+                        }
 
                     }
 
