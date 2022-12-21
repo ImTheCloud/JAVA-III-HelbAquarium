@@ -13,7 +13,7 @@ public class FishOrange extends Fish {
 
     @Override
     public void update() {
-        obstacleTouched();
+
         ifTheOrangeFishTouchAnInsectPlusPellet();
     }
 
@@ -70,7 +70,10 @@ public class FishOrange extends Fish {
                 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlack" == EdiblePellet.get_NameFishTouchPellet()) {
 
-            if (getPos_x_fish() <= getPos_x_target() + getHitBoxFish()
+            if (Obstacle.getnameFishTouchedTheObstacle() == this.getClass().getName()) {
+
+                randomEdgePosition(); // juste take an other random edge
+            } else if (getPos_x_fish() <= getPos_x_target() + getHitBoxFish()
                     && getPos_x_fish() >= getPos_x_target() - getHitBoxFish()
                     && getPos_y_fish() <= getPos_y_target() + getHitBoxFish()
                     && getPos_y_fish() >= getPos_y_target() - getHitBoxFish()) {
@@ -87,18 +90,6 @@ public class FishOrange extends Fish {
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishPurple" == EdiblePellet.get_NameFishTouchPellet()) {
             EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - getCounterDecrement());
-        }
-    }
-
-    ///////////////////////////////////
-    // What does the fish if he touch an obstacle
-    //////////////////////////////////
-
-    public void obstacleTouched() {
-
-        if (Obstacle.getnameFishTouchedTheObstacle() == this.getClass().getName()) {
-
-            randomEdgePosition(); // juste take an other random edge
         }
     }
 

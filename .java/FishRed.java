@@ -23,7 +23,7 @@ public class FishRed extends Fish {
 
     @Override
     public void update() {
-        obstacleTouched();
+
         ifTheRedFishTouchAnInsectPlusPellet();
     }
     ///////////////////////////////////
@@ -62,7 +62,18 @@ public class FishRed extends Fish {
             // empty because if the user press the key b,m,o the red fish cant move
         } else if (EdiblePellet.get_counterToStopMoveFish() == getEndOfTheCounter()
                 || "FishRed" == EdiblePellet.get_NameFishTouchPellet()) {
-            closestFish();
+
+            if (Obstacle.getnameFishTouchedTheObstacle() == this.getClass().getName()) {
+                if (Obstacle.getSideObstacle() == "botTop") {
+                    setPos_x_target(getPos_x_fish() - getCounterDecrement());
+                } else {
+                    setPos_y_target(getPos_y_fish() - getCounterDecrement());
+                }
+
+            } else {
+                closestFish();
+            }
+
             if ((getPos_x_fish() >= getPos_x_target() - getHitBoxFish())
                     && (getPos_x_fish() <= getPos_x_target() + getHitBoxFish())
                     && (getPos_y_fish() >= getPos_y_target() - getHitBoxFish())
@@ -70,7 +81,9 @@ public class FishRed extends Fish {
                 fishKilling();
 
             }
+
             super.update();
+
         } else if ("FishPurple" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlack" == EdiblePellet.get_NameFishTouchPellet()
@@ -117,22 +130,6 @@ public class FishRed extends Fish {
     private void fishKilling() {
         Board.deleteFish(getIdTargetDeathFish());
 
-    }
-
-    ///////////////////////////////////
-    // What does the fish if he touch an obstacle
-    //////////////////////////////////
-
-    public void obstacleTouched() {
-
-        if (Obstacle.getnameFishTouchedTheObstacle() == this.getClass().getName()) {
-            if (Obstacle.getSideObstacle() == "botTop") {
-                setPos_x_target(getPos_x_fish() - getCounterDecrement());
-            } else {
-                setPos_y_target(getPos_y_fish() - getCounterDecrement());
-            }
-
-        }
     }
 
 }

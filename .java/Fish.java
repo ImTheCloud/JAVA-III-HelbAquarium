@@ -213,14 +213,13 @@ public class Fish {
                         && Board.get_listFish().get(j).getPos_y_fish() <= this.getPos_y_fish() + hitBoxFish
                         && Board.get_listFish().get(j).getPos_y_fish() >= this.getPos_y_fish() - hitBoxFish) {
 
-                    if (Board.get_listFish().getClass().getName() == this.getClass().getName()) {
+                    if (Board.get_listFish().get(j).getClass().getName() == this.getClass().getName()) {
 
                         Board.deleteFish(Board.get_listFish().get(j).idFish);
                         Board.deleteFish(this.idFish);
 
-                        for (int i = 0; i < 3; i++) {
-                            Board.addNewFish(this.getClass().getName());
-                        }
+                        Board.addNewFish(this.getClass().getName());
+
                     }
 
                 }

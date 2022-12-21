@@ -18,7 +18,6 @@ public class FishPurple extends Fish {
 
     @Override
     public void update() {
-        obstacleTouched();
         ifThePurpleFishTouchAnInsectPlusPellet();
     }
 
@@ -52,7 +51,17 @@ public class FishPurple extends Fish {
                 || "FishPurple" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlack" == EdiblePellet.get_NameFishTouchPellet()) {
 
-            oppositeDirectionofTheRedFish();
+            if (Obstacle.getnameFishTouchedTheObstacle() == this.getClass().getName()) {
+
+                if (Obstacle.getSideObstacle() == "botTop") {
+                    setPos_x_target(getPos_x_fish() - getCounterDecrement());
+                } else {
+                    setPos_y_target(getPos_y_fish() - getCounterDecrement());
+                }
+            } else {
+                oppositeDirectionofTheRedFish();
+
+            }
 
             super.update();
         } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()
@@ -105,21 +114,6 @@ public class FishPurple extends Fish {
 
         }
         setClosestDistance(get_screen_W());
-    }
-
-    ///////////////////////////////////
-    // What does the fish if he touch an obstacle
-    //////////////////////////////////
-
-    public void obstacleTouched() {
-        if (Obstacle.getnameFishTouchedTheObstacle() == this.getClass().getName()) {
-
-            if (Obstacle.getSideObstacle() == "botTop") {
-                setPos_x_target(getPos_x_fish() - getCounterDecrement());
-            } else {
-                setPos_y_target(getPos_y_fish() - getCounterDecrement());
-            }
-        }
     }
 
 }

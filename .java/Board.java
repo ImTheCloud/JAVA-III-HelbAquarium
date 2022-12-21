@@ -175,6 +175,7 @@ public class Board extends JPanel implements ActionListener {
 
     private void addFish() {
         fishList.add(new FishRed());
+        fishList.add(new FishRed());
 
         fishList.add(new FishOrange());
         fishList.add(new FishOrange());
@@ -213,21 +214,24 @@ public class Board extends JPanel implements ActionListener {
     public static void addNewFish(String newFish) {
 
         if (newFish == "FishOrange") {
-            fishList.add(new FishOrange());
-            fishList.add(new FishOrange());
-            fishList.add(new FishOrange());
+            for (int i = 0; i < 3; i++) {
+                fishList.add(new FishOrange());
+            }
         } else if (newFish == "FishPurple") {
-            fishList.add(new FishPurple());
-            fishList.add(new FishPurple());
-            fishList.add(new FishPurple());
+            for (int i = 0; i < 3; i++) {
+                fishList.add(new FishPurple());
+            }
+
         } else if (newFish == "FishRed") {
-            fishList.add(new FishRed());
-            fishList.add(new FishRed());
-            fishList.add(new FishRed());
+            for (int i = 0; i < 3; i++) {
+                fishList.add(new FishRed());
+            }
+
         } else {
-            fishList.add(new FishBlue());
-            fishList.add(new FishBlue());
-            fishList.add(new FishBlue());
+            for (int i = 0; i < 3; i++) {
+                fishList.add(new FishBlue());
+            }
+
         }
 
     }
@@ -356,6 +360,9 @@ public class Board extends JPanel implements ActionListener {
         numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 1);
         numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
 
+        colourFishKeyEvent = "Default";
+        // every fish take back their movement
+        // if the touch R,M,O,B was pressed
         setBackground(backGroundDefault);
         initGame();
 

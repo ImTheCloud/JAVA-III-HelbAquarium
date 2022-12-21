@@ -33,7 +33,16 @@ public class FishBlack extends Fish {
     //////////////////////////////////
     public void killFishRed() {
 
-        closestFish();
+        if (Obstacle.getnameFishTouchedTheObstacle() == this.getClass().getName()) {
+            if (Obstacle.getSideObstacle() == "botTop") {
+                setPos_x_target(getPos_x_fish() - getCounterDecrement());
+            } else {
+                setPos_y_target(getPos_y_fish() - getCounterDecrement());
+            }
+
+        } else {
+            closestFish();
+        }
         if ((getPos_x_fish() >= getPos_x_target() - getHitBoxFish())
                 && (getPos_x_fish() <= getPos_x_target() + getHitBoxFish())
                 && (getPos_y_fish() >= getPos_y_target() - getHitBoxFish())
