@@ -3,7 +3,6 @@ public class FishRed extends Fish {
     // The variables
     //////////////////////////////////
     private final int key3Press = 10;// 10 its the upgrade speed of the fish red, when key 3 its pressed
-    private final int key1Press = 3;// 3 its the decrease speed of the fish red, when key 1 its pressed
     private static int speedFish = 6;
 
     ///////////////////////////////////
@@ -35,23 +34,19 @@ public class FishRed extends Fish {
     public void ifTheRedFishTouchAnInsectPlusPellet() {
         if (speedFish == key3Press) {
             // I did this because it was a problem with the key, the variable speedFish
-            // couldnt save the speed at 10, same for 3
+            // couldnt save the speed at 11, same for 3
             set_speedFish(key3Press);
-            ifTheRedFishTouchAPellet();
-        } else if (speedFish == key1Press) {
-            set_speedFish(key1Press);
-            ifTheRedFishTouchAPellet();
-
+            ifTheRedFishTouchAPelletPlusKeyEvent();
         } else if (Insect.get_timmerSpeedFish() != getEndOfTheCounter()
                 && Insect.getNameFishTouchInsect() == "FishRed") {
             set_speedFish(getSpeedUpgrade()); // upgrade speed insect = 11
 
-            ifTheRedFishTouchAPellet();
+            ifTheRedFishTouchAPelletPlusKeyEvent();
             Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - getCounterDecrement());
 
         } else {
             set_speedFish(speedFish);// base speed = 6
-            ifTheRedFishTouchAPellet();
+            ifTheRedFishTouchAPelletPlusKeyEvent();
 
         }
     }
@@ -61,16 +56,12 @@ public class FishRed extends Fish {
     // he will stop every other fish who dont have the same colour than him
     //////////////////////////////////
 
-    public void ifTheRedFishTouchAPellet() {
+    public void ifTheRedFishTouchAPelletPlusKeyEvent() {
 
-        if (Board.get_colourFishKeyPressed() == "FishRed") {
-            setStopMoveFishFromKeyEvent(true);
-        } else {
-            setStopMoveFishFromKeyEvent(false);
-        }
-        if (EdiblePellet.get_counterToStopMoveFish() == getEndOfTheCounter()
-                || "FishRed" == EdiblePellet.get_NameFishTouchPellet()
-                || getIsStopMoveFishFromKeyEvent() == true) {
+        if (Board.get_colourFishKeyPressed() != "FishRed" && Board.get_colourFishKeyPressed() != "Default") {
+            // empty because if the user press the key b,m,o the red fish cant move
+        } else if (EdiblePellet.get_counterToStopMoveFish() == getEndOfTheCounter()
+                || "FishRed" == EdiblePellet.get_NameFishTouchPellet()) {
             closestFish();
             if ((getPos_x_fish() >= getPos_x_target() - getHitBoxFish())
                     && (getPos_x_fish() <= getPos_x_target() + getHitBoxFish())
@@ -83,7 +74,7 @@ public class FishRed extends Fish {
         } else if ("FishPurple" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlack" == EdiblePellet.get_NameFishTouchPellet()
-                || "FishOrange" == EdiblePellet.get_NameFishTouchPellet() || getIsStopMoveFishFromKeyEvent() == false) {
+                || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()) {
             EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - getCounterDecrement());
         }
     }
@@ -111,7 +102,7 @@ public class FishRed extends Fish {
                     setPos_x_target(Board.get_listFish().get(i).getPos_x_fish());
                     setPos_y_target(Board.get_listFish().get(i).getPos_y_fish());
 
-                    setDeathFish(Board.get_listFish().get(i));
+                    setIdTargetDeathFish(Board.get_listFish().get(i).getIdFish());
                 }
 
             }
@@ -124,7 +115,7 @@ public class FishRed extends Fish {
     // Kill the fish who is touched by the red
     //////////////////////////////////
     private void fishKilling() {
-        Board.get_listFish().remove(getDeathFish());
+        Board.deleteFish(getIdTargetDeathFish());
 
     }
 

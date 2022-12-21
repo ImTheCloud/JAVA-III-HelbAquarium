@@ -5,13 +5,13 @@ public class Fish {
     protected final int endOfTheCounter = 0;
     private final int counterDecrement = 1;
     private final static int sizeFish = 20; // 20 beacause its the zise of the fish
+    private final static int hitBoxFish = 12; // 12 bcs if the speed upgrade to 11, the hitbox need to be bigger
+    private final int speedUpgrade = 10; // 10 if a fish touch a insect
     protected final static int screen_W = Board.getB_WIDTH() - sizeFish;
     // protected, this variable can be used in other class extends the fish
     // - sizeFish, if not its possible to see the fish halfway
     // if is appear at the limit of the screen
-    private final static int screen_H = Board.getB_HEIGHT() - sizeFish;
-    private final int speedUpgrade = 11; // 11 if a fish touch a insect
-    private Fish deathFish;
+    protected final static int screen_H = Board.getB_HEIGHT() - sizeFish;
     private int pos_x_Fish; // position of the fish will be random
     private int pos_y_Fish;
     private int pos_x_target; // target of every fish
@@ -23,8 +23,9 @@ public class Fish {
     // distance become the closest distance of the fish
     private int x;// calcul for the closest distance
     private int y;
-    private boolean stopMoveFishFromKeyEvent = false; // stop move fish from key R,M,B,O
-    private static int hitBoxFish = 12; // 12 bcs if the speed upgrade to 11, the hitbox need to be bigger
+    private int idFish = idCount; // id fish for to know who fish need to be kill
+    private static int idCount;
+    private int idTargetDeathFish;
 
     ///////////////////////////////////
     // Constructor
@@ -32,11 +33,28 @@ public class Fish {
 
     public Fish() {
         positionFish(); // put a random position for every fish
+        idCount++; // for the id Fish
+
     }
 
     ///////////////////////////////////
     // get and set
     //////////////////////////////////
+
+    // id death fish
+    public int getIdTargetDeathFish() {
+        return idTargetDeathFish;
+    }
+
+    public void setIdTargetDeathFish(int idTargetDeathFish) {
+        this.idTargetDeathFish = idTargetDeathFish;
+    }
+
+    // id fish
+    public int getIdFish() {
+        return idFish;
+    }
+
     // Hitbox
     public static int getHitBoxFish() {
         return hitBoxFish;
@@ -141,24 +159,6 @@ public class Fish {
         return counterDecrement;
     }
 
-    // death fish
-    public Fish getDeathFish() {
-        return deathFish;
-    }
-
-    public void setDeathFish(Fish deathFish) {
-        this.deathFish = deathFish;
-    }
-    // boolean to stop or not the fish from touch key
-
-    public boolean getIsStopMoveFishFromKeyEvent() {
-        return stopMoveFishFromKeyEvent;
-    }
-
-    public void setStopMoveFishFromKeyEvent(boolean stopMoveFishFromKeyEvent) {
-        this.stopMoveFishFromKeyEvent = stopMoveFishFromKeyEvent;
-    }
-
     ///////////////////////////////////
     // Method update called in Board for do something every x milisecond (timer)
     //////////////////////////////////
@@ -206,14 +206,22 @@ public class Fish {
     public void couplingFish() {
 
         for (int j = 0; j < Board.get_listFish().size(); j++) {
+            if (Board.get_listFish().get(j).getPos_x_fish() != this.getPos_x_fish()
+                    && Board.get_listFish().get(j).getPos_y_fish() != this.getPos_y_fish()) {
+                if (Board.get_listFish().get(j).getPos_x_fish() <= this.getPos_x_fish() + hitBoxFish
+                        && Board.get_listFish().get(j).getPos_x_fish() >= this.getPos_x_fish() - hitBoxFish
+                        && Board.get_listFish().get(j).getPos_y_fish() <= this.getPos_y_fish() + hitBoxFish
+                        && Board.get_listFish().get(j).getPos_y_fish() >= this.getPos_y_fish() - hitBoxFish) {
 
-            if (Board.get_listFish().get(j).getPos_x_fish() == this.getPos_x_fish()) {
-                if (Board.get_listFish().get(j).getClass().getName() == this.getClass().getName()) {
+                    if (Board.get_listFish().getClass().getName() == this.getClass().getName()) {
 
-                    // Board.get_listFish().remove(Board.get_listFish().get(j));
-                    // for (int i = 0; i < 3; i++) {
-                    // Board.addNewFish(this.getClass().getName());
-                    // }
+                        Board.deleteFish(Board.get_listFish().get(j).idFish);
+                        Board.deleteFish(this.idFish);
+
+                        for (int i = 0; i < 3; i++) {
+                            Board.addNewFish(this.getClass().getName());
+                        }
+                    }
 
                 }
 

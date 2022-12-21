@@ -19,7 +19,7 @@ public class FishBlack extends Fish {
 
     public void ifTheBlackFishTouchAnInsect() {
         if (Insect.get_timmerSpeedFish() != getEndOfTheCounter() && Insect.getNameFishTouchInsect() == "FishBlack") {
-            set_speedFish(getSpeedUpgrade()); // boost speed 11
+            set_speedFish(getSpeedUpgrade()); // boost speed 10
             killFishRed();
             Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - getCounterDecrement());
         } else {
@@ -65,7 +65,7 @@ public class FishBlack extends Fish {
                     setPos_x_target(Board.get_listFish().get(i).getPos_x_fish());
                     setPos_y_target(Board.get_listFish().get(i).getPos_y_fish());
 
-                    setDeathFish(Board.get_listFish().get(i));
+                    setIdTargetDeathFish(Board.get_listFish().get(i).getIdFish());
                 }
 
             }
@@ -79,7 +79,7 @@ public class FishBlack extends Fish {
     //////////////////////////////////
 
     private void fishKilling() {
-        Board.get_listFish().remove(getDeathFish());
+        Board.deleteFish(getIdTargetDeathFish());
 
     }
 

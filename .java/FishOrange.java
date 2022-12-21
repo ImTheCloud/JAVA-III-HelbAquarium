@@ -48,12 +48,12 @@ public class FishOrange extends Fish {
     public void ifTheOrangeFishTouchAnInsectPlusPellet() {
         if (Insect.get_timmerSpeedFish() != getEndOfTheCounter() && Insect.getNameFishTouchInsect() == "FishOrange") {
             set_speedFish(getSpeedUpgrade());
-            ifTheOrangeFishTouchAPellet();
+            ifTheOrangeFishTouchAPelletPlusKeyEvent();
             Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - getCounterDecrement());
 
         } else {
             set_speedFish(speedFish);
-            ifTheOrangeFishTouchAPellet();
+            ifTheOrangeFishTouchAPelletPlusKeyEvent();
         }
     }
 
@@ -62,17 +62,13 @@ public class FishOrange extends Fish {
     // he will stop every other fish who dont have the same colour than him
     //////////////////////////////////
 
-    public void ifTheOrangeFishTouchAPellet() {
+    public void ifTheOrangeFishTouchAPelletPlusKeyEvent() {
 
-        if (Board.get_colourFishKeyPressed() == "FishOrange") {
-            setStopMoveFishFromKeyEvent(true);
-        } else {
-            setStopMoveFishFromKeyEvent(false);
-        }
-        if (EdiblePellet.get_counterToStopMoveFish() == getEndOfTheCounter()
+        if (Board.get_colourFishKeyPressed() != "FishOrange" && Board.get_colourFishKeyPressed() != "Default") {
+            // empty because if the user press the key b,m,r the orange fish cant move
+        } else if (EdiblePellet.get_counterToStopMoveFish() == getEndOfTheCounter()
                 || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()
-                || "FishBlack" == EdiblePellet.get_NameFishTouchPellet()
-                || getIsStopMoveFishFromKeyEvent() == true) {
+                || "FishBlack" == EdiblePellet.get_NameFishTouchPellet()) {
 
             if (getPos_x_fish() <= getPos_x_target() + getHitBoxFish()
                     && getPos_x_fish() >= getPos_x_target() - getHitBoxFish()
@@ -89,7 +85,7 @@ public class FishOrange extends Fish {
 
         } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
-                || "FishPurple" == EdiblePellet.get_NameFishTouchPellet() || getIsStopMoveFishFromKeyEvent() == false) {
+                || "FishPurple" == EdiblePellet.get_NameFishTouchPellet()) {
             EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - getCounterDecrement());
         }
     }

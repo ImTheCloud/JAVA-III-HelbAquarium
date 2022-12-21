@@ -3,12 +3,12 @@ public class Insect {
     // The variables
     //////////////////////////////////
     private final int hitBoxInsect = 15;
+    private static int timmerSpeedInsect = 0;
+    private static String nameFishTouchInsect;
+    private String insecTimmerName;
     private int pos_x_insect;
     private int pos_y_insect;
     private int randomInsectTimmer = (int) (Math.random() * 3);
-    private String insecTimmerName;
-    private static int timmerSpeedInsect = 0;
-    private static String nameFishTouchInsect;
 
     ///////////////////////////////////
     // Constructor

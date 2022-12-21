@@ -32,26 +32,26 @@ public class Board extends JPanel implements ActionListener {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-    private final static int B_WIDTH = 1000; // Size screen Width
-    private final static int B_HEIGHT = 500; // Size screen Height
-    private final int Delay = 60; // every 60 milisecond, it's the timmer
     private final Color backGroundCold = new Color(102, 178, 255);
     private final Color backGroundDefault = new Color(0, 128, 255);
     private final Color backGroundHot = new Color(51, 51, 255);
+    private final int Delay = 60; // every 60 milisecond, it's the timmer
     private Timer timer = new Timer(Delay, this);
-    private int keyEvent;
+    private final static int B_WIDTH = 1000; // Size screen Width
+    private final static int B_HEIGHT = 500; // Size screen Height
     private final int numberFishDifferentExisting = 4;
-    private final int numberInsectmaxInTheGame = 5;
+    private final int numberInsectmaxInTheGame = 3;
     private final int numberEdiblePelletMaxInTheGame = 3;
-    private final static int numberObstacleMaxInTheGame = 4;
-    private final int speedUpgradeFishRed = 10;
+    private final static int numberObstacleMaxInTheGame = 4; // 1,2,3
+    private final int speedUpgradeFishRed = 11;
     private final int speedSlowFishRed = 3;
-    private final int baseSpeedFishRed = 10;
+    private final int baseSpeedFishRed = 6;
+    private int keyEvent;
     private int fishColourAddForKeyEvent;
     private static String colourFishKeyEvent = "Default";
     // +1 bcs at least 1 (for all +1 in a random)
     private int numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 1);
-    private static int numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 1);
+    private static int numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 1); // 1,2,3
     private int numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
     private double calculDistance;
     private double closestDistance = Board.getB_WIDTH();
@@ -233,6 +233,21 @@ public class Board extends JPanel implements ActionListener {
     }
 
     ///////////////////////////////////
+    // Method for the couple if 2 fish touch each other, they will be delete
+    // method for fish red and black, kill the fish who is touched
+    ///////////////////////////////////
+
+    public static void deleteFish(int idFish) {
+
+        for (int i = 0; i < fishList.size(); i++) {
+            if (fishList.get(i).getIdFish() == idFish) {
+                fishList.remove(i);
+            }
+        }
+
+    }
+
+    ///////////////////////////////////
     // Draw the element every moment if a fish is oange he take the orange image,...
     // same for insect, obstacle and Pelelt but whitout condition
     // because its only 1 image
@@ -333,8 +348,10 @@ public class Board extends JPanel implements ActionListener {
         fishList.removeAll(fishList);
         ediblePelletList.removeAll(ediblePelletList);
         insectList.removeAll(insectList);
+
         EdiblePellet.set_counterToStopMoveFish(0);
         FishRed.setSpeedUpgrade(6);
+
         numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 1);
         numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 1);
         numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
@@ -360,21 +377,23 @@ public class Board extends JPanel implements ActionListener {
 
     // every fish go to the closest insect
     public void goToTheClosestInsect() {
-        if (EdiblePellet.get_counterToStopMoveFish() != 0) {
+        if (EdiblePellet.get_NameFishTouchPellet() == "FishRed" || colourFishKeyEvent == "FishRed") {
             for (int j = 0; j < get_listFish().size(); j++) {
-                for (int i = 0; i < get_insectList().size(); i++) {
-                    x = get_insectList().get(i).getPos_x_insect() - get_listFish().get(i).getPos_x_fish();
-                    y = get_insectList().get(i).getPos_y_insect() - get_listFish().get(i).getPos_y_fish();
-                    calculDistance = Math.sqrt(x * x + y * y);
+                if (get_listFish().getClass().getName() == "FishRed") {
+                    for (int i = 0; i < get_insectList().size(); i++) {
+                        x = get_insectList().get(i).getPos_x_insect() - get_listFish().get(j).getPos_x_fish();
+                        y = get_insectList().get(i).getPos_y_insect() - get_listFish().get(j).getPos_y_fish();
+                        calculDistance = Math.sqrt(x * x + y * y);
 
-                    if (closestDistance > calculDistance) {
-                        closestDistance = calculDistance;
+                        if (closestDistance > calculDistance) {
+                            closestDistance = calculDistance;
 
-                        // Fish.setPos_x_target(get_insectList().get(i).getPos_x_pellet());
-                        // Fish.setPos_y_target(get_insectList().get(i).getPos_y_pellet());
-
+                            // here it was the set of the target position Fish, they would have taken the
+                            // closest pos insect
+                        }
                     }
                 }
+
             }
             closestDistance = Board.getB_WIDTH();
         }
@@ -382,19 +401,20 @@ public class Board extends JPanel implements ActionListener {
     // every fish go to the closest pellet
 
     public void goToTheClosestPellet() {
-        if (EdiblePellet.get_counterToStopMoveFish() != 0) {
+        if (EdiblePellet.get_NameFishTouchPellet() == "FishRed" || colourFishKeyEvent == "FishRed") {
             for (int j = 0; j < get_listFish().size(); j++) {
-                for (int i = 0; i < get_ediblePellet_list().size(); i++) {
-                    x = get_ediblePellet_list().get(i).getPos_x_pellet() - get_listFish().get(i).getPos_x_fish();
-                    y = get_ediblePellet_list().get(i).getPos_y_pellet() - get_listFish().get(i).getPos_y_fish();
-                    calculDistance = Math.sqrt(x * x + y * y);
+                if (get_listFish().getClass().getName() == "FishRed") {
+                    for (int i = 0; i < get_ediblePellet_list().size(); i++) {
+                        x = get_ediblePellet_list().get(i).getPos_x_pellet() - get_listFish().get(j).getPos_x_fish();
+                        y = get_ediblePellet_list().get(i).getPos_y_pellet() - get_listFish().get(j).getPos_y_fish();
+                        calculDistance = Math.sqrt(x * x + y * y);
 
-                    if (closestDistance > calculDistance) {
-                        closestDistance = calculDistance;
+                        if (closestDistance > calculDistance) {
+                            closestDistance = calculDistance;
+                            // here it was the set of the target position Fish, they would have taken the
+                            // closest pos pellet
 
-                        // Fish.setPos_x_target(get_ediblePellet_list().get(i).getPos_x_pellet());
-                        // Fish.setPos_y_target(get_ediblePellet_list().get(i).getPos_y_pellet());
-
+                        }
                     }
                 }
             }
@@ -404,19 +424,23 @@ public class Board extends JPanel implements ActionListener {
 
     // every fish go to the closest fish ( same colour)
     public void goToTheClosestFishSameColour() {
-        if (EdiblePellet.get_counterToStopMoveFish() != 0) {
+
+        if (EdiblePellet.get_NameFishTouchPellet() == "FishRed" || colourFishKeyEvent == "FishRed") {
+
             for (int j = 0; j < get_listFish().size(); j++) {
-                for (int i = 0; i < get_listFish().size(); i++) {
-                    x = get_listFish().get(i).getPos_x_fish() - get_listFish().get(i).getPos_x_fish();
-                    y = get_listFish().get(i).getPos_y_fish() - get_listFish().get(i).getPos_y_fish();
-                    calculDistance = Math.sqrt(x * x + y * y);
+                if (get_listFish().getClass().getName() == "FishRed") {
+                    for (int i = 0; i < get_listFish().size(); i++) {
+                        x = get_listFish().get(i).getPos_x_fish() - get_listFish().get(i).getPos_x_fish();
+                        y = get_listFish().get(i).getPos_y_fish() - get_listFish().get(i).getPos_y_fish();
+                        calculDistance = Math.sqrt(x * x + y * y);
 
-                    if (closestDistance > calculDistance) {
-                        closestDistance = calculDistance;
+                        if (closestDistance > calculDistance) {
+                            closestDistance = calculDistance;
 
-                        // Fish.setPos_x_target(get_listFish().get(i).getPos_x_fish());
-                        // Fish.setPos_y_target(get_listFish().get(i).getPos_y_fish());
+                            // here it was the set of the target position Fish, they would have taken the
+                            // closest pos fish
 
+                        }
                     }
                 }
             }
@@ -470,18 +494,14 @@ public class Board extends JPanel implements ActionListener {
             }
             if (keyEvent == KeyEvent.VK_R) { // stop move fish all but not red
                 colourFishKeyEvent = "FishRed";
-                EdiblePellet.set_counterToStopMoveFish(Integer.MAX_VALUE);
             }
             if (keyEvent == KeyEvent.VK_B) {// stop move fish all but not blue
                 colourFishKeyEvent = "FishBlue";
-                EdiblePellet.set_counterToStopMoveFish(Integer.MAX_VALUE);
             }
             if (keyEvent == KeyEvent.VK_M) {// stop move fish all but not purple
-                EdiblePellet.set_counterToStopMoveFish(Integer.MAX_VALUE);
                 colourFishKeyEvent = "FishPurple";
             }
             if (keyEvent == KeyEvent.VK_O) {// stop move fish all but not orange
-                EdiblePellet.set_counterToStopMoveFish(Integer.MAX_VALUE);
                 colourFishKeyEvent = "FishOrange";
             }
             if (keyEvent == KeyEvent.VK_A) {// add Fish Black and 2 fish red

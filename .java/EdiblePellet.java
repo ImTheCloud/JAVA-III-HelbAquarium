@@ -4,12 +4,11 @@ public class EdiblePellet {
     //////////////////////////////////
 
     private final int milisecond = 100;
-    private final int hightNumberToVerifyKeyPress = 1000000;
     private final static int hitBoxPellet = 7;
-    private int pos_x_Pellet;
-    private int pos_y_Pellet;
     private static int counterToStopMoveFish = 0;
     private static String nameFishTouchPellet;
+    private int pos_x_Pellet;
+    private int pos_y_Pellet;
 
     ///////////////////////////////////
     // Constructor
@@ -17,6 +16,7 @@ public class EdiblePellet {
 
     public EdiblePellet() {
         positionRandomEdiblePellet();
+
     }
 
     ///////////////////////////////////
@@ -81,15 +81,8 @@ public class EdiblePellet {
                     && (Board.get_listFish().get(i).getPos_x_fish() + hitBoxPellet >= getPos_x_pellet())
                     && (Board.get_listFish().get(i).getPos_y_fish() - hitBoxPellet <= getPos_y_pellet())
                     && (Board.get_listFish().get(i).getPos_y_fish() + hitBoxPellet >= getPos_y_pellet())) {
-
                 positionRandomEdiblePellet();
-
-                if (counterToStopMoveFish > hightNumberToVerifyKeyPress) {
-                    counterToStopMoveFish = Integer.MAX_VALUE;
-                } else {
-                    counterToStopMoveFish = milisecond * Board.get_listFish().size();
-                }
-
+                counterToStopMoveFish = milisecond * Board.get_listFish().size();
                 // 10 second and * the number of the fish
                 // because the counter decremente faster when there more fish in the aquarium
 

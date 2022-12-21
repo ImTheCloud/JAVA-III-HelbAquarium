@@ -3,10 +3,10 @@ public class Obstacle {
     // The variables
     //////////////////////////////////
     private final int hitBoxOBstacle = 20; // / 20 H
-    private int pos_x_obstacle;
-    private int pos_y_obstacle;
     private static String nameFishTouchedTheObstacle;
     private static String sideObstacle;
+    private int pos_x_obstacle;
+    private int pos_y_obstacle;
 
     ///////////////////////////////////
     // Constructor
@@ -79,11 +79,13 @@ public class Obstacle {
                 if ((getPos_x_obstacle() - (hitBoxOBstacle * 2) <= Board.get_listFish().get(i).getPos_x_fish())
                         && (getPos_x_obstacle() + (hitBoxOBstacle * 2) >= Board.get_listFish().get(i)
                                 .getPos_x_fish())) {
+                    // verify if its touche in bot or top
                     getnameFishTouchedTheObstacle(Board.get_listFish().get(i).getClass().getName());
                     sideObstacle = "botTop";
 
                 } else if ((getPos_y_obstacle() - hitBoxOBstacle <= Board.get_listFish().get(i).getPos_y_fish())
                         && (getPos_y_obstacle() + hitBoxOBstacle >= Board.get_listFish().get(i).getPos_y_fish())) {
+                    // verify if its touche in left or right
                     getnameFishTouchedTheObstacle(Board.get_listFish().get(i).getClass().getName());
                 }
 
