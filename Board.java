@@ -227,10 +227,14 @@ public class Board extends JPanel implements ActionListener {
                 fishList.add(new FishRed());
             }
 
-        } else {
+        } else if (newFish == "FishBlue") {
             for (int i = 0; i < 3; i++) {
                 fishList.add(new FishBlue());
             }
+
+        } else if (newFish == "FishBlack") {
+
+            fishList.add(new FishBlack());
 
         }
 
