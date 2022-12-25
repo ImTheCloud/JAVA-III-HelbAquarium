@@ -4,10 +4,10 @@ public class Obstacle {
     //////////////////////////////////
     private final int hitBoxOBstacleWidth = 40; // / 20 H
     private final int hitBoxOBstacleHeight = 12; // / 20 H
-    private static String nameFishTouchedTheObstacle;
 
     private int pos_x_obstacle;
     private int pos_y_obstacle;
+    private static boolean posOk = true;
 
     ///////////////////////////////////
     // Constructor
@@ -29,12 +29,8 @@ public class Obstacle {
         return pos_y_obstacle;
     }
 
-    public static String getnameFishTouchedTheObstacle() {
-        return nameFishTouchedTheObstacle;
-    }
-
-    public static void setnameFishTouchedTheObstacle(String nameFishToucehdTheObstacleChange) {
-        nameFishTouchedTheObstacle = nameFishToucehdTheObstacleChange;
+    public static boolean isPosOk() {
+        return posOk;
     }
 
     ///////////////////////////////////
@@ -62,14 +58,16 @@ public class Obstacle {
     // an other random edge
     //////////////////////////////////
     public void obstacleTouched() {
+        posOk = true;
         for (int i = 0; i < Board.get_listFish().size(); i++) {
             if ((getPos_x_obstacle() - hitBoxOBstacleWidth <= Board.get_listFish().get(i).getPos_x_fish())
                     // for x its *2 hitbox bcs width its longer than height
                     && (getPos_x_obstacle() + hitBoxOBstacleWidth >= Board.get_listFish().get(i).getPos_x_fish())
                     && (getPos_y_obstacle() - hitBoxOBstacleHeight <= Board.get_listFish().get(i).getPos_y_fish())
                     && (getPos_y_obstacle() + hitBoxOBstacleHeight >= Board.get_listFish().get(i).getPos_y_fish())) {
+                System.out.println("toucher");
 
-                setnameFishTouchedTheObstacle(Board.get_listFish().get(i).getClass().getName());
+                posOk = false;
 
             }
         }

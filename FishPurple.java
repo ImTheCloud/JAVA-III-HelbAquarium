@@ -51,15 +51,7 @@ public class FishPurple extends Fish {
                 || "FishPurple" == EdiblePellet.get_NameFishTouchPellet()
                 || "FishBlack" == EdiblePellet.get_NameFishTouchPellet()) {
 
-            if (Obstacle.getnameFishTouchedTheObstacle() == this.getClass().getName()) {
-
-                setPos_x_target(getPos_x_fish() - getCounterDecrement());
-                Obstacle.setnameFishTouchedTheObstacle("");
-
-            } else {
-                oppositeDirectionofTheRedFish();
-
-            }
+            oppositeDirectionofTheRedFish();
 
             super.update();
         } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()

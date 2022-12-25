@@ -180,16 +180,34 @@ public class Fish {
     public void movefishToTarget() {
 
         if (getPos_y_fish() < getPos_y_target()) {
-            setPos_y_Fish(getPos_y_fish() + speedFish);
+            if (Obstacle.isPosOk() == true) {
+                setPos_y_Fish(getPos_y_fish() + speedFish);
+            } else if (Obstacle.isPosOk() == false) {
+                setPos_x_Fish(getPos_x_fish() + speedFish);
+            }
         }
         if (getPos_x_fish() < getPos_x_target()) {
-            setPos_x_Fish(getPos_x_fish() + speedFish);
+            if (Obstacle.isPosOk() == true) {
+                setPos_x_Fish(getPos_x_fish() + speedFish);
+            } else if (Obstacle.isPosOk() == false) {
+                setPos_y_Fish(getPos_y_fish() + speedFish);
+            }
         }
         if (getPos_x_fish() > getPos_x_target()) {
-            setPos_x_Fish(getPos_x_fish() - speedFish);
+            if (Obstacle.isPosOk() == true) {
+                setPos_x_Fish(getPos_x_fish() - speedFish);
+            } else if (Obstacle.isPosOk() == false) {
+                setPos_y_Fish(getPos_y_fish() + speedFish);
+            }
+
         }
         if (getPos_y_fish() > getPos_y_target()) {
-            setPos_y_Fish(getPos_y_fish() - speedFish);
+            if (Obstacle.isPosOk() == true) {
+                setPos_y_Fish(getPos_y_fish() - speedFish);
+            } else if (Obstacle.isPosOk() == false) {
+                setPos_x_Fish(getPos_x_fish() + speedFish);
+            }
+
         }
     }
 

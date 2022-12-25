@@ -63,13 +63,7 @@ public class FishRed extends Fish {
         } else if (EdiblePellet.get_counterToStopMoveFish() == getEndOfTheCounter()
                 || "FishRed" == EdiblePellet.get_NameFishTouchPellet()) {
 
-            if (Obstacle.getnameFishTouchedTheObstacle() == this.getClass().getName()) {
-
-                setPos_x_target(getPos_x_fish() - getCounterDecrement());
-                Obstacle.setnameFishTouchedTheObstacle("");
-            } else {
-                closestFish();
-            }
+            closestFish();
 
             if ((getPos_x_fish() >= getPos_x_target() - getHitBoxFish())
                     && (getPos_x_fish() <= getPos_x_target() + getHitBoxFish())
