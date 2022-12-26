@@ -42,7 +42,7 @@ public class Board extends JPanel implements ActionListener {
     private final int numberFishDifferentExisting = 4;
     private final int numberInsectmaxInTheGame = 3;
     private final int numberEdiblePelletMaxInTheGame = 3;
-    private final static int numberObstacleMaxInTheGame = 4; // 1,2,3
+    private final static int numberObstacleMaxInTheGame = 0; // 1,2,3
     private final int speedUpgradeFishRed = 11;
     private final int speedSlowFishRed = 3;
     private final int baseSpeedFishRed = 6;
@@ -51,7 +51,7 @@ public class Board extends JPanel implements ActionListener {
     private static String colourFishKeyEvent = "Default";
     // +1 bcs at least 1 (for all +1 in a random)
     private int numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 1);
-    private static int numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 1); // 1,2,3
+    private static int numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 0); // 1,2,3
     private int numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
     private double calculDistance;
     private double closestDistance = Board.getB_WIDTH();
@@ -361,7 +361,7 @@ public class Board extends JPanel implements ActionListener {
         FishRed.setSpeedUpgrade(6);
 
         numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 1);
-        numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 1);
+        numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 0);
         numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
 
         colourFishKeyEvent = "Default";

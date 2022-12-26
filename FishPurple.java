@@ -18,51 +18,7 @@ public class FishPurple extends Fish {
 
     @Override
     public void update() {
-        ifThePurpleFishTouchAnInsectPlusPellet();
-    }
-
-    ///////////////////////////////////
-    // If the fish touch an insect
-    // hes speed upgrade for a definite time in the class insect
-    //////////////////////////////////
-
-    public void ifThePurpleFishTouchAnInsectPlusPellet() {
-        if (Insect.get_timmerSpeedFish() != getEndOfTheCounter() && Insect.getNameFishTouchInsect() == "FishPurple") {
-            set_speedFish(getSpeedUpgrade());// 10 is the boost speed
-            ifThePurpleFishTouchAPelletPlusKeyEvent();
-            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - getCounterDecrement());
-
-        } else {
-            set_speedFish(speedFish); // base speed
-            ifThePurpleFishTouchAPelletPlusKeyEvent();
-        }
-    }
-
-    ///////////////////////////////////
-    // If the fish touch a pellet
-    // he will stop every other fish who dont have the same colour than him
-    //////////////////////////////////
-
-    private void ifThePurpleFishTouchAPelletPlusKeyEvent() {
-
-        if (Board.get_colourFishKeyPressed() != "FishPurple" && Board.get_colourFishKeyPressed() != "Default") {
-            // empty because if the user press the key b,r,o the purple fish cant move
-        } else if (EdiblePellet.get_counterToStopMoveFish() == getEndOfTheCounter()
-                || "FishPurple" == EdiblePellet.get_NameFishTouchPellet()
-                || "FishBlack" == EdiblePellet.get_NameFishTouchPellet()) {
-
-            oppositeDirectionofTheRedFish();
-
-            super.update();
-        } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()
-                || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
-                || "FishOrange" == EdiblePellet.get_NameFishTouchPellet())
-
-        {
-            EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - getCounterDecrement());
-            // System.out.println(EdiblePellet.get_counterToStopMoveFish() + "M");
-
-        }
+        oppositeDirectionofTheRedFish();
     }
 
     ///////////////////////////////////
@@ -105,7 +61,9 @@ public class FishPurple extends Fish {
             }
 
         }
+
         setClosestDistance(get_screen_W());
+        super.update();
     }
 
 }

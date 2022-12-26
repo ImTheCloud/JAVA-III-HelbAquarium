@@ -10,49 +10,9 @@ public class FishBlue extends Fish {
 
     @Override
     public void update() {
-        ifTheBlueFishTouchAnInsectPlusPellet();
-    }
+        set_speedFish(speedFish);
+        directionToFishBlueOrPurple();
 
-    ///////////////////////////////////
-    // If the fish touch an insect
-    // hes speed upgrade for a definite time in the class insect
-    //////////////////////////////////
-
-    public void ifTheBlueFishTouchAnInsectPlusPellet() {
-        if (Insect.get_timmerSpeedFish() != getEndOfTheCounter()) {
-            set_speedFish(getSpeedUpgrade()); // upgrade speed 7 to 10
-            ifTheBlueFishTouchAPelletPlusKeyEvent();
-            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - getCounterDecrement());
-
-        } else {
-            set_speedFish(speedFish);
-            ifTheBlueFishTouchAPelletPlusKeyEvent();
-        }
-    }
-
-    ///////////////////////////////////
-    // If the fish touch a pellet
-    // he will stop every other fish who dont have the same colour than him
-    //////////////////////////////////
-
-    public void ifTheBlueFishTouchAPelletPlusKeyEvent() {
-
-        if (Board.get_colourFishKeyPressed() != "FishBlue" && Board.get_colourFishKeyPressed() != "Default") {
-            // empty because if the user press the key r,m,o the blue fish cant move
-        } else if (EdiblePellet.get_counterToStopMoveFish() == getEndOfTheCounter()
-                || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
-                || "FishBlack" == EdiblePellet.get_NameFishTouchPellet()) {
-
-            directionToFishBlueOrPurple();
-
-            super.update();
-
-        } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()
-                || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()
-                || "FishPurple" == EdiblePellet.get_NameFishTouchPellet()) {
-            EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - getCounterDecrement());
-
-        }
     }
 
     ///////////////////////////////////
@@ -85,6 +45,7 @@ public class FishBlue extends Fish {
 
         }
         setClosestDistance(get_screen_W());
+        super.update();
     }
 
 }

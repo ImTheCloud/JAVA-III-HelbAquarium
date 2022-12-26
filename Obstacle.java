@@ -65,7 +65,6 @@ public class Obstacle {
                     && (getPos_x_obstacle() + hitBoxOBstacleWidth >= Board.get_listFish().get(i).getPos_x_fish())
                     && (getPos_y_obstacle() - hitBoxOBstacleHeight <= Board.get_listFish().get(i).getPos_y_fish())
                     && (getPos_y_obstacle() + hitBoxOBstacleHeight >= Board.get_listFish().get(i).getPos_y_fish())) {
-                System.out.println("toucher");
 
                 posOk = false;
 

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Insect {
     ///////////////////////////////////
     // The variables
@@ -90,13 +92,19 @@ public class Insect {
     ///////////////////////////////////
 
     public void insectTouchedbyAInsect() {
-        for (int i = 0; i < Board.get_listFish().size(); i++) {
+        ArrayList<Fish> get_listFish = Board.get_listFish();
 
-            if ((getPos_x_insect() - hitBoxInsect <= Board.get_listFish().get(i).getPos_x_fish())
-                    && (getPos_x_insect() + hitBoxInsect >= Board.get_listFish().get(i).getPos_x_fish())
-                    && (getPos_y_insect() - hitBoxInsect <= Board.get_listFish().get(i).getPos_y_fish())
-                    && (getPos_y_insect() + hitBoxInsect >= Board.get_listFish().get(i).getPos_y_fish())) {
-                nameFishTouchInsect = Board.get_listFish().get(i).getClass().getName();
+        for (int i = 0; i < get_listFish.size(); i++) {
+            Fish fish = get_listFish.get(i);
+            int pos_x_fish = fish.getPos_x_fish();
+            int pos_y_fish = fish.getPos_y_fish();
+
+            if ((getPos_x_insect() - hitBoxInsect <= pos_x_fish)
+                    && (getPos_x_insect() + hitBoxInsect >= pos_x_fish)
+                    && (getPos_y_insect() - hitBoxInsect <= pos_y_fish)
+                    && (getPos_y_insect() + hitBoxInsect >= pos_y_fish)) {
+
+                nameFishTouchInsect = fish.getClass().getName();
 
                 if (insecTimmerName == "timmerLow") {
                     timmerSpeedInsect = 100;

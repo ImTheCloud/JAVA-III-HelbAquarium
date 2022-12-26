@@ -23,32 +23,8 @@ public class FishRed extends Fish {
 
     @Override
     public void update() {
-
-        ifTheRedFishTouchAnInsectPlusPellet();
-    }
-    ///////////////////////////////////
-    // If the fish touch an insect
-    // hes speed upgrade for a definite time in the class insect
-    //////////////////////////////////
-
-    public void ifTheRedFishTouchAnInsectPlusPellet() {
-        if (speedFish == key3Press) {
-            // I did this because it was a problem with the key, the variable speedFish
-            // couldnt save the speed at 11, same for 3
-            set_speedFish(key3Press);
-            ifTheRedFishTouchAPelletPlusKeyEvent();
-        } else if (Insect.get_timmerSpeedFish() != getEndOfTheCounter()
-                && Insect.getNameFishTouchInsect() == "FishRed") {
-            set_speedFish(getSpeedUpgrade()); // upgrade speed insect = 11
-
-            ifTheRedFishTouchAPelletPlusKeyEvent();
-            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - getCounterDecrement());
-
-        } else {
-            set_speedFish(speedFish);// base speed = 6
-            ifTheRedFishTouchAPelletPlusKeyEvent();
-
-        }
+        set_speedFish(speedFish);
+        moveFishRed();
     }
 
     ///////////////////////////////////
@@ -56,31 +32,17 @@ public class FishRed extends Fish {
     // he will stop every other fish who dont have the same colour than him
     //////////////////////////////////
 
-    public void ifTheRedFishTouchAPelletPlusKeyEvent() {
+    public void moveFishRed() {
+        closestFish();
+        if ((getPos_x_fish() >= getPos_x_target() - getHitBoxFish())
+                && (getPos_x_fish() <= getPos_x_target() + getHitBoxFish())
+                && (getPos_y_fish() >= getPos_y_target() - getHitBoxFish())
+                && (getPos_y_fish() <= getPos_y_target() + getHitBoxFish())) {
+            fishKilling();
 
-        if (Board.get_colourFishKeyPressed() != "FishRed" && Board.get_colourFishKeyPressed() != "Default") {
-            // empty because if the user press the key b,m,o the red fish cant move
-        } else if (EdiblePellet.get_counterToStopMoveFish() == getEndOfTheCounter()
-                || "FishRed" == EdiblePellet.get_NameFishTouchPellet()) {
-
-            closestFish();
-
-            if ((getPos_x_fish() >= getPos_x_target() - getHitBoxFish())
-                    && (getPos_x_fish() <= getPos_x_target() + getHitBoxFish())
-                    && (getPos_y_fish() >= getPos_y_target() - getHitBoxFish())
-                    && (getPos_y_fish() <= getPos_y_target() + getHitBoxFish())) {
-                fishKilling();
-
-            }
-
-            super.update();
-
-        } else if ("FishPurple" == EdiblePellet.get_NameFishTouchPellet()
-                || "FishBlue" == EdiblePellet.get_NameFishTouchPellet()
-                || "FishBlack" == EdiblePellet.get_NameFishTouchPellet()
-                || "FishOrange" == EdiblePellet.get_NameFishTouchPellet()) {
-            EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - getCounterDecrement());
         }
+        super.update();
+
     }
 
     ///////////////////////////////////

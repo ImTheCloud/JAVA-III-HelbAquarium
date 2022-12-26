@@ -257,4 +257,23 @@ public class Fish {
         }
     }
 
+    ///////////////////////////////////
+    // Method for the Pellet
+    //////////////////////////////////
+
+    public void pelletTouchedByAFish() {
+        if (EdiblePellet.get_counterToStopMoveFish() != getEndOfTheCounter()) {
+            EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - getCounterDecrement());
+
+            if ("FishOrange" == EdiblePellet.get_NameFishTouchPellet()) {
+                movefishToTarget();
+            } else if ("FishBlue" == EdiblePellet.get_NameFishTouchPellet()) {
+
+            } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()) {
+
+            } else if ("FishPurple" == EdiblePellet.get_NameFishTouchPellet()) {
+
+            }
+        }
+    }
 }
