@@ -5,55 +5,45 @@ public class Insect {
     // The variables
     //////////////////////////////////
     private final int hitBoxInsect = 15;
+    private final int numberOfInsect = 3;
+    private int randomInsectTimmer = (int) (Math.random() * numberOfInsect);
+    private final int insectNumberOne = 0;
+    private final int insectNumberTwo = 1;
+    private final int insectNumberThree = 2;
+
     private static int timmerSpeedInsect = 0;
-    private static String nameFishTouchInsect;
     private String insecTimmerName;
     private int pos_x_insect;
     private int pos_y_insect;
-    private int randomInsectTimmer = (int) (Math.random() * 3);
-    private static boolean insectTouched = false;
-    private Fish fishTouchedTheInsect;
-    private int speedUpgrade = 10;
-    private static int idFishTouchInsect = -1;
+
+    private final static int idFishTouchInsectByDefault = -1;
+    // by default is -1 because if no fish touch insect = no id Fish
+    private static int idFishTouchInsect = idFishTouchInsectByDefault;
+
+    private int timmeLow = 100 * Board.get_insectList().size();
+    private int timmeNormal = 200 * Board.get_insectList().size();
+    private int timmeHight = 300 * Board.get_insectList().size();
+
+    private final String insectTimeLow = "timmerLow";
+    private final String insectTimeNormal = "timmerNormal";
+    private final String insectTimeHight = "timmerHight";
+
+    private int endOfTheCounter = 0;
 
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
 
-    public static int getIdFishTouchInsect() {
-        return idFishTouchInsect;
-    }
-
-    public Fish getFishTouchedTheInsect() {
-        return fishTouchedTheInsect;
-    }
-
-    public void setFishTouchedTheInsect(Fish fishTouchedTheInsect) {
-        this.fishTouchedTheInsect = fishTouchedTheInsect;
-    }
-
-    public static boolean isInsectTouched() {
-        return insectTouched;
-    }
-
-    public static void setInsectTouched(boolean insectTouched) {
-        Insect.insectTouched = insectTouched;
-    }
-
     public Insect() {
         positionRandomInsect();
-        nameTimeSpeedUpgrade();
     }
 
     ///////////////////////////////////
     // The Get for other class
     //////////////////////////////////
-    public static String getNameFishTouchInsect() {
-        return nameFishTouchInsect;
-    }
 
-    public static void setNameFishTouchInsect(String nameFishTouchInsect) {
-        Insect.nameFishTouchInsect = nameFishTouchInsect;
+    public static int getIdFishTouchInsectByDefault() {
+        return idFishTouchInsectByDefault;
     }
 
     public int getPos_x_insect() {
@@ -64,20 +54,16 @@ public class Insect {
         return pos_y_insect;
     }
 
-    // time of the spped
-    public static int get_timmerSpeedFish() {
-        return timmerSpeedInsect;
+    public static int getIdFishTouchInsect() {
+        return idFishTouchInsect;
     }
 
-    public static void set_timmerSpeedFish(int setTimmerSpeedInsect) {
-        timmerSpeedInsect = setTimmerSpeedInsect;
-    }
     ///////////////////////////////////
     // Method update called in Board for do something every x milisecond (timer)
     //////////////////////////////////
 
     public void update() {
-
+        nameTimeSpeedUpgrade();
         insectTouchedbyAInsect();
     }
 
@@ -88,13 +74,14 @@ public class Insect {
     //////////////////////////////////
 
     public void nameTimeSpeedUpgrade() {
-        randomInsectTimmer = (int) (Math.random() * 3);
-        if (randomInsectTimmer == 0) {
-            insecTimmerName = "timmerLow";
-        } else if (randomInsectTimmer == 1) {
-            insecTimmerName = "timmerNormal";
-        } else {
-            insecTimmerName = "timmerHigh";
+        if (randomInsectTimmer == insectNumberOne) {
+            // its a random in 0,1,2 number of insect if the random its 0, the timmer will
+            // be low, etc...
+            insecTimmerName = insectTimeLow;
+        } else if (randomInsectTimmer == insectNumberTwo) {
+            insecTimmerName = insectTimeNormal;
+        } else if (randomInsectTimmer == insectNumberThree) {
+            insecTimmerName = insectTimeHight;
         }
     }
 
@@ -130,39 +117,25 @@ public class Insect {
                     && (getPos_x_insect() + hitBoxInsect >= pos_x_fish)
                     && (getPos_y_insect() - hitBoxInsect <= pos_y_fish)
                     && (getPos_y_insect() + hitBoxInsect >= pos_y_fish)) {
-
-                nameFishTouchInsect = Board.get_listFish().getClass().getName();
-                if (insecTimmerName == "timmerLow") {
-                    timmerSpeedInsect = 1000;
-                } else if (insecTimmerName == "timmerNormal") {
-                    timmerSpeedInsect = 1500;
-                } else {
-                    timmerSpeedInsect = 2000;
-                }
                 positionRandomInsect();
-                idFishTouchInsect = Board.get_listFish().get(i).getIdFish();
-                Board.get_listFish().get(i).setSpeedFish(45);
+
+                if (insecTimmerName == insectTimeLow) {
+                    timmerSpeedInsect = timmeLow;
+                } else if (insecTimmerName == insectTimeNormal) {
+                    timmerSpeedInsect = timmeNormal;
+                } else if (insecTimmerName == insectTimeHight) {
+                    timmerSpeedInsect = timmeHight;
+                }
+                idFishTouchInsect = fish.getIdFish();
 
             }
 
         }
 
-        if (timmerSpeedInsect != 0) {
+        if (timmerSpeedInsect != endOfTheCounter) {
             timmerSpeedInsect--;
-            System.out.println(timmerSpeedInsect);
         } else {
-            for (int i = 0; i < Board.get_listFish().size(); i++) {
-                if (Board.get_listFish().get(i).getSpeedFish() == speedUpgrade) {
-                    if (nameFishTouchInsect == "FishBlue") {
-                        Board.get_listFish().get(i).setSpeedFish(7);
-                    } else if (nameFishTouchInsect == "FishPurple") {
-                        Board.get_listFish().get(i).setSpeedFish(6 + Board.get_numberObstacle());
-                    } else {
-                        Board.get_listFish().get(i).setSpeedFish(6);
-                    }
-
-                }
-            }
+            idFishTouchInsect = idFishTouchInsectByDefault;
         }
 
     }

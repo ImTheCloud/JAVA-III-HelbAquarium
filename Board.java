@@ -51,7 +51,7 @@ public class Board extends JPanel implements ActionListener {
     private static String colourFishKeyEvent = "Default";
     // +1 bcs at least 1 (for all +1 in a random)
     private int numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 0);
-    private static int numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 6); // 1,2,3
+    private static int numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 0); // 1,2,3
     private int numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
     private double calculDistance;
     private double closestDistance = Board.getB_WIDTH();
@@ -177,7 +177,7 @@ public class Board extends JPanel implements ActionListener {
         // fishList.add(new FishRed());
         // fishList.add(new FishRed());
 
-        fishList.add(new FishOrange());
+        // fishList.add(new FishOrange());
         fishList.add(new FishOrange());
         // fishList.add(new FishOrange());
         // fishList.add(new FishOrange());

@@ -185,10 +185,12 @@ public class Fish {
             }
 
         } else {
+            // System.out.println(Insect.getIdFishTouchInsect());
+            if (Insect.getIdFishTouchInsect() != Insect.getIdFishTouchInsectByDefault()) {
 
-            if (Insect.getIdFishTouchInsect() != -1) {
                 if (this.idFish == Insect.getIdFishTouchInsect()) {
-                    speedFish = 10;
+                    speedFish = speedUpgrade;
+
                 }
             }
 
@@ -214,6 +216,7 @@ public class Fish {
 
     public void movefishToTarget() {
 
+        // System.out.println(speedFish);
         if (getPos_y_fish() < getPos_y_target()) {
             if (Obstacle.isPosOk() == true) {
                 setPos_y_Fish(getPos_y_fish() + speedFish);

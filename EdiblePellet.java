@@ -120,7 +120,7 @@ public class EdiblePellet {
                 // 10 second and * the number of the fish
                 // because the counter decremente faster when there more fish in the aquarium
 
-                System.out.println(counterToStopMoveFish);
+                // System.out.println(counterToStopMoveFish);
 
                 for (int j = 0; j < Board.get_listFish().size(); j++) {
                     if (Board.get_listFish().get(j).getIdFish() != Board.get_listFish().get(i).getIdFish()) {
@@ -145,7 +145,7 @@ public class EdiblePellet {
 
         } else {
             counterToStopMoveFish--;
-            System.out.println(counterToStopMoveFish);
+            // System.out.println(counterToStopMoveFish);
 
         }
     }
