@@ -172,11 +172,11 @@ public class Fish {
 
     public void update() {
 
-        if (Board.isInsectivorMod() == true) {
+        if (Board.isInsectivorMod()) {
             goToTheClosestInsect();
-        } else if (Board.isPelletMod() == true) {
+        } else if (Board.isPelletMod()) {
             goToTheClosestPellet();
-        } else if (Board.isCoupleMod() == true) {
+        } else if (Board.isCoupleMod()) {
             goToTheClosestFishSameColor();
         }
 
@@ -218,37 +218,23 @@ public class Fish {
 
     public void movefishToTarget() {
 
-        // System.out.println(speedFish);
-        if (getPos_y_fish() < getPos_y_target()) {
-            if (Obstacle.isPosOk() == true) {
-                setPos_y_Fish(getPos_y_fish() + speedFish);
-            } else if (Obstacle.isPosOk() == false) {
-                setPos_x_Fish(getPos_x_fish() + speedFish);
-            }
-        }
-        if (getPos_x_fish() < getPos_x_target()) {
-            if (Obstacle.isPosOk() == true) {
-                setPos_x_Fish(getPos_x_fish() + speedFish);
-            } else if (Obstacle.isPosOk() == false) {
+        if (Obstacle.getIdFishTouchInsect() == this.idFish) {
+
+        } else {
+            if (getPos_y_fish() < getPos_y_target()) {
                 setPos_y_Fish(getPos_y_fish() + speedFish);
             }
-        }
-        if (getPos_x_fish() > getPos_x_target()) {
-            if (Obstacle.isPosOk() == true) {
+            if (getPos_x_fish() < getPos_x_target()) {
+                setPos_x_Fish(getPos_x_fish() + speedFish);
+            }
+            if (getPos_x_fish() > getPos_x_target()) {
                 setPos_x_Fish(getPos_x_fish() - speedFish);
-            } else if (Obstacle.isPosOk() == false) {
-                setPos_y_Fish(getPos_y_fish() + speedFish);
             }
-
-        }
-        if (getPos_y_fish() > getPos_y_target()) {
-            if (Obstacle.isPosOk() == true) {
+            if (getPos_y_fish() > getPos_y_target()) {
                 setPos_y_Fish(getPos_y_fish() - speedFish);
-            } else if (Obstacle.isPosOk() == false) {
-                setPos_x_Fish(getPos_x_fish() + speedFish);
             }
-
         }
+
     }
 
     ///////////////////////////////////

@@ -12,6 +12,7 @@ public class Insect {
     private final int insectNumberThree = 2;
 
     private static int timmerSpeedInsect = 0;
+
     private String insecTimmerName;
     private int pos_x_insect;
     private int pos_y_insect;
@@ -41,6 +42,14 @@ public class Insect {
     ///////////////////////////////////
     // The Get for other class
     //////////////////////////////////
+
+    public static int getTimmerSpeedInsect() {
+        return timmerSpeedInsect;
+    }
+
+    public static void setTimmerSpeedInsect(int timmerSpeedInsect) {
+        Insect.timmerSpeedInsect = timmerSpeedInsect;
+    }
 
     public static int getIdFishTouchInsectByDefault() {
         return idFishTouchInsectByDefault;

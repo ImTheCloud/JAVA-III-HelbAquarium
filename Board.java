@@ -39,13 +39,25 @@ public class Board extends JPanel implements ActionListener {
     private Timer timer = new Timer(Delay, this);
     private final static int B_WIDTH = 1000; // Size screen Width
     private final static int B_HEIGHT = 500; // Size screen Height
-    private final int numberFishDifferentExisting = 4;
+    private final int numberFishDifferentExisting = 5;
     private final int numberInsectmaxInTheGame = 3;
     private final int numberEdiblePelletMaxInTheGame = 3;
-    private final static int numberObstacleMaxInTheGame = 0; // 1,2,3
+    private final static int numberObstacleMaxInTheGame = 3; // 1,2,3
     private final int speedUpgradeFishRed = 11;
     private final int speedSlowFishRed = 3;
     private final int baseSpeedFishRed = 6;
+    private final int endOfTheCounter = 0;
+    private final int numberFishRedByDefault = 2;
+    private final int numberFishBlueByDefault = 2;
+    private final int numberFishPurpleByDefault = 2;
+    private final int numberFishOrangeByDefault = 4;
+    private final static int numberFishAddAfterCouple = 3;
+    private final int randomNumberFishOne = 0;
+    private final int randomNumberFishTwo = 1;
+    private final int randomNumberFishThree = 2;
+    private final int randomNumberFishFour = 3;
+    private final int randomNumberFishFive = 4;
+
     private int keyEvent;
     private int fishColourAddForKeyEvent;
     private static String colourFishKeyEvent = "Default";
@@ -54,7 +66,7 @@ public class Board extends JPanel implements ActionListener {
     private static boolean coupleMod = false;
     // +1 bcs at least 1 (for all +1 in a random)
     private int numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 1);
-    private static int numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 0); // 1,2,3
+    private static int numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 1); // 1,2,3
     private int numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
 
     ///////////////////////////////////
@@ -183,18 +195,21 @@ public class Board extends JPanel implements ActionListener {
     ///////////////////////////////////
 
     private void addFish() {
-        fishList.add(new FishRed());
-        fishList.add(new FishRed());
 
-        fishList.add(new FishOrange());
-        fishList.add(new FishOrange());
-        fishList.add(new FishOrange());
-        fishList.add(new FishOrange());
+        for (int i = 0; i < numberFishRedByDefault; i++) {
+            fishList.add(new FishRed());
+        }
+        for (int i = 0; i < numberFishBlueByDefault; i++) {
+            fishList.add(new FishBlue());
+        }
 
-        fishList.add(new FishBlue());
-        fishList.add(new FishBlue());
-        fishList.add(new FishPurple());
-        fishList.add(new FishPurple());
+        for (int i = 0; i < numberFishPurpleByDefault; i++) {
+            fishList.add(new FishPurple());
+        }
+
+        for (int i = 0; i < numberFishOrangeByDefault; i++) {
+            fishList.add(new FishOrange());
+        }
 
     }
 
@@ -220,31 +235,29 @@ public class Board extends JPanel implements ActionListener {
     ///////////////////////////////////
     // Method for the couple if 2 fish touch each other, 3 others appear
     ///////////////////////////////////
-    public static void addNewFish(String newFish) {
+    public static void addNewFish(String newFishAdd) {
 
-        if (newFish == "FishOrange") {
-            for (int i = 0; i < 3; i++) {
+        if (newFishAdd == "FishOrange") {
+            for (int i = 0; i < numberFishAddAfterCouple; i++) {
                 fishList.add(new FishOrange());
             }
-        } else if (newFish == "FishPurple") {
-            for (int i = 0; i < 3; i++) {
+        } else if (newFishAdd == "FishPurple") {
+            for (int i = 0; i < numberFishAddAfterCouple; i++) {
                 fishList.add(new FishPurple());
             }
 
-        } else if (newFish == "FishRed") {
-            for (int i = 0; i < 3; i++) {
+        } else if (newFishAdd == "FishRed") {
+            for (int i = 0; i < numberFishAddAfterCouple; i++) {
                 fishList.add(new FishRed());
             }
 
-        } else if (newFish == "FishBlue") {
-            for (int i = 0; i < 3; i++) {
+        } else if (newFishAdd == "FishBlue") {
+            for (int i = 0; i < numberFishAddAfterCouple; i++) {
                 fishList.add(new FishBlue());
             }
 
-        } else if (newFish == "FishBlack") {
-
+        } else if (newFishAdd == "FishBlack") {
             fishList.add(new FishBlack());
-
         }
 
     }
@@ -366,10 +379,11 @@ public class Board extends JPanel implements ActionListener {
         ediblePelletList.removeAll(ediblePelletList);
         insectList.removeAll(insectList);
 
-        EdiblePellet.set_counterToStopMoveFish(0);
-        FishRed.setSpeedUpgrade(6);
+        EdiblePellet.set_counterToStopMoveFish(endOfTheCounter);
+        Insect.setTimmerSpeedInsect(endOfTheCounter);
+        FishRed.setSpeedUpgrade(baseSpeedFishRed);
 
-        numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 0);
+        numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 1); // at least 1
         numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 0);
         numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
 
@@ -389,14 +403,16 @@ public class Board extends JPanel implements ActionListener {
     // add fish random colour but not the black
     public void addFishKeyboardKey() {
         fishColourAddForKeyEvent = (int) (Math.random() * numberFishDifferentExisting);
-        if (fishColourAddForKeyEvent == 0) {
+        if (fishColourAddForKeyEvent == randomNumberFishOne) {
             fishList.add(new FishBlue());
-        } else if (fishColourAddForKeyEvent == 1) {
+        } else if (fishColourAddForKeyEvent == randomNumberFishTwo) {
             fishList.add(new FishRed());
-        } else if (fishColourAddForKeyEvent == 2) {
+        } else if (fishColourAddForKeyEvent == randomNumberFishThree) {
             fishList.add(new FishPurple());
-        } else {
+        } else if (fishColourAddForKeyEvent == randomNumberFishFour) {
             fishList.add(new FishOrange());
+        } else if (fishColourAddForKeyEvent == randomNumberFishFive) {
+            fishList.add(new FishBlack());
         }
     }
 

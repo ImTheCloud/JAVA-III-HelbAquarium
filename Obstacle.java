@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Obstacle {
     ///////////////////////////////////
     // The variables
@@ -5,13 +7,25 @@ public class Obstacle {
     private final int hitBoxOBstacleWidth = 40; // / 20 H
     private final int hitBoxOBstacleHeight = 12; // / 20 H
 
-    private int pos_x_obstacle;
+    private static int pos_x_obstacle;
     private int pos_y_obstacle;
-    private static boolean posOk = true;
+    private static boolean fishTouchObstacle = false;
+
+    private final static int idFishTouchInsectByDefault = -1;
+    // by default is -1 because if no fish touch insect = no id Fish
+    private static int idFishTouchInsect = idFishTouchInsectByDefault;
 
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
+
+    public static int getIdFishTouchInsect() {
+        return idFishTouchInsect;
+    }
+
+    public static void setIdFishTouchInsect(int idFishTouchInsect) {
+        Obstacle.idFishTouchInsect = idFishTouchInsect;
+    }
 
     public Obstacle() {
         positionRandomObstacle();
@@ -21,16 +35,16 @@ public class Obstacle {
     // GET
     //////////////////////////////////
 
+    public static boolean isFishTouchObstacle() {
+        return fishTouchObstacle;
+    }
+
     public int getPos_x_obstacle() {
         return pos_x_obstacle;
     }
 
     public int getPos_y_obstacle() {
         return pos_y_obstacle;
-    }
-
-    public static boolean isPosOk() {
-        return posOk;
     }
 
     ///////////////////////////////////
@@ -58,15 +72,23 @@ public class Obstacle {
     // an other random edge
     //////////////////////////////////
     public void obstacleTouched() {
-        posOk = true;
-        for (int i = 0; i < Board.get_listFish().size(); i++) {
-            if ((getPos_x_obstacle() - hitBoxOBstacleWidth <= Board.get_listFish().get(i).getPos_x_fish())
-                    // for x its *2 hitbox bcs width its longer than height
-                    && (getPos_x_obstacle() + hitBoxOBstacleWidth >= Board.get_listFish().get(i).getPos_x_fish())
-                    && (getPos_y_obstacle() - hitBoxOBstacleHeight <= Board.get_listFish().get(i).getPos_y_fish())
-                    && (getPos_y_obstacle() + hitBoxOBstacleHeight >= Board.get_listFish().get(i).getPos_y_fish())) {
+        fishTouchObstacle = false;
+        idFishTouchInsect = idFishTouchInsectByDefault;
+        ArrayList<Fish> get_listFish = Board.get_listFish();
+        for (int i = 0; i < get_listFish.size(); i++) {
 
-                posOk = false;
+            Fish fish = get_listFish.get(i);
+            int pos_x_fish = fish.getPos_x_fish();
+            int pos_y_fish = fish.getPos_y_fish();
+
+            if ((getPos_x_obstacle() - hitBoxOBstacleWidth <= pos_x_fish)
+                    // for x its *2 hitbox bcs width its longer than height
+                    && (getPos_x_obstacle() + hitBoxOBstacleWidth >= pos_x_fish)
+                    && (getPos_y_obstacle() - hitBoxOBstacleHeight <= pos_y_fish)
+                    && (getPos_y_obstacle() + hitBoxOBstacleHeight >= pos_y_fish)) {
+
+                fishTouchObstacle = true;
+                idFishTouchInsect = fish.getIdFish();
 
             }
         }
