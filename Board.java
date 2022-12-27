@@ -195,18 +195,18 @@ public class Board extends JPanel implements ActionListener {
 
     private void addFish() {
 
-        // for (int i = 0; i < numberFishRedByDefault; i++) {
-        // fishList.add(new FishRed());
-        // }
-        // for (int i = 0; i < numberFishBlueByDefault; i++) {
-        // fishList.add(new FishBlue());
-        // }
+        for (int i = 0; i < numberFishRedByDefault; i++) {
+            fishList.add(new FishRed());
+        }
+        for (int i = 0; i < numberFishBlueByDefault; i++) {
+            fishList.add(new FishBlue());
+        }
 
-        // for (int i = 0; i < numberFishPurpleByDefault; i++) {
-        // fishList.add(new FishPurple());
-        // }
+        for (int i = 0; i < numberFishPurpleByDefault; i++) {
+            fishList.add(new FishPurple());
+        }
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < numberFishOrangeByDefault; i++) {
             fishList.add(new FishOrange());
         }
 
