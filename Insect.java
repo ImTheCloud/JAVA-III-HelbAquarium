@@ -12,9 +12,15 @@ public class Insect extends GameFixeElement {
     private static int timmerSpeedInsect = 0;
     private String insecTimmerName;
 
+    private static int idFishTouchInsect = getIdfishtouchelementbydefault();
+
     ///////////////////////////////////
-    // Constructor
+    // Get
     //////////////////////////////////
+
+    public static int getIdFishTouchInsect() {
+        return idFishTouchInsect;
+    }
 
     public Insect() {
         nameTimeSpeedUpgrade();
@@ -98,7 +104,7 @@ public class Insect extends GameFixeElement {
                     timmerSpeedInsect = timeByDefaultHight;
                 }
 
-                setIdFishTouchElement(fish.getIdFish());
+                idFishTouchInsect = fish.getIdFish();
 
             }
 
@@ -107,7 +113,7 @@ public class Insect extends GameFixeElement {
         if (timmerSpeedInsect != getEndofthecounter()) {
             timmerSpeedInsect--;
         } else {
-            setIdFishTouchElement(getIdFishTouchElement());
+            idFishTouchInsect = getIdfishtouchelementbydefault();
         }
 
     }

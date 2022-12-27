@@ -8,14 +8,19 @@ public class EdiblePellet extends GameFixeElement {
     private final int timeFor10second = 120;
     private final static int hitBoxPellet = 15;
     private static int counterToStopMoveFish = 0;
+    private static int idFishTouchPellet = getIdfishtouchelementbydefault();
 
     ///////////////////////////////////
-    // Constructor
+    // Get
     //////////////////////////////////
 
     public EdiblePellet() {
         super.positionRandomElement();
 
+    }
+
+    public static int getIdFishTouchPellet() {
+        return idFishTouchPellet;
     }
 
     public static void set_counterToStopMoveFish(int setCounterToStopMoveFish) {
@@ -61,7 +66,7 @@ public class EdiblePellet extends GameFixeElement {
                 // * the number of the pellet
                 // because the counter decremente faster when there more pellet in the aquarium
 
-                setIdFishTouchElement(fish.getIdFish());
+                idFishTouchPellet = fish.getIdFish();
 
             }
 
@@ -71,7 +76,7 @@ public class EdiblePellet extends GameFixeElement {
             counterToStopMoveFish--;
 
         } else {
-            setIdFishTouchElement(getIdfishtouchelementbydefault());
+            idFishTouchPellet = getIdfishtouchelementbydefault();
 
         }
     }

@@ -2,10 +2,7 @@ public class GameFixeElement {
     private final int hitBoxElement = 20;
     private final static int endOfTheCounter = 0;
     private final static int idFishTouchElementByDefault = -1;
-
     // by default is -1 because if no fish touch insect = no id Fish
-    private static int idFishTouchElement = idFishTouchElementByDefault;
-
     private int pos_x_element;
     private int pos_y_element;
 
@@ -18,14 +15,6 @@ public class GameFixeElement {
     //////////////////////////////////
     public static int getIdfishtouchelementbydefault() {
         return idFishTouchElementByDefault;
-    }
-
-    public static int getIdFishTouchElement() {
-        return idFishTouchElement;
-    }
-
-    public static void setIdFishTouchElement(int idFishTouchElement) {
-        GameFixeElement.idFishTouchElement = idFishTouchElement;
     }
 
     public static int getEndofthecounter() {

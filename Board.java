@@ -57,7 +57,6 @@ public class Board extends JPanel implements ActionListener {
     private final int randomNumberFishThree = 2;
     private final int randomNumberFishFour = 3;
     private final int randomNumberFishFive = 4;
-
     private int keyEvent;
     private int fishColourAddForKeyEvent;
     private static String colourFishKeyEvent = "Default";
@@ -196,18 +195,18 @@ public class Board extends JPanel implements ActionListener {
 
     private void addFish() {
 
-        for (int i = 0; i < numberFishRedByDefault; i++) {
-            fishList.add(new FishRed());
-        }
-        for (int i = 0; i < numberFishBlueByDefault; i++) {
-            fishList.add(new FishBlue());
-        }
+        // for (int i = 0; i < numberFishRedByDefault; i++) {
+        // fishList.add(new FishRed());
+        // }
+        // for (int i = 0; i < numberFishBlueByDefault; i++) {
+        // fishList.add(new FishBlue());
+        // }
 
-        for (int i = 0; i < numberFishPurpleByDefault; i++) {
-            fishList.add(new FishPurple());
-        }
+        // for (int i = 0; i < numberFishPurpleByDefault; i++) {
+        // fishList.add(new FishPurple());
+        // }
 
-        for (int i = 0; i < numberFishOrangeByDefault; i++) {
+        for (int i = 0; i < 2; i++) {
             fishList.add(new FishOrange());
         }
 
@@ -384,7 +383,7 @@ public class Board extends JPanel implements ActionListener {
         FishRed.setSpeedUpgrade(baseSpeedFishRed);
 
         numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 1); // at least 1
-        numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 0);
+        numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 1);
         numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
 
         colourFishKeyEvent = "Default";

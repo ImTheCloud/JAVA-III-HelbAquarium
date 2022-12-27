@@ -187,17 +187,16 @@ public class Fish {
             }
 
         } else {
-            // System.out.println(Insect.getIdFishTouchInsect());
-            if (Insect.getIdFishTouchElement() != Insect.getIdfishtouchelementbydefault()) {
+            if (Insect.getIdFishTouchInsect() != Insect.getIdfishtouchelementbydefault()) {
 
-                if (this.idFish == Insect.getIdFishTouchElement()) {
+                if (this.idFish == Insect.getIdFishTouchInsect()) {
                     speedFish = speedUpgrade;
 
                 }
             }
 
-            if (EdiblePellet.getIdFishTouchElement() != EdiblePellet.getIdfishtouchelementbydefault()) {
-                if (this.idFish == EdiblePellet.getIdFishTouchElement()) {
+            if (EdiblePellet.getIdFishTouchPellet() != EdiblePellet.getIdfishtouchelementbydefault()) {
+                if (this.idFish == EdiblePellet.getIdFishTouchPellet()) {
                     movefishToTarget();
                 }
             } else {

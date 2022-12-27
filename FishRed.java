@@ -29,8 +29,7 @@ public class FishRed extends Fish {
     }
 
     ///////////////////////////////////
-    // If the fish touch a pellet
-    // he will stop every other fish who dont have the same colour than him
+    // if the red fish touch an other fish he kills
     //////////////////////////////////
 
     public void moveFishRed() {
