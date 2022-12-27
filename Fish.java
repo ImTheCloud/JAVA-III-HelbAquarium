@@ -220,8 +220,8 @@ public class Fish {
         // if yes, the fish will go on the right if hes under the obstacle, etc..
         // if not he will just move normal
         int pos_xIncrement = getPos_x_fish() + speedFish;
-        int pos_yIncrement = getPos_y_fish() - speedFish;
-        int pos_yDecrement = getPos_y_fish() + speedFish;
+        int pos_yDecrement = getPos_y_fish() - speedFish;
+        int pos_yIncrement = getPos_y_fish() + speedFish;
         int pos_xDecrement = getPos_x_fish() - speedFish;
 
         if (Obstacle.getIdFishTouchInsect() == this.idFish) {
@@ -240,7 +240,7 @@ public class Fish {
         } else {
             if (getPos_y_fish() < getPos_y_target()) {
 
-                setPos_y_Fish(pos_yDecrement);
+                setPos_y_Fish(pos_yIncrement);
             }
             if (getPos_x_fish() < getPos_x_target()) {
                 setPos_x_Fish(pos_xIncrement);
@@ -250,7 +250,7 @@ public class Fish {
                 setPos_x_Fish(pos_xDecrement);
             }
             if (getPos_y_fish() > getPos_y_target()) {
-                setPos_y_Fish(pos_yIncrement);
+                setPos_y_Fish(pos_yDecrement);
             }
         }
 
