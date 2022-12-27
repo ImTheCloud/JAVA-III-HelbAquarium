@@ -3,16 +3,49 @@ public class EdiblePellet {
     // The variables
     //////////////////////////////////
 
-    private final int milisecond = 100;
+    private final int milisecond = 1000;
     private final static int hitBoxPellet = 7;
     private static int counterToStopMoveFish = 0;
     private static String nameFishTouchPellet;
     private int pos_x_Pellet;
     private int pos_y_Pellet;
+    private static boolean moveOk;
+    private static int counter;
+    private int idFishTouchedPelllet = -1;
+
+    public int getIdFishTouchedPelllet() {
+        return idFishTouchedPelllet;
+    }
+
+    public static int getCounter() {
+        return counter;
+    }
+
+    public static void setCounter(int counter) {
+        EdiblePellet.counter = counter;
+    }
+
+    public static boolean isMoveOk() {
+        return moveOk;
+    }
+
+    public static void setMoveOk(boolean moveOk) {
+        EdiblePellet.moveOk = moveOk;
+    }
+
+    private static int idFishTouchedPellet;
 
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
+
+    public static int getIdFishTouchedPellet() {
+        return idFishTouchedPellet;
+    }
+
+    public static void setIdFishTouchedPellet(int idFishTouchedPellet) {
+        EdiblePellet.idFishTouchedPellet = idFishTouchedPellet;
+    }
 
     public EdiblePellet() {
         positionRandomEdiblePellet();
@@ -74,6 +107,7 @@ public class EdiblePellet {
     ///////////////////////////////////
 
     public void ediblePelletTouchedByAFish() {
+
         for (int i = 0; i < Board.get_listFish().size(); i++) {
 
             // first if its for the hitbox of the pellet
@@ -86,11 +120,33 @@ public class EdiblePellet {
                 // 10 second and * the number of the fish
                 // because the counter decremente faster when there more fish in the aquarium
 
-                nameFishTouchPellet = Board.get_listFish().get(i).getClass().getName();
+                System.out.println(counterToStopMoveFish);
+
+                for (int j = 0; j < Board.get_listFish().size(); j++) {
+                    if (Board.get_listFish().get(j).getIdFish() != Board.get_listFish().get(i).getIdFish()) {
+
+                        idFishTouchedPellet = Board.get_listFish().get(i).getIdFish();
+                        Board.get_listFish().get(j).setMoveStop(true);
+
+                    }
+                }
 
             }
 
         }
-    }
 
+        if (counterToStopMoveFish == 0) {
+            for (int j = 0; j < Board.get_listFish().size(); j++) {
+
+                Board.get_listFish().get(j).setMoveStop(false);
+                idFishTouchedPellet = -1;
+
+            }
+
+        } else {
+            counterToStopMoveFish--;
+            System.out.println(counterToStopMoveFish);
+
+        }
+    }
 }

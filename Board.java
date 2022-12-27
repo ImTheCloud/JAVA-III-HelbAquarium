@@ -40,7 +40,7 @@ public class Board extends JPanel implements ActionListener {
     private final static int B_WIDTH = 1000; // Size screen Width
     private final static int B_HEIGHT = 500; // Size screen Height
     private final int numberFishDifferentExisting = 4;
-    private final int numberInsectmaxInTheGame = 3;
+    private final int numberInsectmaxInTheGame = 0;
     private final int numberEdiblePelletMaxInTheGame = 3;
     private final static int numberObstacleMaxInTheGame = 0; // 1,2,3
     private final int speedUpgradeFishRed = 11;
@@ -50,8 +50,8 @@ public class Board extends JPanel implements ActionListener {
     private int fishColourAddForKeyEvent;
     private static String colourFishKeyEvent = "Default";
     // +1 bcs at least 1 (for all +1 in a random)
-    private int numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 1);
-    private static int numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 0); // 1,2,3
+    private int numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 0);
+    private static int numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 6); // 1,2,3
     private int numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
     private double calculDistance;
     private double closestDistance = Board.getB_WIDTH();
@@ -174,18 +174,18 @@ public class Board extends JPanel implements ActionListener {
     ///////////////////////////////////
 
     private void addFish() {
-        fishList.add(new FishRed());
-        fishList.add(new FishRed());
+        // fishList.add(new FishRed());
+        // fishList.add(new FishRed());
 
         fishList.add(new FishOrange());
         fishList.add(new FishOrange());
-        fishList.add(new FishOrange());
-        fishList.add(new FishOrange());
+        // fishList.add(new FishOrange());
+        // fishList.add(new FishOrange());
 
-        fishList.add(new FishBlue());
-        fishList.add(new FishBlue());
-        fishList.add(new FishPurple());
-        fishList.add(new FishPurple());
+        // fishList.add(new FishBlue());
+        // fishList.add(new FishBlue());
+        // fishList.add(new FishPurple());
+        // fishList.add(new FishPurple());
 
     }
 
@@ -360,7 +360,7 @@ public class Board extends JPanel implements ActionListener {
         EdiblePellet.set_counterToStopMoveFish(0);
         FishRed.setSpeedUpgrade(6);
 
-        numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 1);
+        numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 0);
         numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 0);
         numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
 
@@ -492,7 +492,7 @@ public class Board extends JPanel implements ActionListener {
                 ediblePelletList.add(new EdiblePellet());
             }
             if (keyEvent == KeyEvent.VK_6) {
-                goToTheClosestInsect();
+                // Fish.goToTheClosestInsect();
             }
             if (keyEvent == KeyEvent.VK_7) {
                 goToTheClosestPellet();

@@ -9,7 +9,8 @@ public class FishPurple extends Fish {
     // Constructor
     //////////////////////////////////
     public FishPurple() {
-        set_speedFish(speedFish);
+
+        setSpeedFish(speedFish);
     }
 
     ///////////////////////////////////

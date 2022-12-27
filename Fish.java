@@ -1,3 +1,4 @@
+
 public class Fish {
     ///////////////////////////////////
     // The variables
@@ -6,7 +7,7 @@ public class Fish {
     private final int counterDecrement = 1;
     private final static int sizeFish = 20; // 20 beacause its the zise of the fish
     private final static int hitBoxFish = 12; // 12 bcs if the speed upgrade to 11, the hitbox need to be bigger
-    private final int speedUpgrade = 10; // 10 if a fish touch a insect
+    final int speedUpgrade = 10; // 10 if a fish touch a insect
     protected final static int screen_W = Board.getB_WIDTH() - sizeFish;
     // protected, this variable can be used in other class extends the fish
     // - sizeFish, if not its possible to see the fish halfway
@@ -16,7 +17,8 @@ public class Fish {
     private int pos_y_Fish;
     private int pos_x_target; // target of every fish
     private int pos_y_target;
-    private int speedFish; // important to put the good speed for every fish
+    private static int speedFish; // important to put the good speed for every fish
+
     private double calculDistance = 0;
     private double closestDistance = Board.getB_WIDTH();
     // by default its the width but when the calcul start the closest
@@ -28,10 +30,19 @@ public class Fish {
     private int idTargetDeathFish;
     private int chanceToCouplingFish;
     private int coupleFishOk;
+    private static boolean moveStop;
 
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
+
+    public static boolean isMoveStop() {
+        return moveStop;
+    }
+
+    public void setMoveStop(boolean moveStop) {
+        Fish.moveStop = moveStop;
+    }
 
     public Fish() {
         positionFish(); // put a random position for every fish
@@ -110,12 +121,12 @@ public class Fish {
     }
 
     // speed
-    public int get_SpeedFish() {
+    public int getSpeedFish() {
         return speedFish;
     }
 
-    public void set_speedFish(int speedFish) {
-        this.speedFish = speedFish;
+    public void setSpeedFish(int speedFish) {
+        Fish.speedFish = speedFish;
     }
 
     // Fish
@@ -166,7 +177,31 @@ public class Fish {
     //////////////////////////////////
 
     public void update() {
-        movefishToTarget();
+
+        if (Board.get_colourFishKeyPressed() != "Default") {
+
+            if (this.getClass().getName() == Board.get_colourFishKeyPressed()) {
+                this.movefishToTarget();
+            }
+
+        } else {
+
+            if (Insect.getIdFishTouchInsect() != -1) {
+                if (this.idFish == Insect.getIdFishTouchInsect()) {
+                    speedFish = 10;
+                }
+            }
+
+            if (EdiblePellet.getIdFishTouchedPellet() != -1) {
+                if (this.idFish == EdiblePellet.getIdFishTouchedPellet()) {
+                    movefishToTarget();
+                }
+            } else {
+                movefishToTarget();
+            }
+
+        }
+
         couplingFish();
     }
 
@@ -257,23 +292,24 @@ public class Fish {
         }
     }
 
-    ///////////////////////////////////
-    // Method for the Pellet
-    //////////////////////////////////
+    public void goToTheClosestInsect() {
 
-    public void pelletTouchedByAFish() {
-        if (EdiblePellet.get_counterToStopMoveFish() != getEndOfTheCounter()) {
-            EdiblePellet.set_counterToStopMoveFish(EdiblePellet.get_counterToStopMoveFish() - getCounterDecrement());
+        for (int i = 0; i < Board.get_listFish().size(); i++) {
 
-            if ("FishOrange" == EdiblePellet.get_NameFishTouchPellet()) {
-                movefishToTarget();
-            } else if ("FishBlue" == EdiblePellet.get_NameFishTouchPellet()) {
+            x = Board.get_insectList().get(i).getPos_x_insect() - this.getPos_x_fish();
+            y = Board.get_insectList().get(i).getPos_y_insect() - this.getPos_y_fish();
+            calculDistance = Math.sqrt(x * x + y * y);
 
-            } else if ("FishRed" == EdiblePellet.get_NameFishTouchPellet()) {
+            if (closestDistance > calculDistance) {
+                closestDistance = calculDistance;
 
-            } else if ("FishPurple" == EdiblePellet.get_NameFishTouchPellet()) {
+                setPos_x_target(Board.get_insectList().get(i).getPos_x_insect());
+                setPos_y_target(Board.get_insectList().get(i).getPos_y_insect());
 
             }
         }
+        closestDistance = Board.getB_WIDTH();
+
     }
+
 }

@@ -2,7 +2,6 @@ public class FishRed extends Fish {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-    private final int key3Press = 10;// 10 its the upgrade speed of the fish red, when key 3 its pressed
     private static int speedFish = 6;
 
     ///////////////////////////////////
@@ -23,7 +22,7 @@ public class FishRed extends Fish {
 
     @Override
     public void update() {
-        set_speedFish(speedFish);
+        setSpeedFish(speedFish);
         moveFishRed();
     }
 

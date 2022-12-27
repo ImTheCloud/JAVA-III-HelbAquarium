@@ -11,10 +11,34 @@ public class Insect {
     private int pos_x_insect;
     private int pos_y_insect;
     private int randomInsectTimmer = (int) (Math.random() * 3);
+    private static boolean insectTouched = false;
+    private Fish fishTouchedTheInsect;
+    private int speedUpgrade = 10;
+    private static int idFishTouchInsect = -1;
 
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
+
+    public static int getIdFishTouchInsect() {
+        return idFishTouchInsect;
+    }
+
+    public Fish getFishTouchedTheInsect() {
+        return fishTouchedTheInsect;
+    }
+
+    public void setFishTouchedTheInsect(Fish fishTouchedTheInsect) {
+        this.fishTouchedTheInsect = fishTouchedTheInsect;
+    }
+
+    public static boolean isInsectTouched() {
+        return insectTouched;
+    }
+
+    public static void setInsectTouched(boolean insectTouched) {
+        Insect.insectTouched = insectTouched;
+    }
 
     public Insect() {
         positionRandomInsect();
@@ -53,6 +77,7 @@ public class Insect {
     //////////////////////////////////
 
     public void update() {
+
         insectTouchedbyAInsect();
     }
 
@@ -92,9 +117,11 @@ public class Insect {
     ///////////////////////////////////
 
     public void insectTouchedbyAInsect() {
+
         ArrayList<Fish> get_listFish = Board.get_listFish();
 
         for (int i = 0; i < get_listFish.size(); i++) {
+
             Fish fish = get_listFish.get(i);
             int pos_x_fish = fish.getPos_x_fish();
             int pos_y_fish = fish.getPos_y_fish();
@@ -104,20 +131,40 @@ public class Insect {
                     && (getPos_y_insect() - hitBoxInsect <= pos_y_fish)
                     && (getPos_y_insect() + hitBoxInsect >= pos_y_fish)) {
 
-                nameFishTouchInsect = fish.getClass().getName();
-
+                nameFishTouchInsect = Board.get_listFish().getClass().getName();
                 if (insecTimmerName == "timmerLow") {
-                    timmerSpeedInsect = 100;
+                    timmerSpeedInsect = 1000;
                 } else if (insecTimmerName == "timmerNormal") {
-                    timmerSpeedInsect = 150;
+                    timmerSpeedInsect = 1500;
                 } else {
-                    timmerSpeedInsect = 200;
+                    timmerSpeedInsect = 2000;
                 }
                 positionRandomInsect();
+                idFishTouchInsect = Board.get_listFish().get(i).getIdFish();
+                Board.get_listFish().get(i).setSpeedFish(45);
 
             }
 
         }
+
+        if (timmerSpeedInsect != 0) {
+            timmerSpeedInsect--;
+            System.out.println(timmerSpeedInsect);
+        } else {
+            for (int i = 0; i < Board.get_listFish().size(); i++) {
+                if (Board.get_listFish().get(i).getSpeedFish() == speedUpgrade) {
+                    if (nameFishTouchInsect == "FishBlue") {
+                        Board.get_listFish().get(i).setSpeedFish(7);
+                    } else if (nameFishTouchInsect == "FishPurple") {
+                        Board.get_listFish().get(i).setSpeedFish(6 + Board.get_numberObstacle());
+                    } else {
+                        Board.get_listFish().get(i).setSpeedFish(6);
+                    }
+
+                }
+            }
+        }
+
     }
 
 }

@@ -13,8 +13,11 @@ public class FishOrange extends Fish {
 
     @Override
     public void update() {
-        set_speedFish(speedFish);
+
+        setSpeedFish(speedFish);
+
         moveFishOrange();
+
     }
 
     ///////////////////////////////////

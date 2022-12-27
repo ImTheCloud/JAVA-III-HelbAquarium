@@ -10,30 +10,16 @@ public class FishBlack extends Fish {
 
     @Override
     public void update() {
-        ifTheBlackFishTouchAnInsect();
-    }
-    ///////////////////////////////////
-    // If the fish touch an insect
-    // hes speed upgrade for a definite time in the class insect
-    //////////////////////////////////
-
-    public void ifTheBlackFishTouchAnInsect() {
-        if (Insect.get_timmerSpeedFish() != getEndOfTheCounter() && Insect.getNameFishTouchInsect() == "FishBlack") {
-            set_speedFish(getSpeedUpgrade()); // boost speed 10
-            killFishRed();
-            Insect.set_timmerSpeedFish(Insect.get_timmerSpeedFish() - getCounterDecrement());
-        } else {
-            set_speedFish(speedFish); // base speed
-            killFishRed();
-        }
+        setSpeedFish(speedFish);
+        moveFishBlack();
     }
 
     ///////////////////////////////////
     // the fish will follow the closest fish red and he will kill him
     //////////////////////////////////
-    public void killFishRed() {
+    public void moveFishBlack() {
 
-        closestFish();
+        closestFishRed();
 
         if ((getPos_x_fish() >= getPos_x_target() - getHitBoxFish())
                 && (getPos_x_fish() <= getPos_x_target() + getHitBoxFish())
@@ -49,7 +35,7 @@ public class FishBlack extends Fish {
     // method to calculate the closest fish red
     //////////////////////////////////
 
-    private void closestFish() {
+    private void closestFishRed() {
 
         for (int i = 0; i < Board.get_listFish().size(); i++) {
 
