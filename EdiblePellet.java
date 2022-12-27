@@ -1,47 +1,21 @@
 import java.util.ArrayList;
 
-public class EdiblePellet {
+public class EdiblePellet extends GameFixeElement {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-    private final int endOfTheCounter = 0;
-    private final int milisecond = 115;
-    private final static int hitBoxPellet = 7;
-    private static int counterToStopMoveFish = 0;
-    private int pos_x_Pellet;
-    private int pos_y_Pellet;
 
-    private final static int idFishTouchPelletByDefault = -1;
-    // by default is -1 because if no fish touch insect = no id Fish
-    private static int idFishTouchedPellet = idFishTouchPelletByDefault;
+    private final int timeFor10second = 120;
+    private final static int hitBoxPellet = 15;
+    private static int counterToStopMoveFish = 0;
 
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
 
     public EdiblePellet() {
-        positionRandomEdiblePellet();
+        super.positionRandomElement();
 
-    }
-
-    ///////////////////////////////////
-    // Get and Set used
-    //////////////////////////////////
-
-    public static int getIdFishTouchedPellet() {
-        return idFishTouchedPellet;
-    }
-
-    public static int getIdfishtouchpelletbydefault() {
-        return idFishTouchPelletByDefault;
-    }
-
-    public int getPos_x_pellet() {
-        return pos_x_Pellet;
-    }
-
-    public int getPos_y_pellet() {
-        return pos_y_Pellet;
     }
 
     public static void set_counterToStopMoveFish(int setCounterToStopMoveFish) {
@@ -55,17 +29,6 @@ public class EdiblePellet {
 
     public void update() {
         ediblePelletTouchedByAFish();
-    }
-
-    ///////////////////////////////////
-    // Method for put a Pellet in a random position ah the beginning
-    //////////////////////////////////
-
-    public void positionRandomEdiblePellet() {
-        pos_x_Pellet = (int) (Math.random() * Board.getB_WIDTH() - hitBoxPellet);
-        pos_y_Pellet = (int) (Math.random() * Board.getB_HEIGHT() - hitBoxPellet);
-        // - hitbox, if not its possible to see the pellet halfway
-        // if is appear at the limit of the screen
     }
 
     ///////////////////////////////////
@@ -87,27 +50,28 @@ public class EdiblePellet {
             int pos_x_fish = fish.getPos_x_fish();
             int pos_y_fish = fish.getPos_y_fish();
 
-            if ((pos_x_fish - hitBoxPellet <= pos_x_Pellet)
-                    && (pos_x_fish + hitBoxPellet >= pos_x_Pellet)
-                    && (pos_y_fish - hitBoxPellet <= pos_y_Pellet)
-                    && (pos_y_fish + hitBoxPellet >= pos_y_Pellet)) {
+            if ((pos_x_fish - hitBoxPellet <= getPos_x_element())
+                    && (pos_x_fish + hitBoxPellet >= getPos_x_element())
+                    && (pos_y_fish - hitBoxPellet <= getPos_y_element())
+                    && (pos_y_fish + hitBoxPellet >= getPos_y_element())) {
 
-                positionRandomEdiblePellet();
-                counterToStopMoveFish = milisecond * Board.get_ediblePellet_list().size();
+                super.positionRandomElement();
+
+                counterToStopMoveFish = timeFor10second * Board.get_ediblePellet_list().size();
                 // * the number of the pellet
                 // because the counter decremente faster when there more pellet in the aquarium
 
-                idFishTouchedPellet = fish.getIdFish();
+                setIdFishTouchElement(fish.getIdFish());
 
             }
 
         }
 
-        if (counterToStopMoveFish != endOfTheCounter) {
+        if (counterToStopMoveFish != getEndofthecounter()) {
             counterToStopMoveFish--;
 
         } else {
-            idFishTouchedPellet = idFishTouchPelletByDefault;
+            setIdFishTouchElement(getIdfishtouchelementbydefault());
 
         }
     }

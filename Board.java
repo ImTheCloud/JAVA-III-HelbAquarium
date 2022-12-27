@@ -302,22 +302,22 @@ public class Board extends JPanel implements ActionListener {
 
     private void drawInsect(Graphics g) {
         for (int i = 0; i < insectList.size(); i++) {
-            g.drawImage(insectBlackImage, insectList.get(i).getPos_x_insect(), insectList.get(i).getPos_y_insect(),
+            g.drawImage(insectBlackImage, insectList.get(i).getPos_x_element(), insectList.get(i).getPos_y_element(),
                     this);
         }
     }
 
     private void drawObstacle(Graphics g) {
         for (int i = 0; i < obstacleList.size(); i++) {
-            g.drawImage(obstacleImage, obstacleList.get(i).getPos_x_obstacle(),
-                    obstacleList.get(i).getPos_y_obstacle(), this);
+            g.drawImage(obstacleImage, obstacleList.get(i).getPos_x_element(),
+                    obstacleList.get(i).getPos_y_element(), this);
         }
     }
 
     private void drawEdiblePellet(Graphics g) {
         for (int i = 0; i < ediblePelletList.size(); i++) {
-            g.drawImage(ediblePelletImage, ediblePelletList.get(i).getPos_x_pellet(),
-                    ediblePelletList.get(i).getPos_y_pellet(), this);
+            g.drawImage(ediblePelletImage, ediblePelletList.get(i).getPos_x_element(),
+                    ediblePelletList.get(i).getPos_y_element(), this);
         }
     }
 

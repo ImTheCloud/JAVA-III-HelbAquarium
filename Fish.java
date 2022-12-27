@@ -188,16 +188,16 @@ public class Fish {
 
         } else {
             // System.out.println(Insect.getIdFishTouchInsect());
-            if (Insect.getIdFishTouchInsect() != Insect.getIdFishTouchInsectByDefault()) {
+            if (Insect.getIdFishTouchElement() != Insect.getIdfishtouchelementbydefault()) {
 
-                if (this.idFish == Insect.getIdFishTouchInsect()) {
+                if (this.idFish == Insect.getIdFishTouchElement()) {
                     speedFish = speedUpgrade;
 
                 }
             }
 
-            if (EdiblePellet.getIdFishTouchedPellet() != EdiblePellet.getIdfishtouchpelletbydefault()) {
-                if (this.idFish == EdiblePellet.getIdFishTouchedPellet()) {
+            if (EdiblePellet.getIdFishTouchElement() != EdiblePellet.getIdfishtouchelementbydefault()) {
+                if (this.idFish == EdiblePellet.getIdFishTouchElement()) {
                     movefishToTarget();
                 }
             } else {
@@ -339,8 +339,8 @@ public class Fish {
 
             Insect insect = get_insectList.get(i);
 
-            int pos_x_insect = insect.getPos_x_insect();
-            int pos_y_insect = insect.getPos_y_insect();
+            int pos_x_insect = insect.getPos_x_element();
+            int pos_y_insect = insect.getPos_y_element();
 
             x = pos_x_insect - this.getPos_x_fish();
             y = pos_y_insect - this.getPos_y_fish();
@@ -369,8 +369,8 @@ public class Fish {
 
             EdiblePellet pellet = gEdiblePellets.get(i);
 
-            int pos_x_pellet = pellet.getPos_x_pellet();
-            int pos_y_pellet = pellet.getPos_y_pellet();
+            int pos_x_pellet = pellet.getPos_x_element();
+            int pos_y_pellet = pellet.getPos_y_element();
 
             x = pos_x_pellet - this.getPos_x_fish();
             y = pos_y_pellet - this.getPos_y_fish();

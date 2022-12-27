@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Insect {
+public class Insect extends GameFixeElement {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
@@ -9,34 +9,16 @@ public class Insect {
     private int randomInsectTimmer = (int) (Math.random() * numberOfInsect);
     private final int insectNumberOne = 0;
     private final int insectNumberTwo = 1;
-    private final int insectNumberThree = 2;
-
     private static int timmerSpeedInsect = 0;
-
     private String insecTimmerName;
-    private int pos_x_insect;
-    private int pos_y_insect;
-
-    private final static int idFishTouchInsectByDefault = -1;
-    // by default is -1 because if no fish touch insect = no id Fish
-    private static int idFishTouchInsect = idFishTouchInsectByDefault;
-
-    private int timmeLow = 100 * Board.get_insectList().size();
-    private int timmeNormal = 200 * Board.get_insectList().size();
-    private int timmeHight = 300 * Board.get_insectList().size();
-
-    private final String insectTimeLow = "timmerLow";
-    private final String insectTimeNormal = "timmerNormal";
-    private final String insectTimeHight = "timmerHight";
-
-    private final int endOfTheCounter = 0;
 
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
 
     public Insect() {
-        positionRandomInsect();
+        nameTimeSpeedUpgrade();
+        super.positionRandomElement();
     }
 
     ///////////////////////////////////
@@ -51,28 +33,12 @@ public class Insect {
         Insect.timmerSpeedInsect = timmerSpeedInsect;
     }
 
-    public static int getIdFishTouchInsectByDefault() {
-        return idFishTouchInsectByDefault;
-    }
-
-    public int getPos_x_insect() {
-        return pos_x_insect;
-    }
-
-    public int getPos_y_insect() {
-        return pos_y_insect;
-    }
-
-    public static int getIdFishTouchInsect() {
-        return idFishTouchInsect;
-    }
-
     ///////////////////////////////////
     // Method update called in Board for do something every x milisecond (timer)
     //////////////////////////////////
 
     public void update() {
-        nameTimeSpeedUpgrade();
+
         insectTouchedbyAInsect();
     }
 
@@ -83,26 +49,16 @@ public class Insect {
     //////////////////////////////////
 
     public void nameTimeSpeedUpgrade() {
+        randomInsectTimmer = (int) (Math.random() * numberOfInsect);
         if (randomInsectTimmer == insectNumberOne) {
             // its a random in 0,1,2 number of insect if the random its 0, the timmer will
             // be low, etc...
-            insecTimmerName = insectTimeLow;
+            insecTimmerName = "timmerLow";
         } else if (randomInsectTimmer == insectNumberTwo) {
-            insecTimmerName = insectTimeNormal;
-        } else if (randomInsectTimmer == insectNumberThree) {
-            insecTimmerName = insectTimeHight;
+            insecTimmerName = "timmerNormal";
+        } else {
+            insecTimmerName = "timmerHight";
         }
-    }
-
-    ///////////////////////////////////
-    // Method for put a insect in a random position at the beginning
-    //////////////////////////////////
-
-    public void positionRandomInsect() {
-        pos_x_insect = (int) (Math.random() * Board.getB_WIDTH() - hitBoxInsect);
-        pos_y_insect = (int) (Math.random() * Board.getB_HEIGHT() - hitBoxInsect);
-        // - hitbox, if not its possible to see the insect halfway
-        // if is appear at the limit of the screen
     }
 
     ///////////////////////////////////
@@ -116,35 +72,42 @@ public class Insect {
 
         ArrayList<Fish> get_listFish = Board.get_listFish();
 
-        for (int i = 0; i < get_listFish.size(); i++) {
+        int sizeListFish = get_listFish.size();
+        for (int i = 0; i < sizeListFish; i++) {
 
             Fish fish = get_listFish.get(i);
             int pos_x_fish = fish.getPos_x_fish();
             int pos_y_fish = fish.getPos_y_fish();
 
-            if ((getPos_x_insect() - hitBoxInsect <= pos_x_fish)
-                    && (getPos_x_insect() + hitBoxInsect >= pos_x_fish)
-                    && (getPos_y_insect() - hitBoxInsect <= pos_y_fish)
-                    && (getPos_y_insect() + hitBoxInsect >= pos_y_fish)) {
-                positionRandomInsect();
+            if ((getPos_x_element() - hitBoxInsect <= pos_x_fish)
+                    && (getPos_x_element() + hitBoxInsect >= pos_x_fish)
+                    && (getPos_y_element() - hitBoxInsect <= pos_y_fish)
+                    && (getPos_y_element() + hitBoxInsect >= pos_y_fish)) {
 
-                if (insecTimmerName == insectTimeLow) {
-                    timmerSpeedInsect = timmeLow;
-                } else if (insecTimmerName == insectTimeNormal) {
-                    timmerSpeedInsect = timmeNormal;
-                } else if (insecTimmerName == insectTimeHight) {
-                    timmerSpeedInsect = timmeHight;
+                super.positionRandomElement();
+
+                if (insecTimmerName == "timmerLow") {
+                    int timeByDefaultlow = 100 * sizeListFish;
+                    // important to let variable local, if not the condition will not work
+                    timmerSpeedInsect = timeByDefaultlow * sizeListFish;
+                } else if (insecTimmerName == "timmerNormal") {
+                    int timeByDefaultNormal = 200 * sizeListFish;
+                    timmerSpeedInsect = timeByDefaultNormal;
+                } else {
+                    int timeByDefaultHight = 300 * sizeListFish;
+                    timmerSpeedInsect = timeByDefaultHight;
                 }
-                idFishTouchInsect = fish.getIdFish();
+
+                setIdFishTouchElement(fish.getIdFish());
 
             }
 
         }
 
-        if (timmerSpeedInsect != endOfTheCounter) {
+        if (timmerSpeedInsect != getEndofthecounter()) {
             timmerSpeedInsect--;
         } else {
-            idFishTouchInsect = idFishTouchInsectByDefault;
+            setIdFishTouchElement(getIdFishTouchElement());
         }
 
     }
