@@ -53,12 +53,6 @@ public class Board extends JPanel implements ActionListener {
     private int numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 0);
     private static int numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 0); // 1,2,3
     private int numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
-    private double calculDistance;
-    private double closestDistance = Board.getB_WIDTH();
-    // by default its the width but when the calcul start the closest
-    // distance become the closest distance of the fish
-    private int x;// calcul for the closest distance
-    private int y;
 
     ///////////////////////////////////
     // The Array lists
@@ -174,18 +168,18 @@ public class Board extends JPanel implements ActionListener {
     ///////////////////////////////////
 
     private void addFish() {
-        // fishList.add(new FishRed());
-        // fishList.add(new FishRed());
+        fishList.add(new FishRed());
+        fishList.add(new FishRed());
 
-        // fishList.add(new FishOrange());
         fishList.add(new FishOrange());
-        // fishList.add(new FishOrange());
-        // fishList.add(new FishOrange());
+        fishList.add(new FishOrange());
+        fishList.add(new FishOrange());
+        fishList.add(new FishOrange());
 
-        // fishList.add(new FishBlue());
-        // fishList.add(new FishBlue());
-        // fishList.add(new FishPurple());
-        // fishList.add(new FishPurple());
+        fishList.add(new FishBlue());
+        fishList.add(new FishBlue());
+        fishList.add(new FishPurple());
+        fishList.add(new FishPurple());
 
     }
 
@@ -386,79 +380,6 @@ public class Board extends JPanel implements ActionListener {
         }
     }
 
-    // every fish go to the closest insect
-    public void goToTheClosestInsect() {
-        if (EdiblePellet.get_NameFishTouchPellet() == "FishRed" || colourFishKeyEvent == "FishRed") {
-            for (int j = 0; j < get_listFish().size(); j++) {
-                if (get_listFish().getClass().getName() == "FishRed") {
-                    for (int i = 0; i < get_insectList().size(); i++) {
-                        x = get_insectList().get(i).getPos_x_insect() - get_listFish().get(j).getPos_x_fish();
-                        y = get_insectList().get(i).getPos_y_insect() - get_listFish().get(j).getPos_y_fish();
-                        calculDistance = Math.sqrt(x * x + y * y);
-
-                        if (closestDistance > calculDistance) {
-                            closestDistance = calculDistance;
-
-                            // here it was the set of the target position Fish, they would have taken the
-                            // closest pos insect
-                        }
-                    }
-                }
-
-            }
-            closestDistance = Board.getB_WIDTH();
-        }
-    }
-    // every fish go to the closest pellet
-
-    public void goToTheClosestPellet() {
-        if (EdiblePellet.get_NameFishTouchPellet() == "FishRed" || colourFishKeyEvent == "FishRed") {
-            for (int j = 0; j < get_listFish().size(); j++) {
-                if (get_listFish().getClass().getName() == "FishRed") {
-                    for (int i = 0; i < get_ediblePellet_list().size(); i++) {
-                        x = get_ediblePellet_list().get(i).getPos_x_pellet() - get_listFish().get(j).getPos_x_fish();
-                        y = get_ediblePellet_list().get(i).getPos_y_pellet() - get_listFish().get(j).getPos_y_fish();
-                        calculDistance = Math.sqrt(x * x + y * y);
-
-                        if (closestDistance > calculDistance) {
-                            closestDistance = calculDistance;
-                            // here it was the set of the target position Fish, they would have taken the
-                            // closest pos pellet
-
-                        }
-                    }
-                }
-            }
-            closestDistance = Board.getB_WIDTH();
-        }
-    }
-
-    // every fish go to the closest fish ( same colour)
-    public void goToTheClosestFishSameColour() {
-
-        if (EdiblePellet.get_NameFishTouchPellet() == "FishRed" || colourFishKeyEvent == "FishRed") {
-
-            for (int j = 0; j < get_listFish().size(); j++) {
-                if (get_listFish().getClass().getName() == "FishRed") {
-                    for (int i = 0; i < get_listFish().size(); i++) {
-                        x = get_listFish().get(i).getPos_x_fish() - get_listFish().get(i).getPos_x_fish();
-                        y = get_listFish().get(i).getPos_y_fish() - get_listFish().get(i).getPos_y_fish();
-                        calculDistance = Math.sqrt(x * x + y * y);
-
-                        if (closestDistance > calculDistance) {
-                            closestDistance = calculDistance;
-
-                            // here it was the set of the target position Fish, they would have taken the
-                            // closest pos fish
-
-                        }
-                    }
-                }
-            }
-            closestDistance = Board.getB_WIDTH();
-        }
-    }
-
     ///////////////////////////////////
     // keyboard key
     ///////////////////////////////////
@@ -495,10 +416,10 @@ public class Board extends JPanel implements ActionListener {
                 // Fish.goToTheClosestInsect();
             }
             if (keyEvent == KeyEvent.VK_7) {
-                goToTheClosestPellet();
+
             }
             if (keyEvent == KeyEvent.VK_8) {
-                goToTheClosestFishSameColour();
+
             }
             if (keyEvent == KeyEvent.VK_9) { // add fish random
                 addFishKeyboardKey();

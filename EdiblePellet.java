@@ -1,51 +1,23 @@
+import java.util.ArrayList;
+
 public class EdiblePellet {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-
-    private final int milisecond = 1000;
+    private final int endOfTheCounter = 0;
+    private final int milisecond = 115;
     private final static int hitBoxPellet = 7;
     private static int counterToStopMoveFish = 0;
-    private static String nameFishTouchPellet;
     private int pos_x_Pellet;
     private int pos_y_Pellet;
-    private static boolean moveOk;
-    private static int counter;
-    private int idFishTouchedPelllet = -1;
 
-    public int getIdFishTouchedPelllet() {
-        return idFishTouchedPelllet;
-    }
-
-    public static int getCounter() {
-        return counter;
-    }
-
-    public static void setCounter(int counter) {
-        EdiblePellet.counter = counter;
-    }
-
-    public static boolean isMoveOk() {
-        return moveOk;
-    }
-
-    public static void setMoveOk(boolean moveOk) {
-        EdiblePellet.moveOk = moveOk;
-    }
-
-    private static int idFishTouchedPellet;
+    private final static int idFishTouchPelletByDefault = -1;
+    // by default is -1 because if no fish touch insect = no id Fish
+    private static int idFishTouchedPellet = idFishTouchPelletByDefault;
 
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
-
-    public static int getIdFishTouchedPellet() {
-        return idFishTouchedPellet;
-    }
-
-    public static void setIdFishTouchedPellet(int idFishTouchedPellet) {
-        EdiblePellet.idFishTouchedPellet = idFishTouchedPellet;
-    }
 
     public EdiblePellet() {
         positionRandomEdiblePellet();
@@ -56,20 +28,20 @@ public class EdiblePellet {
     // Get and Set used
     //////////////////////////////////
 
+    public static int getIdFishTouchedPellet() {
+        return idFishTouchedPellet;
+    }
+
+    public static int getIdfishtouchpelletbydefault() {
+        return idFishTouchPelletByDefault;
+    }
+
     public int getPos_x_pellet() {
         return pos_x_Pellet;
     }
 
     public int getPos_y_pellet() {
         return pos_y_Pellet;
-    }
-
-    static int get_counterToStopMoveFish() {
-        return counterToStopMoveFish;
-    }
-
-    static String get_NameFishTouchPellet() { // see wich fish touched the pellet
-        return nameFishTouchPellet;
     }
 
     public static void set_counterToStopMoveFish(int setCounterToStopMoveFish) {
@@ -100,52 +72,42 @@ public class EdiblePellet {
     // If a fish touch a pellet he eats it and another pellet appears in a random
     // not for the fish black
     // a counter is put when a pellet is touched
-    // milisecond its multiplicate by the number of the fish in the listFish because
-    // its a change when they are several fish ( its for to have 10 second )
+    // milisecond its multiplicate by the number of the pellet in the listPellet
+    // because its change when they are several pelet ( its for to have 10 second )
     // the method take the name of the fish whou touched the pellet
     // for know that fish will continue to move
     ///////////////////////////////////
 
     public void ediblePelletTouchedByAFish() {
 
-        for (int i = 0; i < Board.get_listFish().size(); i++) {
+        ArrayList<Fish> get_listFish = Board.get_listFish();
+        for (int i = 0; i < get_listFish.size(); i++) {
 
-            // first if its for the hitbox of the pellet
-            if ((Board.get_listFish().get(i).getPos_x_fish() - hitBoxPellet <= getPos_x_pellet())
-                    && (Board.get_listFish().get(i).getPos_x_fish() + hitBoxPellet >= getPos_x_pellet())
-                    && (Board.get_listFish().get(i).getPos_y_fish() - hitBoxPellet <= getPos_y_pellet())
-                    && (Board.get_listFish().get(i).getPos_y_fish() + hitBoxPellet >= getPos_y_pellet())) {
+            Fish fish = get_listFish.get(i);
+            int pos_x_fish = fish.getPos_x_fish();
+            int pos_y_fish = fish.getPos_y_fish();
+
+            if ((pos_x_fish - hitBoxPellet <= pos_x_Pellet)
+                    && (pos_x_fish + hitBoxPellet >= pos_x_Pellet)
+                    && (pos_y_fish - hitBoxPellet <= pos_y_Pellet)
+                    && (pos_y_fish + hitBoxPellet >= pos_y_Pellet)) {
+
                 positionRandomEdiblePellet();
-                counterToStopMoveFish = milisecond * Board.get_listFish().size();
-                // 10 second and * the number of the fish
-                // because the counter decremente faster when there more fish in the aquarium
+                counterToStopMoveFish = milisecond * Board.get_ediblePellet_list().size();
+                // * the number of the pellet
+                // because the counter decremente faster when there more pellet in the aquarium
 
-                // System.out.println(counterToStopMoveFish);
-
-                for (int j = 0; j < Board.get_listFish().size(); j++) {
-                    if (Board.get_listFish().get(j).getIdFish() != Board.get_listFish().get(i).getIdFish()) {
-
-                        idFishTouchedPellet = Board.get_listFish().get(i).getIdFish();
-                        Board.get_listFish().get(j).setMoveStop(true);
-
-                    }
-                }
+                idFishTouchedPellet = fish.getIdFish();
 
             }
 
         }
 
-        if (counterToStopMoveFish == 0) {
-            for (int j = 0; j < Board.get_listFish().size(); j++) {
-
-                Board.get_listFish().get(j).setMoveStop(false);
-                idFishTouchedPellet = -1;
-
-            }
-
-        } else {
+        if (counterToStopMoveFish != endOfTheCounter) {
             counterToStopMoveFish--;
-            // System.out.println(counterToStopMoveFish);
+            System.out.println(counterToStopMoveFish);
+        } else {
+            idFishTouchedPellet = idFishTouchPelletByDefault;
 
         }
     }

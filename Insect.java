@@ -28,7 +28,7 @@ public class Insect {
     private final String insectTimeNormal = "timmerNormal";
     private final String insectTimeHight = "timmerHight";
 
-    private int endOfTheCounter = 0;
+    private final int endOfTheCounter = 0;
 
     ///////////////////////////////////
     // Constructor

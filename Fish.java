@@ -194,7 +194,7 @@ public class Fish {
                 }
             }
 
-            if (EdiblePellet.getIdFishTouchedPellet() != -1) {
+            if (EdiblePellet.getIdFishTouchedPellet() != EdiblePellet.getIdfishtouchpelletbydefault()) {
                 if (this.idFish == EdiblePellet.getIdFishTouchedPellet()) {
                     movefishToTarget();
                 }
