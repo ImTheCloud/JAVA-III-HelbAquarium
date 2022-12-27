@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class FishPurple extends Fish {
     //////////////////////////////////
     // The variables
@@ -29,21 +31,30 @@ public class FishPurple extends Fish {
 
     private void oppositeDirectionofTheRedFish() {
 
-        for (int i = 0; i < Board.get_listFish().size(); i++) {
+        ArrayList<Fish> get_listFish = Board.get_listFish();
 
-            if (FishRed.class.getName() == Board.get_listFish().get(i).getClass().getName()) {
+        for (int i = 0; i < get_listFish.size(); i++) {
 
-                setX(Board.get_listFish().get(i).getPos_x_fish() - this.getPos_x_fish());
-                setY(Board.get_listFish().get(i).getPos_y_fish() - this.getPos_y_fish());
+            Fish fish = get_listFish.get(i);
+            String nameFishCurrent = fish.getClass().getName();
+            int pos_x_fish = fish.getPos_x_fish();
+            int pos_y_fish = fish.getPos_y_fish();
+
+            if (FishRed.class.getName() == nameFishCurrent) {
+
+                setX(pos_x_fish - this.getPos_x_fish());
+                setY(pos_y_fish - this.getPos_y_fish());
 
                 setCalculDistance(Math.sqrt(getX() * getX() + getY() * getY()));
 
                 if (getClosestDistance() > getCalculDistance()) {
                     setClosestDistance(getCalculDistance());
 
-                    setPos_x_target(Board.get_listFish().get(i).getPos_x_fish());
-                    setPos_y_target(Board.get_listFish().get(i).getPos_x_fish());
+                    setPos_x_target(pos_x_fish);
+                    setPos_y_target(pos_y_fish);
                 }
+
+                // go to the farthest position of the red fish here
 
                 if (getPos_x_fish() <= getPos_x_target() && getPos_x_fish() <= getPos_y_target()) {
                     setPos_x_target(corner);
@@ -62,7 +73,6 @@ public class FishPurple extends Fish {
             }
 
         }
-
         setClosestDistance(get_screen_W());
         super.update();
     }

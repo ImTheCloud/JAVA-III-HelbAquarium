@@ -6,6 +6,10 @@ public class FishOrange extends Fish {
     private final int numberEdgeExisting = 3; // 0,1,2,3 = 4 edge
     private final int speedFish = 6; // base speed
     private static int randomEdge;
+    private final int randomEdgenumberOne = 0;
+    private final int randomEdgenumberTwo = 1;
+    private final int randomEdgenumberThree = 2;
+    private final int randomEdgenumberFour = 3;
 
     ///////////////////////////////////
     // Method update called in Board for do something every x milisecond (timer)
@@ -49,17 +53,17 @@ public class FishOrange extends Fish {
     public void randomEdgePosition() {
 
         randomEdge = (int) (Math.random() * numberEdgeExisting);
-        if (randomEdge == 0) {
-            setPos_x_target(0);
+        if (randomEdge == randomEdgenumberOne) {
+            setPos_x_target(0); // 0 is the edge left
             setPos_y_target((int) (Math.random() * screen_H));
-        } else if (randomEdge == 1) {
-            setPos_x_target(screen_W);
+        } else if (randomEdge == randomEdgenumberTwo) {
+            setPos_x_target(screen_W); // screen_W is the edge right
             setPos_y_target((int) (Math.random() * screen_H));
-        } else if (randomEdge == 2) {
-            setPos_y_target(0);
+        } else if (randomEdge == randomEdgenumberThree) {
+            setPos_y_target(0); // 0 is the edge top
             setPos_x_target((int) (Math.random() * screen_W));
-        } else if (randomEdge == 3) {
-            setPos_y_target(screen_H);
+        } else if (randomEdge == randomEdgenumberFour) {
+            setPos_y_target(screen_H);// screen_W is the edge bottom
             setPos_x_target((int) (Math.random() * screen_W));
         }
     }
