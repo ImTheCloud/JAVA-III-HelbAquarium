@@ -105,7 +105,7 @@ public class EdiblePellet {
 
         if (counterToStopMoveFish != endOfTheCounter) {
             counterToStopMoveFish--;
-            System.out.println(counterToStopMoveFish);
+
         } else {
             idFishTouchedPellet = idFishTouchPelletByDefault;
 

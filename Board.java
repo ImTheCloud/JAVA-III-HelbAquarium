@@ -40,7 +40,7 @@ public class Board extends JPanel implements ActionListener {
     private final static int B_WIDTH = 1000; // Size screen Width
     private final static int B_HEIGHT = 500; // Size screen Height
     private final int numberFishDifferentExisting = 4;
-    private final int numberInsectmaxInTheGame = 0;
+    private final int numberInsectmaxInTheGame = 3;
     private final int numberEdiblePelletMaxInTheGame = 3;
     private final static int numberObstacleMaxInTheGame = 0; // 1,2,3
     private final int speedUpgradeFishRed = 11;
@@ -49,8 +49,11 @@ public class Board extends JPanel implements ActionListener {
     private int keyEvent;
     private int fishColourAddForKeyEvent;
     private static String colourFishKeyEvent = "Default";
+    private static boolean insectivorMod = false;
+    private static boolean pelletMod = false;
+    private static boolean coupleMod = false;
     // +1 bcs at least 1 (for all +1 in a random)
-    private int numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 0);
+    private int numberInsect = (int) (Math.random() * numberInsectmaxInTheGame + 1);
     private static int numberObstacle = (int) (Math.random() * numberObstacleMaxInTheGame + 0); // 1,2,3
     private int numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
 
@@ -65,6 +68,18 @@ public class Board extends JPanel implements ActionListener {
     ///////////////////////////////////
     // Get Array List
     ///////////////////////////////////
+
+    public static boolean isInsectivorMod() {
+        return insectivorMod;
+    }
+
+    public static boolean isPelletMod() {
+        return pelletMod;
+    }
+
+    public static boolean isCoupleMod() {
+        return coupleMod;
+    }
 
     public static ArrayList<Fish> get_listFish() {
         return fishList;
@@ -359,6 +374,11 @@ public class Board extends JPanel implements ActionListener {
         numberEdiblePellet = (int) (Math.random() * numberEdiblePelletMaxInTheGame + 1);
 
         colourFishKeyEvent = "Default";
+
+        insectivorMod = false; // put every mod to false for the reset
+        pelletMod = false;
+        coupleMod = false;
+
         // every fish take back their movement
         // if the touch R,M,O,B was pressed
         setBackground(backGroundDefault);
@@ -407,19 +427,26 @@ public class Board extends JPanel implements ActionListener {
                 FishRed.setSpeedUpgrade(speedUpgradeFishRed);
             }
             if (keyEvent == KeyEvent.VK_4) { // add insect
+
                 insectList.add(new Insect());
             }
             if (keyEvent == KeyEvent.VK_5) { // add edible pellet
                 ediblePelletList.add(new EdiblePellet());
             }
             if (keyEvent == KeyEvent.VK_6) {
-                // Fish.goToTheClosestInsect();
+                insectivorMod = true;
+                pelletMod = false;
+                coupleMod = false;
             }
             if (keyEvent == KeyEvent.VK_7) {
-
+                pelletMod = true;
+                coupleMod = false;
+                insectivorMod = false;
             }
             if (keyEvent == KeyEvent.VK_8) {
-
+                coupleMod = true;
+                insectivorMod = false;
+                pelletMod = false;
             }
             if (keyEvent == KeyEvent.VK_9) { // add fish random
                 addFishKeyboardKey();

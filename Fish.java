@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Fish {
     ///////////////////////////////////
@@ -30,19 +31,12 @@ public class Fish {
     private int idTargetDeathFish;
     private int chanceToCouplingFish;
     private int coupleFishOk;
-    private static boolean moveStop;
+
+    ArrayList<Fish> get_listFish = Board.get_listFish();
 
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
-
-    public static boolean isMoveStop() {
-        return moveStop;
-    }
-
-    public void setMoveStop(boolean moveStop) {
-        Fish.moveStop = moveStop;
-    }
 
     public Fish() {
         positionFish(); // put a random position for every fish
@@ -178,6 +172,14 @@ public class Fish {
 
     public void update() {
 
+        if (Board.isInsectivorMod() == true) {
+            goToTheClosestInsect();
+        } else if (Board.isPelletMod() == true) {
+            goToTheClosestPellet();
+        } else if (Board.isCoupleMod() == true) {
+            goToTheClosestFishSameColor();
+        }
+
         if (Board.get_colourFishKeyPressed() != "Default") {
 
             if (this.getClass().getName() == Board.get_colourFishKeyPressed()) {
@@ -263,25 +265,32 @@ public class Fish {
 
     public void couplingFish() {
 
-        for (int j = 0; j < Board.get_listFish().size(); j++) {
-            if (Board.get_listFish().get(j).getPos_x_fish() != this.getPos_x_fish()
-                    && Board.get_listFish().get(j).getPos_y_fish() != this.getPos_y_fish()) {
+        int sizeListFish = get_listFish.size();
+        for (int j = 0; j < sizeListFish; j++) {
+
+            Fish fish = get_listFish.get(j);
+            String nameFishCurrent = fish.getClass().getName();
+            int pos_x_fish = fish.getPos_x_fish();
+            int pos_y_fish = fish.getPos_y_fish();
+
+            if (pos_x_fish != this.getPos_x_fish()
+                    && pos_y_fish != this.getPos_y_fish()) {
                 // if its not the same fish
 
-                if (Board.get_listFish().get(j).getPos_x_fish() <= this.getPos_x_fish() + hitBoxFish
-                        && Board.get_listFish().get(j).getPos_x_fish() >= this.getPos_x_fish() - hitBoxFish
-                        && Board.get_listFish().get(j).getPos_y_fish() <= this.getPos_y_fish() + hitBoxFish
-                        && Board.get_listFish().get(j).getPos_y_fish() >= this.getPos_y_fish() - hitBoxFish) {
+                if (pos_x_fish <= this.getPos_x_fish() + hitBoxFish
+                        && pos_x_fish >= this.getPos_x_fish() - hitBoxFish
+                        && pos_y_fish <= this.getPos_y_fish() + hitBoxFish
+                        && pos_y_fish >= this.getPos_y_fish() - hitBoxFish) {
 
                     // if they have the same colour
-                    if (Board.get_listFish().get(j).getClass().getName() == this.getClass().getName()) {
+                    if (nameFishCurrent == this.getClass().getName()) {
 
-                        chanceToCouplingFish = Board.get_listFish().size(); // get the number of the fish in a variable
+                        chanceToCouplingFish = get_listFish.size(); // get the number of the fish in a variable
                         coupleFishOk = (int) (Math.random() * chanceToCouplingFish); // make a random from the vairable
 
                         if (coupleFishOk == 0) {
                             // if the random is 0, they can be a couple
-                            Board.deleteFish(Board.get_listFish().get(j).idFish);
+                            Board.deleteFish(fish.idFish);
                             Board.deleteFish(this.idFish);
                             Board.addNewFish(this.getClass().getName());
                         }
@@ -295,19 +304,97 @@ public class Fish {
         }
     }
 
+    ///////////////////////////////////
+    // go to the closest fish who has the same color, calcul the distance
+    // and they go to the closest
+    //////////////////////////////////
+
+    public void goToTheClosestFishSameColor() {
+
+        int sizeListFish = get_listFish.size();
+        for (int j = 0; j < sizeListFish; j++) {
+
+            Fish fish = get_listFish.get(j);
+            String nameFishCurrent = fish.getClass().getName();
+            int pos_x_fish = fish.getPos_x_fish();
+            int pos_y_fish = fish.getPos_y_fish();
+
+            if (pos_x_fish != this.getPos_x_fish()
+                    && pos_y_fish != this.getPos_y_fish()) {
+
+                if (nameFishCurrent == this.getClass().getName()) {
+                    x = pos_x_fish - this.getPos_x_fish();
+                    y = pos_y_fish - this.getPos_y_fish();
+                    calculDistance = Math.sqrt(x * x + y * y);
+
+                    if (closestDistance > calculDistance) {
+                        closestDistance = calculDistance;
+
+                        setPos_x_target(pos_x_fish);
+                        setPos_y_target(pos_y_fish);
+
+                    }
+                }
+            }
+
+        }
+        closestDistance = Board.getB_WIDTH();
+
+    }
+
+    ///////////////////////////////////
+    // same for insectivor, just for the insect, every fish go to the closest insect
+    //////////////////////////////////
+
     public void goToTheClosestInsect() {
 
-        for (int i = 0; i < Board.get_listFish().size(); i++) {
+        ArrayList<Insect> get_insectList = Board.get_insectList();
+        for (int i = 0; i < get_insectList.size(); i++) {
 
-            x = Board.get_insectList().get(i).getPos_x_insect() - this.getPos_x_fish();
-            y = Board.get_insectList().get(i).getPos_y_insect() - this.getPos_y_fish();
+            Insect insect = get_insectList.get(i);
+
+            int pos_x_insect = insect.getPos_x_insect();
+            int pos_y_insect = insect.getPos_y_insect();
+
+            x = pos_x_insect - this.getPos_x_fish();
+            y = pos_y_insect - this.getPos_y_fish();
             calculDistance = Math.sqrt(x * x + y * y);
 
             if (closestDistance > calculDistance) {
                 closestDistance = calculDistance;
 
-                setPos_x_target(Board.get_insectList().get(i).getPos_x_insect());
-                setPos_y_target(Board.get_insectList().get(i).getPos_y_insect());
+                setPos_x_target(pos_x_insect);
+                setPos_y_target(pos_y_insect);
+
+            }
+        }
+        closestDistance = Board.getB_WIDTH();
+
+    }
+
+    ///////////////////////////////////
+    // same for pellet, like insectivorMod
+    //////////////////////////////////
+
+    public void goToTheClosestPellet() {
+
+        ArrayList<EdiblePellet> gEdiblePellets = Board.get_ediblePellet_list();
+        for (int i = 0; i < gEdiblePellets.size(); i++) {
+
+            EdiblePellet pellet = gEdiblePellets.get(i);
+
+            int pos_x_pellet = pellet.getPos_x_pellet();
+            int pos_y_pellet = pellet.getPos_y_pellet();
+
+            x = pos_x_pellet - this.getPos_x_fish();
+            y = pos_y_pellet - this.getPos_y_fish();
+            calculDistance = Math.sqrt(x * x + y * y);
+
+            if (closestDistance > calculDistance) {
+                closestDistance = calculDistance;
+
+                setPos_x_target(pos_x_pellet);
+                setPos_y_target(pos_y_pellet);
 
             }
         }
