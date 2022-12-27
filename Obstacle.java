@@ -7,8 +7,6 @@ public class Obstacle extends GameFixeElement {
     private final int hitBoxOBstacleWidth = 40; // / 20 H
     private final int hitBoxOBstacleHeight = 12; // / 20 H
 
-    private static boolean fishTouchObstacle = false;
-
     private final static int idFishTouchInsectByDefault = -1;
     // by default is -1 because if no fish touch insect = no id Fish
     private static int idFishTouchInsect = idFishTouchInsectByDefault;
@@ -16,14 +14,6 @@ public class Obstacle extends GameFixeElement {
     ///////////////////////////////////
     // Constructor
     //////////////////////////////////
-
-    public static int getIdFishTouchInsect() {
-        return idFishTouchInsect;
-    }
-
-    public static void setIdFishTouchInsect(int idFishTouchInsect) {
-        Obstacle.idFishTouchInsect = idFishTouchInsect;
-    }
 
     public Obstacle() {
         super.positionRandomElement();
@@ -34,8 +24,12 @@ public class Obstacle extends GameFixeElement {
     // GET
     //////////////////////////////////
 
-    public static boolean isFishTouchObstacle() {
-        return fishTouchObstacle;
+    public static int getIdFishTouchInsect() {
+        return idFishTouchInsect;
+    }
+
+    public static void setIdFishTouchInsect(int idFishTouchInsect) {
+        Obstacle.idFishTouchInsect = idFishTouchInsect;
     }
 
     ///////////////////////////////////
@@ -52,7 +46,6 @@ public class Obstacle extends GameFixeElement {
     // an other random edge
     //////////////////////////////////
     public void obstacleTouched() {
-        fishTouchObstacle = false;
         idFishTouchInsect = idFishTouchInsectByDefault;
         ArrayList<Fish> get_listFish = Board.get_listFish();
         for (int i = 0; i < get_listFish.size(); i++) {
@@ -66,8 +59,6 @@ public class Obstacle extends GameFixeElement {
                     && (getPos_x_element() + hitBoxOBstacleWidth >= pos_x_fish)
                     && (getPos_y_element() - hitBoxOBstacleHeight <= pos_y_fish)
                     && (getPos_y_element() + hitBoxOBstacleHeight >= pos_y_fish)) {
-
-                fishTouchObstacle = true;
                 idFishTouchInsect = fish.getIdFish();
 
             }
