@@ -227,6 +227,7 @@ public class Fish {
         if (Obstacle.getIdFishTouchInsect() == this.idFish) {
             if (getPos_y_fish() < getPos_y_target()) {
                 setPos_x_Fish(pos_xIncrement);
+                // if the target is in top, the fish go on hes right
             }
             if (getPos_x_fish() < getPos_x_target()) {
                 setPos_y_Fish(pos_yIncrement);
@@ -238,9 +239,10 @@ public class Fish {
                 setPos_x_Fish(pos_xIncrement);
             }
         } else {
+            // these if are different bcs its some direction differente
             if (getPos_y_fish() < getPos_y_target()) {
-
                 setPos_y_Fish(pos_yIncrement);
+                // target top, fish go top
             }
             if (getPos_x_fish() < getPos_x_target()) {
                 setPos_x_Fish(pos_xIncrement);

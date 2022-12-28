@@ -484,7 +484,7 @@ public class Board extends JPanel implements ActionListener {
                 colourFishKeyEvent = "FishOrange";
                 EdiblePellet.set_counterToStopMoveFish(0);
             }
-            if (keyEvent == KeyEvent.VK_A) {// add Fish Black and 2 fish red
+            if (keyEvent == KeyEvent.VK_A) {// add Fish Black and fish red
                 fishList.add(new FishBlack());
                 fishList.add(new FishRed());
 
