@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Insect extends GameFixeElement {
+public class Insect extends GameObjectElement {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Obstacle extends GameFixeElement {
+public class Obstacle extends GameObjectElement {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////

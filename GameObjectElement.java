@@ -1,4 +1,4 @@
-public class GameFixeElement {
+public class GameObjectElement {
     private final int hitBoxElement = 20;
     private final static int endOfTheCounter = 0;
     private final static int idFishTouchElementByDefault = -1;
@@ -6,7 +6,7 @@ public class GameFixeElement {
     private int pos_x_element;
     private int pos_y_element;
 
-    public GameFixeElement() {
+    public GameObjectElement() {
         positionRandomElement();
     }
 

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class EdiblePellet extends GameFixeElement {
+public class EdiblePellet extends GameObjectElement {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
