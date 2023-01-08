@@ -52,6 +52,7 @@ public class Board extends JPanel implements ActionListener {
     private final int numberFishPurpleByDefault = 2;
     private final int numberFishOrangeByDefault = 4;
     private final static int numberFishAddAfterCouple = 3;
+    private final static int numberFishAddAfterCoupleForBlack = 4;
     private final int randomNumberFishOne = 0;
     private final int randomNumberFishTwo = 1;
     private final int randomNumberFishThree = 2;
@@ -256,7 +257,10 @@ public class Board extends JPanel implements ActionListener {
             }
 
         } else if (newFishAdd == "FishBlack") {
-            fishList.add(new FishBlack());
+            for (int i = 0; i < numberFishAddAfterCoupleForBlack; i++) {
+                fishList.add(new FishBlack());
+            }
+
         }
 
     }
