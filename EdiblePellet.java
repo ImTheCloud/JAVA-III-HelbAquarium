@@ -5,7 +5,7 @@ public class EdiblePellet extends GameObjectElement {
     // The variables
     //////////////////////////////////
 
-    private final int timeFor10second = 120;
+    private final int timeFor10second = 160;
     private final static int hitBoxPellet = 15;
     private static int counterToStopMoveFish = 0;
     private static int idFishTouchPellet = getIdfishtouchelementbydefault();
