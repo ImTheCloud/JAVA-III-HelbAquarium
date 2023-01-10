@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Fish {
+public abstract class Fish {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////

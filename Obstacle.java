@@ -4,8 +4,8 @@ public class Obstacle extends GameObjectElement {
     ///////////////////////////////////
     // The variables
     //////////////////////////////////
-    private final int hitBoxOBstacleWidth = 40; // / 20 H
-    private final int hitBoxOBstacleHeight = 12; // / 20 H
+    private final int hitBoxOBstacleWidth = 40;
+    private final int hitBoxOBstacleHeight = 12;
 
     private final static int idFishTouchInsectByDefault = -1;
     // by default is -1 because if no fish touch insect = no id Fish

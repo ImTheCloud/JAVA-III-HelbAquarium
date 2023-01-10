@@ -1,8 +1,7 @@
-public class GameObjectElement {
+public abstract class GameObjectElement {
     private final int hitBoxElement = 20;
     private final static int endOfTheCounter = 0;
     private final static int idFishTouchElementByDefault = -1;
-    // by default is -1 because if no fish touch insect = no id Fish
     private int pos_x_element;
     private int pos_y_element;
 

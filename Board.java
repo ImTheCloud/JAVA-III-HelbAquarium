@@ -472,21 +472,17 @@ public class Board extends JPanel implements ActionListener {
             }
             if (keyEvent == KeyEvent.VK_R) { // stop move fish all but not red
                 colourFishKeyEvent = "FishRed";
-                EdiblePellet.set_counterToStopMoveFish(0);
                 // I did this bcs if a fish touched a pellet he couldnt move
                 // even with this touch
             }
             if (keyEvent == KeyEvent.VK_B) {// stop move fish all but not blue
                 colourFishKeyEvent = "FishBlue";
-                EdiblePellet.set_counterToStopMoveFish(0);
             }
             if (keyEvent == KeyEvent.VK_M) {// stop move fish all but not purple
                 colourFishKeyEvent = "FishPurple";
-                EdiblePellet.set_counterToStopMoveFish(0);
             }
             if (keyEvent == KeyEvent.VK_O) {// stop move fish all but not orange
                 colourFishKeyEvent = "FishOrange";
-                EdiblePellet.set_counterToStopMoveFish(0);
             }
             if (keyEvent == KeyEvent.VK_A) {// add Fish Black and fish red
                 fishList.add(new FishBlack());
